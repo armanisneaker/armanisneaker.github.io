@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Genesys Talents Complete Reference</title>
-    <!-- Fuse.js for fuzzy search -->
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
     <style>
-        /* (All your existing beautiful CSS – unchanged) */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
         .container { max-width: 1400px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); overflow: hidden; }
@@ -17,41 +15,89 @@
         .controls { background: #f7fafc; padding: 25px; border-bottom: 2px solid #e2e8f0; }
         .search-bar { display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
         .search-bar input { flex: 1; min-width: 250px; padding: 12px 20px; border: 2px solid #cbd5e0; border-radius: 8px; font-size: 16px; transition: all 0.3s; }
-        .search-bar input:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); }
-        .filters { display: flex; gap: 15px; flex-wrap: wrap; align-items: center; }
+        .search-bar input:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102,126,234,0.1); }
+
+        .filters { display: flex; gap: 15px; flex-wrap: wrap; align-items: end; margin-bottom: 15px; }
         .filter-group { display: flex; flex-direction: column; gap: 5px; }
         .filter-group label { font-size: 12px; font-weight: 600; color: #4a5568; text-transform: uppercase; letter-spacing: 0.5px; }
         select, button { padding: 10px 16px; border: 2px solid #cbd5e0; border-radius: 8px; font-size: 14px; cursor: pointer; transition: all 0.3s; background: white; }
         select:hover, button:hover { border-color: #667eea; }
         button { background: #667eea; color: white; border: none; font-weight: 600; }
-        button:hover { background: #5568d3; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4); }
-        .stats { display: flex; gap: 15px; margin-top: 15px; flex-wrap: wrap; }
+        button:hover { background: #5568d3; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(102,126,234,0.4); }
+
+        /* Tag Filter Bar */
+        .tag-filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .tag-btn {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+        .tag-btn.active {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        /* Tag colors */
+        .tag-combat { background: #e53e3e; color: white; }
+        .tag-defense { background: #3182ce; color: white; }
+        .tag-healing { background: #38a169; color: white; }
+        .tag-social { background: #d69e2e; color: white; }
+        .tag-vehicle { background: #805ad5; color: white; }
+        .tag-magic { background: #d53f8c; color: white; }
+        .tag-fear { background: #4c51bf; color: white; }
+        .tag-knowledge { background: #319795; color: white; }
+        .tag-movement { background: #dd6b20; color: white; }
+        .tag-strain { background: #718096; color: white; }
+        .tag-critical { background: #9b2c2c; color: white; }
+        .tag-leadership { background: #2c7a7b; color: white; }
+
+        .stats { display: flex; gap: 15px; flex-wrap: wrap; }
         .stat-card { background: white; padding: 15px 20px; border-radius: 8px; border-left: 4px solid #667eea; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
         .stat-card .number { font-size: 24px; font-weight: bold; color: #667eea; }
         .stat-card .label { font-size: 12px; color: #718096; text-transform: uppercase; margin-top: 5px; }
+
         .content { padding: 30px; max-height: 800px; overflow-y: auto; }
-        .talent-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px; }
-        .talent-card { background: white; border: 2px solid #e2e8f0; border-radius: 10px; padding: 20px; transition: all 0.3s; position: relative; overflow: hidden; }
-        .talent-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); border-color: #667eea; }
-        .talent-card::before { content: ''; position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: var(--tier-color); }
+        .talent-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 22px; }
+        .talent-card { background: white; border: 2px solid #e2e8f0; border-radius: 12px; padding: 22px; transition: all 0.3s; position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .talent-card:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.2); border-color: #667eea; }
+        .talent-card::before { content: ''; position: absolute; top: 0; left: 0; width: 6px; height: 100%; background: var(--tier-color); }
         .tier-1 { --tier-color: #48bb78; }
         .tier-2 { --tier-color: #4299e1; }
         .tier-3 { --tier-color: #9f7aea; }
         .tier-4 { --tier-color: #ed8936; }
         .tier-5 { --tier-color: #f56565; }
-        .talent-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px; gap: 10px; }
-        .talent-name { font-size: 1.3em; font-weight: bold; color: #2d3748; flex: 1; }
-        .talent-tier { background: var(--tier-color); color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; white-space: nowrap; }
-        .talent-meta { display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap; }
-        .meta-item { display: flex; align-items: center; gap: 5px; font-size: 13px; color: #718096; }
-        .meta-label { font-weight: 600; color: #4a5568; }
-        .talent-description { color: #4a5568; line-height: 1.6; margin-bottom: 12px; font-size: 14px; }
-        .talent-source { font-size: 11px; color: #a0aec0; font-style: italic; text-align: right; }
-        .no-results { text-align: center; padding: 60px 20px; color: #718096; }
-        .no-results h2 { font-size: 2em; margin-bottom: 10px; }
-        .loading { text-align: center; padding: 60px 20px; color: #4a5568; font-size: 1.2em; }
+
+        .talent-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px; gap: 10px; }
+        .talent-name { font-size: 1.4em; font-weight: bold; color: #2d3748; }
+        .talent-tier { background: var(--tier-color); color: white; padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+
+        .talent-tags {
+            display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0;
+        }
+        .talent-tag {
+            font-size: 11px;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .talent-meta { display: flex; gap: 15px; flex-wrap: wrap; margin: 10px 0; font-size: 13px; color: #718096; }
+        .meta-item span.meta-label { font-weight: 600; color: #4a5568; }
+
+        .talent-description { color: #4a5568; line-height: 1.6; font-size: 14.5px; }
+        .talent-source { font-size: 11px; color: #a0aec0; font-style: italic; text-align: right; margin-top: 10px; }
+
+        .no-results, .loading { text-align: center; padding: 60px 20px; color: #718096; font-size: 1.3em; }
+
         @media (max-width: 768px) {
-            header h1 { font-size: 1.8em; }
             .talent-grid { grid-template-columns: 1fr; }
             .filters { flex-direction: column; align-items: stretch; }
             .filter-group { width: 100%; }
@@ -62,71 +108,90 @@
     <div class="container">
         <header>
             <h1>⚔️ Genesys Talents Reference ⚔️</h1>
-            <p>Complete Database - All Talents from Version 6.0 • Now with Fuzzy Search!</p>
+            <p>Complete Database + Smart Tags + Fuzzy Search</p>
         </header>
 
         <div class="controls">
             <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="🔍 Fuzzy search: try 'pary strain', 'doge crit', 'full trotle'..." autocomplete="off">
+                <input type="text" id="searchInput" placeholder="Fuzzy search: pary strain, doge, full trottle, heal crit..." autocomplete="off">
             </div>
 
             <div class="filters">
                 <div class="filter-group">
                     <label>Tier</label>
                     <select id="tierFilter">
-                        <option value="all">All Tiers</option>
-                        <option value="1">Tier 1</option>
-                        <option value="2">Tier 2</option>
-                        <option value="3">Tier 3</option>
-                        <option value="4">Tier 4</option>
-                        <option value="5">Tier 5</option>
+                        <option value="all">All Tiers</option><option value="1">Tier 1</option><option value="2">Tier 2</option>
+                        <option value="3">Tier 3</option><option value="4">Tier 4</option><option value="5">Tier 5</option>
                     </select>
                 </div>
-
                 <div class="filter-group">
                     <label>Activation</label>
                     <select id="activationFilter">
-                        <option value="all">All Types</option>
-                        <option value="passive">Passive</option>
-                        <option value="active">Active</option>
+                        <option value="all">All</option><option value="passive">Passive</option><option value="active">Active</option>
                     </select>
                 </div>
-
                 <div class="filter-group">
                     <label>Ranked</label>
                     <select id="rankedFilter">
-                        <option value="all">All</option>
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
+                        <option value="all">All</option><option value="yes">Yes</option><option value="no">No</option>
                     </select>
                 </div>
-
-                <button id="resetBtn">Reset Filters</button>
+                <button id="resetBtn">Reset All</button>
             </div>
 
+            <!-- Tag Filter Bar -->
+            <div class="tag-filter-bar" id="tagBar"></div>
+
             <div class="stats">
-                <div class="stat-card"><div class="number" id="totalCount">0</div><div class="label">Total Talents</div></div>
+                <div class="stat-card"><div class="number" id="totalCount">0</div><div class="label">Total</div></div>
                 <div class="stat-card"><div class="number" id="shownCount">0</div><div class="label">Shown</div></div>
-                <div class="stat-card"><div class="number" id="tier1Count">0</div><div class="label">Tier 1</div></div>
-                <div class="stat-card"><div class="number" id="tier2Count">0</div><div class="label">Tier 2</div></div>
-                <div class="stat-card"><div class="number" id="tier3Count">0</div><div class="label">Tier 3</div></div>
-                <div class="stat-card"><div class="number" id="tier4Count">0</div><div class="label">Tier 4</div></div>
-                <div class="stat-card"><div class="number" id="tier5Count">0</div><div class="label">Tier 5</div></div>
+                <div class="stat-card"><div class="number" id="tagCount">0</div><div class="label">Active Tags</div></div>
             </div>
         </div>
 
         <div class="content">
             <div id="talentGrid" class="talent-grid">
-                <div class="loading">Loading talents from talents.csv...</div>
+                <div class="loading">Loading talents and generating tags...</div>
             </div>
         </div>
     </div>
 
     <script>
         let talents = [];
-        let fuse; // Will hold the Fuse.js instance
+        let fuse;
+        const activeTags = new Set();
 
-        // CSV parser (handles quoted commas)
+        // Tag definitions with keywords and colors
+        const tagDefinitions = [
+            { name: "combat", color: "tag-combat", keywords: ["attack", "damage", "hit", "melee", "ranged", "brawl", "weapon", "combat check", "deadly", "lethal"] },
+            { name: "defense", color: "tag-defense", keywords: ["defense", "soak", "parr", "reflect", "dodge", "sidestep", "armor", "shield"] },
+            { name: "healing", color: "tag-healing", keywords: ["heal", "wound", "strain", "medicine", "physician", "surgeon", "apothecary", "recovery"] },
+            { name: "social", color: "tag-social", keywords: ["charm", "coercion", "deception", "leadership", "negotiation", "scathing", "inspiring", "presence"] },
+            { name: "vehicle", color: "tag-vehicle", keywords: ["piloting", "driving", "vehicle", "speed", "handling", "full throttle", "all-terrain"] },
+            { name: "magic", color: "tag-magic", keywords: ["magic", "spell", "arcana", "divine", "primal", "curse", "barrier", "augment"] },
+            { name: "fear", color: "tag-fear", keywords: ["fear", "terrifying", "scathing", "confidence", "nobody's fool"] },
+            { name: "knowledge", color: "tag-knowledge", keywords: ["knowledge", "education", "lore", "xenology", "astrogation"] },
+            { name: "movement", color: "tag-movement", keywords: ["move", "swift", "jump up", "disengage", "shortcut"] },
+            { name: "strain", color: "tag-strain", keywords: ["strain", "second wind", "grit", "resolve"] },
+            { name: "critical", color: "tag-critical", keywords: ["critical", "vicious", "deadly accuracy", "lethal blows"] },
+            { name: "leadership", color: "tag-leadership", keywords: ["leadership", "command", "field commander", "inspiring"] }
+        ];
+
+        function generateTagsForTalent(talent) {
+            const text = (talent.name + " " + talent.description).toLowerCase();
+            const tags = [];
+            for (const def of tagDefinitions) {
+                if (def.keywords.some(kw => text.includes(kw))) {
+                    tags.push({ name: def.name, color: def.color });
+                }
+            }
+            // Special overrides
+            if (talent.name.toLowerCase().includes("parry")) tags.push({name: "defense", color: "tag-defense"});
+            if (talent.name.toLowerCase().includes("reflect")) tags.push({name: "defense", color: "tag-defense"});
+            if (talent.name.toLowerCase().includes("dodge")) tags.push({name: "defense", color: "tag-defense"});
+            return tags;
+        }
+
         function parseCSVLine(line) {
             const values = [];
             let current = '';
@@ -135,7 +200,7 @@
                 const char = line[i];
                 if (char === '"' && !inQuote) inQuote = true;
                 else if (char === '"' && inQuote) {
-                    if (i + 1 < line.length && line[i + 1] === '"') { current += '"'; i++; }
+                    if (i + 1 < line.length && line[i+1] === '"') { current += '"'; i++; }
                     else inQuote = false;
                 }
                 else if (char === ',' && !inQuote) { values.push(current.trim()); current = ''; }
@@ -148,116 +213,140 @@
         async function loadTalents() {
             try {
                 const response = await fetch('talents.csv');
-                if (!response.ok) throw new Error('Could not load talents.csv');
+                if (!response.ok) throw new Error('talents.csv not found');
                 const csvText = await response.text();
 
                 const lines = csvText.trim().split('\n');
                 talents = lines.slice(1).map(line => {
-                    const [name, tier, activation, ranked, description, source] = parseCSVLine(line);
-                    return {
+                    const [name, tierStr, activation, ranked, description, source] = parseCSVLine(line);
+                    const tier = parseInt(tierStr) || 1;
+                    const talent = {
                         name: name || '',
-                        tier: parseInt(tier) || 1,
+                        tier,
                         activation: activation || '',
                         ranked: ranked || '',
                         description: description || '',
-                        source: source || ''
+                        source: source || '',
+                        tags: [] // will be filled below
                     };
+                    talent.tags = generateTagsForTalent(talent);
+                    return talent;
                 }).filter(t => t.name);
 
-                // Initialize Fuse.js for fuzzy searching on name + description
+                // Init Fuse.js
                 fuse = new Fuse(talents, {
                     keys: ['name', 'description'],
-                    threshold: 0.35,        // 0.0 = perfect match, 1.0 = match anything (0.35 is forgiving but not too loose)
+                    threshold: 0.35,
                     includeScore: true,
-                    shouldSort: true,
-                    minMatchCharLength: 2
+                    shouldSort: true
                 });
 
-                renderTalents(talents);
+                // Build tag bar
+                buildTagBar();
+                applyFilters();
             } catch (err) {
-                document.getElementById('talentGrid').innerHTML = `
-                    <div class="no-results">
-                        <h2>Error loading data</h2>
-                        <p>${err.message}<br>Please make sure <strong>talents.csv</strong> is in the same folder.</p>
-                    </div>`;
-                console.error(err);
+                document.getElementById('talentGrid').innerHTML = `<div class="no-results"><h2>Error</h2><p>${err.message}</p></div>`;
             }
         }
 
-        function renderTalents(talentList) {
-            const grid = document.getElementById('talentGrid');
-
-            if (talentList.length === 0) {
-                grid.innerHTML = `<div class="no-results"><h2>No talents found</h2><p>Try adjusting your search or filters</p></div>`;
-                updateStats();
-                return;
-            }
-
-            grid.innerHTML = talentList.map(talent => `
-                <div class="talent-card tier-${talent.tier}">
-                    <div class="talent-header">
-                        <div class="talent-name">${talent.name}</div>
-                        <div class="talent-tier">Tier ${talent.tier}</div>
-                    </div>
-                    <div class="talent-meta">
-                        <div class="meta-item"><span class="meta-label">Activation:</span> <span>${talent.activation}</span></div>
-                        <div class="meta-item"><span class="meta-label">Ranked:</span> <span>${talent.ranked}</span></div>
-                    </div>
-                    <div class="talent-description">${talent.description}</div>
-                    <div class="talent-source">Source: ${talent.source}</div>
-                </div>
-            `).join('');
-
-            updateStats(talentList.length);
+        function buildTagBar() {
+            const bar = document.getElementById('tagBar');
+            bar.innerHTML = '';
+            tagDefinitions.forEach(def => {
+                const btn = document.createElement('button');
+                btn.className = `tag-btn ${def.color}`;
+                btn.textContent = def.name.charAt(0).toUpperCase() + def.name.slice(1);
+                btn.dataset.tag = def.name;
+                btn.onclick = () => toggleTag(def.name);
+                bar.appendChild(btn);
+            });
         }
 
-        function updateStats(shown = talents.length) {
-            document.getElementById('totalCount').textContent = talents.length;
-            document.getElementById('shownCount').textContent = shown;
-            for (let i = 1; i <= 5; i++) {
-                document.getElementById(`tier${i}Count`).textContent = talents.filter(t => t.tier === i).length;
+        function toggleTag(tagName) {
+            const btn = document.querySelector(`.tag-btn[data-tag="${tagName}"]`);
+            if (activeTags.has(tagName)) {
+                activeTags.delete(tagName);
+                btn.classList.remove('active');
+            } else {
+                activeTags.add(tagName);
+                btn.classList.add('active');
             }
+            applyFilters();
         }
 
-        function filterTalents() {
-            const query = document.getElementById('searchInput').value.trim();
-            const tier = document.getElementById('tierFilter').value;
-            const activation = document.getElementById('activationFilter').value.toLowerCase();
-            const ranked = document.getElementById('rankedFilter').value.toLowerCase();
-
+        function applyFilters() {
             let results = talents;
 
-            // 1. Fuzzy search first (if there's a query)
+            // Fuzzy search
+            const query = document.getElementById('searchInput').value.trim();
             if (query) {
-                const fuseResult = fuse.search(query);
-                results = fuseResult.map(r => r.item);
+                results = fuse.search(query).map(r => r.item);
             }
 
-            // 2. Apply hard filters
-            results = results.filter(talent => {
-                const matchTier = tier === 'all' || talent.tier === parseInt(tier);
-                const matchAct = activation === 'all' || talent.activation.toLowerCase().includes(activation);
-                const matchRanked = ranked === 'all' || talent.ranked.toLowerCase() === ranked;
-                return matchTier && matchAct && matchRanked;
+            // Hard filters
+            const tier = document.getElementById('tierFilter').value;
+            const act = document.getElementById('activationFilter').value.toLowerCase();
+            const ranked = document.getElementById('rankedFilter').value.toLowerCase();
+
+            results = results.filter(t => {
+                const matchTier = tier === 'all' || t.tier === parseInt(tier);
+                const matchAct = act === 'all' || t.activation.toLowerCase().includes(act);
+                const matchRanked = ranked === 'all' || t.ranked.toLowerCase() === ranked;
+                const matchTags = activeTags.size === 0 || t.tags.some(tag => activeTags.has(tag.name));
+                return matchTier && matchAct && matchRanked && matchTags;
             });
 
             renderTalents(results);
+            document.getElementById('tagCount').textContent = activeTags.size;
+        }
+
+        function renderTalents(list) {
+            const grid = document.getElementById('talentGrid');
+            if (list.length === 0) {
+                grid.innerHTML = `<div class="no-results"><h2>No talents found</h2><p>Try different filters or search terms</p></div>`;
+                document.getElementById('shownCount').textContent = 0;
+                return;
+            }
+
+            grid.innerHTML = list.map(t => `
+                <div class="talent-card tier-${t.tier}">
+                    <div class="talent-header">
+                        <div class="talent-name">${t.name}</div>
+                        <div class="talent-tier">Tier ${t.tier}</div>
+                    </div>
+
+                    <div class="talent-tags">
+                        ${t.tags.map(tag => `<span class="talent-tag ${tag.color}">${tag.name}</span>`).join('')}
+                    </div>
+
+                    <div class="talent-meta">
+                        <div class="meta-item"><span class="meta-label">Activation:</span> ${t.activation}</div>
+                        <div class="meta-item"><span class="meta-label">Ranked:</span> ${t.ranked}</div>
+                    </div>
+                    <div class="talent-description">${t.description}</div>
+                    <div class="talent-source">Source: ${t.source}</div>
+                </div>
+            `).join('');
+
+            document.getElementById('shownCount').textContent = list.length;
         }
 
         // Event listeners
-        document.getElementById('searchInput').addEventListener('input', filterTalents);
-        document.getElementById('tierFilter').addEventListener('change', filterTalents);
-        document.getElementById('activationFilter').addEventListener('change', filterTalents);
-        document.getElementById('rankedFilter').addEventListener('change', filterTalents);
+        document.getElementById('searchInput').addEventListener('input', applyFilters);
+        document.getElementById('tierFilter').addEventListener('change', applyFilters);
+        document.getElementById('activationFilter').addEventListener('change', applyFilters);
+        document.getElementById('rankedFilter').addEventListener('change', applyFilters);
         document.getElementById('resetBtn').addEventListener('click', () => {
             document.getElementById('searchInput').value = '';
             document.getElementById('tierFilter').value = 'all';
             document.getElementById('activationFilter').value = 'all';
             document.getElementById('rankedFilter').value = 'all';
-            renderTalents(talents);
+            activeTags.clear();
+            document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+            applyFilters();
         });
 
-        // Start loading
+        // Init
         loadTalents();
     </script>
 </body>
