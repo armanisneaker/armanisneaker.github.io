@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Genesys Talents Complete Reference</title>
+    <!-- Fuse.js for fuzzy search -->
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
     <style>
-        /* (All your existing CSS remains unchanged) */
+        /* (All your existing beautiful CSS – unchanged) */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
         .container { max-width: 1400px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); overflow: hidden; }
@@ -60,12 +62,12 @@
     <div class="container">
         <header>
             <h1>⚔️ Genesys Talents Reference ⚔️</h1>
-            <p>Complete Database - All Talents from Version 6.0</p>
+            <p>Complete Database - All Talents from Version 6.0 • Now with Fuzzy Search!</p>
         </header>
 
         <div class="controls">
             <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="🔍 Search talents by name, description, or keywords...">
+                <input type="text" id="searchInput" placeholder="🔍 Fuzzy search: try 'pary strain', 'doge crit', 'full trotle'..." autocomplete="off">
             </div>
 
             <div class="filters">
@@ -122,46 +124,34 @@
 
     <script>
         let talents = [];
-        let filteredTalents = [];
+        let fuse; // Will hold the Fuse.js instance
 
-        // Simple CSV line parser (handles quoted fields with commas inside)
+        // CSV parser (handles quoted commas)
         function parseCSVLine(line) {
             const values = [];
             let current = '';
             let inQuote = false;
             for (let i = 0; i < line.length; i++) {
                 const char = line[i];
-                if (char === '"' && !inQuote) {
-                    inQuote = true;
-                } else if (char === '"' && inQuote) {
-                    if (i + 1 < line.length && line[i + 1] === '"') {
-                        // Escaped quote (if any, but assuming none for simplicity)
-                        current += '"';
-                        i++;
-                    } else {
-                        inQuote = false;
-                    }
-                } else if (char === ',' && !inQuote) {
-                    values.push(current.trim());
-                    current = '';
-                } else {
-                    current += char;
+                if (char === '"' && !inQuote) inQuote = true;
+                else if (char === '"' && inQuote) {
+                    if (i + 1 < line.length && line[i + 1] === '"') { current += '"'; i++; }
+                    else inQuote = false;
                 }
+                else if (char === ',' && !inQuote) { values.push(current.trim()); current = ''; }
+                else current += char;
             }
             values.push(current.trim());
             return values;
         }
 
-        // Load the CSV file
         async function loadTalents() {
             try {
                 const response = await fetch('talents.csv');
                 if (!response.ok) throw new Error('Could not load talents.csv');
                 const csvText = await response.text();
 
-                // Parse CSV
                 const lines = csvText.trim().split('\n');
-                // Skip header line
                 talents = lines.slice(1).map(line => {
                     const [name, tier, activation, ranked, description, source] = parseCSVLine(line);
                     return {
@@ -172,84 +162,86 @@
                         description: description || '',
                         source: source || ''
                     };
-                }).filter(t => t.name); // remove any empty lines
+                }).filter(t => t.name);
 
-                filteredTalents = [...talents];
-                renderTalents();
+                // Initialize Fuse.js for fuzzy searching on name + description
+                fuse = new Fuse(talents, {
+                    keys: ['name', 'description'],
+                    threshold: 0.35,        // 0.0 = perfect match, 1.0 = match anything (0.35 is forgiving but not too loose)
+                    includeScore: true,
+                    shouldSort: true,
+                    minMatchCharLength: 2
+                });
+
+                renderTalents(talents);
             } catch (err) {
                 document.getElementById('talentGrid').innerHTML = `
                     <div class="no-results">
                         <h2>Error loading data</h2>
-                        <p>${err.message}<br>Please make sure <strong>talents.csv</strong> is in the same folder as this HTML file.</p>
+                        <p>${err.message}<br>Please make sure <strong>talents.csv</strong> is in the same folder.</p>
                     </div>`;
                 console.error(err);
             }
         }
 
-        function renderTalents() {
+        function renderTalents(talentList) {
             const grid = document.getElementById('talentGrid');
 
-            if (filteredTalents.length === 0) {
-                grid.innerHTML = `
-                    <div class="no-results">
-                        <h2>No talents found</h2>
-                        <p>Try adjusting your filters or search terms</p>
-                    </div>`;
+            if (talentList.length === 0) {
+                grid.innerHTML = `<div class="no-results"><h2>No talents found</h2><p>Try adjusting your search or filters</p></div>`;
                 updateStats();
                 return;
             }
 
-            grid.innerHTML = filteredTalents.map(talent => `
+            grid.innerHTML = talentList.map(talent => `
                 <div class="talent-card tier-${talent.tier}">
                     <div class="talent-header">
                         <div class="talent-name">${talent.name}</div>
                         <div class="talent-tier">Tier ${talent.tier}</div>
                     </div>
                     <div class="talent-meta">
-                        <div class="meta-item">
-                            <span class="meta-label">Activation:</span>
-                            <span>${talent.activation}</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Ranked:</span>
-                            <span>${talent.ranked}</span>
-                        </div>
+                        <div class="meta-item"><span class="meta-label">Activation:</span> <span>${talent.activation}</span></div>
+                        <div class="meta-item"><span class="meta-label">Ranked:</span> <span>${talent.ranked}</span></div>
                     </div>
                     <div class="talent-description">${talent.description}</div>
                     <div class="talent-source">Source: ${talent.source}</div>
                 </div>
             `).join('');
 
-            updateStats();
+            updateStats(talentList.length);
         }
 
-        function updateStats() {
+        function updateStats(shown = talents.length) {
             document.getElementById('totalCount').textContent = talents.length;
-            document.getElementById('shownCount').textContent = filteredTalents.length;
+            document.getElementById('shownCount').textContent = shown;
             for (let i = 1; i <= 5; i++) {
                 document.getElementById(`tier${i}Count`).textContent = talents.filter(t => t.tier === i).length;
             }
         }
 
         function filterTalents() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const tierFilter = document.getElementById('tierFilter').value;
-            const activationFilter = document.getElementById('activationFilter').value;
-            const rankedFilter = document.getElementById('rankedFilter').value;
+            const query = document.getElementById('searchInput').value.trim();
+            const tier = document.getElementById('tierFilter').value;
+            const activation = document.getElementById('activationFilter').value.toLowerCase();
+            const ranked = document.getElementById('rankedFilter').value.toLowerCase();
 
-            filteredTalents = talents.filter(talent => {
-                const matchesSearch = talent.name.toLowerCase().includes(searchTerm) ||
-                                    talent.description.toLowerCase().includes(searchTerm);
-                const matchesTier = tierFilter === 'all' || talent.tier.toString() === tierFilter;
-                const matchesActivation = activationFilter === 'all' ||
-                                        talent.activation.toLowerCase().includes(activationFilter);
-                const matchesRanked = rankedFilter === 'all' ||
-                                    talent.ranked.toLowerCase() === rankedFilter;
+            let results = talents;
 
-                return matchesSearch && matchesTier && matchesActivation && matchesRanked;
+            // 1. Fuzzy search first (if there's a query)
+            if (query) {
+                const fuseResult = fuse.search(query);
+                results = fuseResult.map(r => r.item);
+            }
+
+            // 2. Apply hard filters
+            results = results.filter(talent => {
+                const matchTier = tier === 'all' || talent.tier === parseInt(tier);
+                const matchAct = activation === 'all' || talent.activation.toLowerCase().includes(activation);
+                const matchRanked = ranked === 'all' || talent.ranked.toLowerCase() === ranked;
+                return matchTier && matchAct && matchRanked;
             });
 
-            renderTalents();
+            renderTalents(results);
         }
 
         // Event listeners
@@ -262,10 +254,10 @@
             document.getElementById('tierFilter').value = 'all';
             document.getElementById('activationFilter').value = 'all';
             document.getElementById('rankedFilter').value = 'all';
-            filterTalents();
+            renderTalents(talents);
         });
 
-        // Start loading the data
+        // Start loading
         loadTalents();
     </script>
 </body>
