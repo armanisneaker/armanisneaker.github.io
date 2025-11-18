@@ -1,0 +1,579 @@
+name,tier,activation,ranked,description,source
+All-Terrain Driver,1,Passive,No,Do not suffer usual penalties for driving through difficult terrain when using Driving.,ACRB; ETU; ND
+Apothecary,1,Passive,Yes,When a patient under your character's care heals wounds from natural rest they heal additional wounds equal to twice your character's ranks in Apothecary.,ROT
+Armor Master,1,Passive,No,When wearing armor increase total soak value by 1.,ACRB; EBGR; ECRB; KTP
+Black Market Contacts,1,Active (Incidental),Yes,When purchasing illegal goods may reduce rarity by 1 per rank of Black-Market Contacts increasing cost by 50 percent of base cost per reduction.,ECRB
+Basic Combat Training,1,Passive,No,Character gains Brawl Ranged (Heavy) or Ranged (Light) as a career skill.,EOTI
+Bought Info,1,Active (Action),No,Spend currency equal to fifty times difficulty to automatically succeed on knowledge check with one uncanceled success instead of rolling.,GCRB
+Brace,1,Active (Maneuver),Yes,Remove setback per rank from next skill check based on changing conditions inclement weather unstable surfaces zero gravity heavy gravity or other disruptive physical obstacles.,ACRB; ECRB
+Bullrush,1,Active (Incidental),No,After using maneuver to engage target spend advantages or triumph to knock target prone and move them one range band away.,ROT
+Call 'Em,1,Passive,No,Do not add setback to combat checks due to use of Aim maneuver.,FC
+Challenge!,1,Active (Maneuver),Yes,Once per encounter choose adversaries within short range no greater than character's ranks. Until encounter ends they add setback targeting you and two setbacks targeting others.,ROT
+Clever Retort,1,Active (Incidental; Out of Turn),No,Once per encounter add automatic help to another character's social skill check.,GCRB
+Component Casting,1,Active (Incidental),No,When casting spell consume physical item and add setback to check. Item must be thematically appropriate and subject to GM's approval.,GEPG
+Construction Specialist,1,Passive,Yes,Remove one setback per rank from checks to construct bases defense works positions fortifications tunnels bunkers and similar projects.,FO
+Cosmopolitan Upbringing,1,Passive,No,Character gains Streetwise or Knowledge (Culture) as career skill. Spend advantages to heal 3 strain when using these skills to resolve conflicts between different species.,EOTI
+Corporate Drone,1,Passive,No,Character gains Knowledge (Society) or Negotiation as career skill. Once per session collect small favor from corporation member even if they don't owe favor.,SOTB
+Creative Design,1,Passive,Yes,As part of successful crafting check apply advantages equal to ranks in Creative Design. GM may apply equivalent help.,FO
+Custom Code,1,Passive,No,Choose icebreaker or piece of ice owned. Add success to results when using chosen icebreaker or add help when others attempt to override it.,SOTB
+Custom Rig,1,Passive,Yes,Increase ice or icebreakers on chosen computer by 1 per rank of Custom Rig.,SOTB
+Customer Service Experience,1,Active (Incidental),Yes,After Charm check suffer 1 strain to cancel help equal to ranks in Customer Service Experience.,SOTB
+Dark Insight,1,Active (Incidental),No,When spell adds quality with rating from Knowledge (Lore) may use Knowledge (Forbidden) instead.,ROT
+Data Miner,1,Active (Incidental),No,Once per session before knowledge skill check use Computers skill instead.,EOTI
+Deep Pockets,1,Active (Maneuver),No,Once per session produce small but narratively useful item from pockets or backpack. Generally less than 100 credits and encumbrance 0-1.,SOTB
+Defensive Sysops,1,Passive,No,When defending computer system add two setbacks to opponent's checks. Automatically aware of intrusion if have access.,GCRB
+Desperate Recovery,1,Passive,No,Before healing strain at end of encounter if strain exceeds half threshold heal two additional strain.,GCRB
+Diplomatic Instruction,1,Passive,No,Character gains Leadership or Negotiation as career skill. Spend advantages to heal 3 strain when convincing allies.,EOTI
+Disenfrancisto,1,Passive,No,Character gains Streetwise or Survival as career skill. Once per session collect small favor from another Disenfrancisto.,SOTB
+Duelist,1,Passive,No,Add setback to melee checks while engaged with single opponent. Add setback to melee checks while engaged with three or more opponents.,GCRB
+Dungeoneer,1,Passive,Yes,After Perception Vigilance or Knowledge (Adventuring) check cancel uncanceled help no greater than ranks in caverns subterranean ruins or similar.,ROT
+Durable,1,Passive,Yes,Reduce Critical Injury result by 10 per rank to minimum 01.,GCRB
+Elementalist,1,Passive,No,Choose one attack spell effect element (Fire Ice Impact Lightning). Always add chosen effect without increasing difficulty. Never add other three effects.,GEPG
+Emergency Thruster Burn,1,Active (Incidental),No,Once per round increase or decrease starship speed by 1. Starship suffers 2 system strain.,EOTI
+Emergency Vacuum Training,1,Passive,No,Do not count zero-gravity as difficult terrain. Hold breath for rounds equal to twice Brawn. Suffer 2 wounds per round in vacuum.,EOTI
+Ensorcelled,1,Active (Incidental),No,If have one rank in magic skill once per encounter add success to next social skill check. Appearance subtly enhanced by magic.,GEPG
+Extra Ammo,1,Passive,No,Cannot run out of ammo due to despair. Limited Ammo quality items run out normally.,ACRB; ECRB
+Familiar Sky,1,Active (Maneuver),No,Once per session make Hard Knowledge check to reveal current environment type and useful information.,ACRB; ECRB
+Finesse,1,Active (Incidental),No,When making Brawl or Melee (Light) check use Agility instead of Brawn.,ROT
+Fires of Conviction,1,Passive,No,Must be Gashlai N'orr or have allegiance to Yin Brotherhood Argent Flight or Keleres. Reroll failed fear checks.,EOTI
+Forager,1,Passive,No,Remove up to two setbacks from checks to find food water or shelter. Forage checks take half normal time.,GCRB
+Former Professor,1,Passive,No,Character gains one Knowledge skill as career skill. Once per session collect small favor from institute member.,SOTB
+Grit,1,Passive,Yes,Each rank increases strain threshold by one.,GCRB
+Hamstring Shot,1,Active (Action),No,Once per round perform ranged combat check against non-vehicle target. If successful halve damage and immobilize until end of next turn.,GCRB
+Hand on The Throttle,1,Active (Incidental),No,Once per round increase or decrease vehicle speed by 1.,EOTI; SOTB
+Historical Record,1,Active (Incidental),No,Must be Winnu or have allegiance to Empyrean or Nomad. Once per session succeed on knowledge check with three successes.,EOTI
+Hidden Storage,1,Passive,Yes,Gain hidden storage in vehicles or equipment holding items with encumbrance equal to ranks.,ACRB; EBGR; ECRB
+Iaijutsu Training,1,Passive,No,First time during encounter drawing Melee weapon increase weapon damage by 2 for remainder of turn.,SOTB
+Jump Up,1,Active (Incidental),No,Once per round stand from prone or seated position as incidental.,GCRB
+Knack for It,1,Passive,Yes,Select skill. Remove two setbacks from checks using this skill. Cannot select combat or magic skills.,GCRB
+Knockout Punch,1,Passive,No,Add Stun quality to Brawl checks with rating equal to two plus ranks in Coordination.,SOTB
+Know Somebody,1,Active (Incidental),Yes,Once per session reduce rarity of legal item by one per rank.,GCRB
+Knowledge Specialization,1,Passive,Yes,Choose Knowledge skill. Spend triumph to gain additional successes equal to ranks.,ACRB; ECRB; FCRB
+Life on the Streets,1,Passive,No,Character gains Skulduggery or Deception as career skill. Spend advantages to heal 3 strain when obtaining wealth.,EOTI
+Let's Ride,1,Active (Incidental),No,Once per round mount dismount from vehicle or animal or move position. Suffer no damage from short-range falls.,GCRB
+Museum Worthy,1,Active (Action),No,Once per session make Hard Knowledge check to ascertain information about relic ruin or history.,ETU
+Net Search,1,Active (Maneuver),No,With Network access upgrade next Knowledge check twice and downgrade its difficulty once. GM spends despair for false information.,SOTB
+Nocturnal Upbringing,1,Passive,No,Character gains Perception or Stealth as career skill. Remove setback from checks due to darkness.,EOTI
+Null Gravity Adept,1,Passive,No,Character gains Athletics or Coordination as career skill. Spend advantages to heal 3 strain in zero-gravity checks.,EOTI
+One with Nature,1,Active (Incidental),No,In wilderness make Simple Survival check instead of Discipline or Cool to recover strain.,GCRB
+Painful Blow,1,Active (Incidental),No,Voluntarily increase difficulty by one. If target suffers wounds target suffers 2 strain per maneuver until end of encounter.,ROT
+Parry,1,Active (Incidental; Out of Turn),Yes,After melee hit calculated but before soak suffer 3 strain to reduce damage by two plus ranks. Need Melee weapon.,GCRB
+Physician,1,Passive,Yes,When making Medicine check target heals 1 additional strain per rank.,FCRB
+Precision,1,Active (Incidental),No,When making Brawl or Ranged check use Cunning instead of Brawn and Agility.,ROT
+Proper Upbringing,1,Active (Incidental),Yes,In polite company suffer strain to add equal advantages to social check. Cannot exceed ranks.,GCRB
+Quick Draw,1,Active (Incidental),No,Once per round draw or holster weapon as incidental. Reduce weapon's Prepare rating by one minimum one.,GCRB
+Quick Strike,1,Passive,Yes,Add setback per rank to combat checks against targets not yet acted.,GCRB
+Rapid Reaction,1,Active (Incidental; Out of Turn),Yes,Suffer strain to add equal successes to Vigilance or Cool check. Cannot exceed ranks.,GCRB
+Rapid Recovery,1,Passive,Yes,When healing strain after encounter heal 1 additional strain per rank.,ABGR; ACRB; ECRB; FBGR; FCRB
+Redundant Systems,1,Active (Action),No,Once per session make Easy Mechanics check to harvest components from functioning device to repair broken one.,ACRB; ECRB
+Reflect,1,Active (Incidental; Out of Turn),Yes,After ranged hit calculated but before soak suffer 3 strain to reduce damage by two plus ranks. Need Shield.,FBGR; FCRB
+Resourceful Mechanic,1,Passive,Yes,When making Mechanics check repair one additional system strain or hull trauma per rank.,SOTB
+Sagacious Instruction,1,Passive,No,Character gains Astrocartography or Knowledge skill as career skill. Spend advantages to heal 3 strain when navigating or learning.,EOTI
+Second Wind,1,Active (Incidental),Yes,Once per encounter heal strain equal to ranks.,GCRB
+Shapeshifter,1,Passive,No,When incapacitated from exceeding strain threshold heal all strain increase Brawn Agility by one reduce Intellect Willpower by one. Deal +1 unarmed damage. Critical 3. Cannot use magic or ranged attacks. Revert after 8 hours or if incapacitated.,ROT
+Shield Slam,1,Active (Incidental),No,When attacking minion or rival with shield spend four advantages or triumph to stagger target.,ROT
+Signature Vehicle,1,Passive,Yes,Choose starship or vehicle silhouette 3 or lower. Upgrade Mechanics checks on it. Apply to new vehicle if lost or destroyed.,SOT; SM
+Skilled Mechanic,1,Passive,Yes,When making repair check repair 1 additional hull trauma or system strain per rank.,EOTI
+Smooth Talker,1,Active (Incidental),Yes,Choose one social skill. Spend triumph to gain additional successes equal to ranks.,ACRB; ECRB; FCRB
+Solid Repairs,1,Passive,Yes,Repair +1 hull trauma per rank when repairing starship or vehicle.,ABGR; ACRB; ECRB; FCRB
+Soothing Tone,1,Active (Action),No,Once per encounter make Average Knowledge check to allow beast recover strain equal to successes.,SOT; SS
+Street Fighter,1,Active (Incidental),No,When disorienting or knocking prone with Brawl check cause target to suffer wounds equal to ranks in Skullduggery.,SOTB
+Surgeon,1,Passive,Yes,When making Medicine check target heals one additional wound per rank.,GCRB
+Subtle,1,Active (Incidental),No,When making social check spend success to convey simple message using body language gestures or double entendres.,EOTI
+Swift,1,Passive,No,Do not suffer penalties for moving through difficult terrain. Move through at normal speed.,GCRB
+Tavern Brawler,1,Passive,No,Add success to Brawl checks and improvised weapon combat checks.,ROT
+Templar,1,Passive,No,Divine is now career skill. Can only cast one spell per encounter.,ROT
+Toughened,1,Passive,Yes,Each rank increases wound threshold by two.,GCRB
+Tri-Maf Contact,1,Passive,No,Character gains Melee or Skullduggery as career skill. Once per session collect small favor from crime group member.,SOTB
+Tumble,1,Active (Incidental),No,Once per round suffer 2 strain to disengage from all engaged adversaries.,ROT
+Union Member,1,Passive,No,Character gains Athletics Mechanics or Operating as career skill. Once per session collect favor from labor union member.,SOTB
+Unremarkable,1,Passive,No,Other characters add failure to checks to find or identify character in crowd.,GCRB
+War Veteran,1,Passive,No,Character gains Athletics or Resilience as career skill. Spend advantages to heal 3 strain after combat.,EOTI
+Wheel and Deal,1,Passive,Yes,When selling goods legally gain 10% more currency per rank.,ACRB; ECRB
+Where did I put that?,1,Active (Action),No,Once per session make Average Cool check. If successful find one previously lost or left behind item.,EOTI
+Worlds War Vet,1,Passive,No,Character gains Ranged (Heavy) or Resilience as career skill. Once per session collect favor from military member.,SOTB
+Xenoreader,1,Passive,Yes,Choose one creature category (mammalian aquatic insectoid reptilian anomaly). Add advantages to social checks targeting that category.,EOTI
+Years on The Force,1,Passive,No,Character gains Perception or Ranged (Light) as career skill. Once per session collect favor from NAPD or city government member.,SOTB
+Adventurer,2,Passive,No,Athletics and Knowledge (Adventuring) are career skills.,ROT
+Aethersprite,2,Active (Action),No,Once per encounter with Network access make Average Computers check. Reduce difficulty of further Computers and Skulduggery checks by 1 or succeed automatically.,EOTI
+Angle the Shields,2,Active (Action),Yes,While piloting silhouette 4+ starship make Hard Operating check. Starship suffers system strain and removes setback from incoming checks.,EOTI
+Animal Expertise (Hunter),2,Passive,Yes,Add setback per rank to beast interaction checks. Add +10 to Critical Injury results per rank.,ECRB; FCRB
+Bad Cop,2,Active (Incidental),Yes,Spend advantages from Coercion or Deception check to upgrade ally's subsequent social check targeting same character.,SOTB
+Bard,2,Passive,No,Knowledge (Lore) and Verse are career skills.,ROT
+Barrage,2,Passive,Yes,Add 1 damage per rank to hit using Ranged (Heavy) or Gunnery at long or extreme range.,ABGR; FIB; EBGR; ECRB
+Basic Military Training,2,Passive,No,Athletics Ranged (Heavy) and Resilience are career skills.,GCRB
+Beast Wrangler,2,Passive,Yes,Add setback per rank to checks to tame or wrangle creatures.,SOT
+Berserk,2,Active (Maneuver),No,Once per encounter add successes and advantages to melee checks. Opponents add success targeting you. Cannot make ranged attacks. Suffer 6 strain at end.,GCRB
+Big Guns,2,Passive,No,Encumbrance threshold is 10 plus Brawn. Reduce Cumbersome rating by 1 minimum 3.,SOTB
+Blackmail,2,Active (Incidental; Out of Turn),No,When NPC exceeds strain spend Story Point to convince them to perform task.,DA
+Block,2,Active (Incidental; Out of Turn),No,Must have Parry talent. While wielding shield use Parry against ranged and melee attacks.,ROT
+Blood Sacrifice,2,Active (Incidental),Yes,Must have Dark Insight talent. Before magic check suffer wounds to add equal successes. Cannot exceed ranks.,ROT
+Blooded,2,Passive,Yes,Add setback per rank to poison venom toxin checks. Reduce poison duration by 1 round per rank minimum 1.,ACRB; ECRB
+Brilliant Casting,2,Active (Incidental),No,Spend Story Point when casting spell to add successes equal to ranks in Knowledge.,GEPG
+Bulwark,2,Active (Incidental; Out of Turn),No,Must have Parry talent. While wielding Defensive weapon use Parry against attacks on engaged ally.,ROT
+Burly,2,Passive,Yes,Reduce weapon Cumbersome and Encumbrance by ranks minimum 1.,FIB; DC
+Called Shot,2,Passive,No,When aiming at specific item or body part do not add setback to check.,EOTI
+Chameleon Infiltration,2,Active (Incidental),No,Must be Yssaril or have allegiance. Spend advantages from Stealth check to add to next combat check.,EOTI
+Chill of Nordros,2,Active (Incidental),No,Cannot have Flames of Kellos. When casting Attack spell add Ice effect without increasing difficulty. Never add Fire.,ROT
+Code Slinger,2,Passive,No,When activating icebreaker can leave one other active. May have two icebreakers active at once.,SOTB
+Combat Medicine,2,Active (Incidental),Yes,Before Medicine check add successes equal to ranks to results. Target suffers 2 strain per rank after.,SOTB
+Combined Arms,2,Passive,No,While engaged with enemy GM cannot spend despair to cause hit from ally's ranged attack.,EOTI
+Command,2,Passive,Yes,Add setback per rank to Leadership checks. Affected targets add setback to Discipline for 24 hours.,ACRB; ECRB; FCRB
+Confidence,2,Passive,Yes,Decrease difficulty of fear Discipline checks by 1 per rank minimum Easy.,ACRB; ECRB; FCRB
+Containment,2,Passive,Yes,Character and allies within short range spend advantage on failed combat checks to inflict strain per rank. Once per round.,FIB; KTP
+Coordinated Assault,2,Active (Maneuver),Yes,Once per turn have allies engaged add success to combat checks until end of next turn. Range increases per rank.,GCRB
+Counteroffer,2,Active (Action),No,Once per session choose non-nemesis adversary within medium range. Make opposed Negotiation vs Discipline check. If successful stagger target. Spend triumph to make ally until end of encounter.,GCRB
+Cutting Question,2,Active (Incidental),No,Once per encounter when making Coercion check use Deception skill instead.,DA
+Daring Aviator,2,Active (Incidental),Yes,Before Driving or Piloting check add help to results to add equal successes. Cannot exceed ranks.,GCRB
+Debilitating Shot,2,Active (Incidental),No,Upon successful starship or vehicle weapon attack spend advantages to reduce max speed by 1.,ACRB; ND
+Deceptive Taunt,2,Active (Action),No,Once per session make opposed Deception check. If successful adversary must attack character during next turn.,FH
+Defensive Stance,2,Active (Maneuver),Yes,Once per round suffer strain up to ranks to upgrade difficulty of melee checks until end of next turn.,GCRB
+Defensive Sysops (Improved),2,Active (Incidental),No,Must have Defensive Sysops talent. Instead of setbacks add failure and help to check results.,GCRB
+Determined Driver,2,Active (Incidental),No,Spend Story Point to heal system strain on vehicle equal to ranks in appropriate skill.,SOTB
+Dirty Tricks,2,Active (Incidental),No,After inflicting Critical Injury upgrade difficulty of adversary's next check.,ROT
+Disorient,2,Passive,Yes,After successful combat check spend advantages to disorient target for rounds equal to ranks.,ACRB; ECRB
+Distracting Behavior,2,Active (Maneuver),Yes,Make maneuver suffering strain up to Cunning. Until next turn equal NPCs suffer help on checks.,FH
+Dominion of the Dimora,2,Active (Incidental),No,Cannot have Favor of the Fae. When casting Attack spell add Impact effect without increasing difficulty. Never add Manipulative.,ROT
+Driven to Succeed,2,Active (Incidental),No,Must be Human Winnu or have allegiance. Once per session spend advantages or triumph to move Story Points to players' pool.,EOTI
+Dual Wielder,2,Active (Maneuver),No,Once per round decrease difficulty of next combined combat check by one.,GCRB
+Dynamic Fire,2,Active (Incidental),No,When making ranged attack while engaged suffer 2 strain to reduce ranged modifier by 1.,ACRB
+Encouraging Song,2,Active (Action),No,With musical instrument make Average Charm or Verse check. Each success grants ally setback. Each advantage heals 1 strain.,ROT
+Ensorcelled (Improved),2,Passive,No,Must have Ensorcelled talent with two+ ranks in magic skill. Add successes and advantages to next social check. Appearance noticeably enhanced.,GEPG
+Exploit,2,Active (Incidental),Yes,When making Ranged or Melee (Light) check suffer 2 strain to add Ensnare quality. Rating equals ranks.,ROT
+Fan the Hammer,2,Active (Incidental),No,Once per encounter before pistol combat check add Auto-fire quality. Weapon runs out of ammo.,GCRB
+Fancy Paint Job,2,Passive,No,Must have Signature Vehicle talent. Upgrade Charm Deception Negotiation checks in vehicle's presence.,SOT; SM
+Favor of the Fae,2,Active (Incidental),No,Cannot have Dominion of the Dimora. When casting Attack spell add Manipulative effect without increasing difficulty. Never add Impact.,ROT
+Fearsome,2,Passive,Yes,When adversary becomes engaged force fear check with difficulty equal to ranks.,DC; FCRB
+Fine Tuning,2,Passive,Yes,When reducing system strain reduce 1 additional per rank.,ACRB; ECRB; FCRB
+Flames of Kellos,2,Active (Incidental),No,Cannot have Chill of Nordros. When casting Attack spell add Fire effect without increasing difficulty. Never add Ice.,ROT
+Flash of Insight,2,Passive,No,When knowledge check generates triumph roll two dice and add results in addition to spending triumph.,ROT
+Friends in Low Places,2,Active (Action),No,Must be Saar or have allegiance. Once per session on populated world make Easy Streetwise check. Obtain item or service with rarity up to 2x successes.,EOTI
+Go Without,2,Active (Incidental),No,Once per session count as having right tools for next check this turn.,DOH
+Gunslinger Diplomacy,2,Active (Maneuver),No,If armed conspicuously display weapon and add successes and advantages to next social check.,EOTI
+Good Cop,2,Active (Incidental),Yes,Spend advantages from Charm or Negotiation check to upgrade ally's subsequent social check targeting same character.,SOTB
+Grapple,2,Active (Incidental),No,Suffer 2 strain to make enemies spend two maneuvers to disengage.,ROT
+Hard-Headed,2,Active (Action),Yes,When staggered or disoriented make Daunting Discipline check to remove status. Reduce difficulty per rank.,ACRB; ECRB
+Haughty Demeanor,2,Passive,No,Other characters add help to social checks targeting you.,SOTB
+Headbutt,2,Active (Incidental),No,Once per encounter suffer two wounds to knock engaged target prone and disorient until end of next round.,KOF
+Heightened Awareness,2,Passive,No,Allies within short range add setback to Perception Vigilance checks. Engaged allies add two setbacks.,GCRB
+Heroic Recovery,2,Active (Incidental),No,Choose one characteristic. Once per encounter spend Story Point to heal strain equal to characteristic rating.,ROT
+Hidden Storage (Improved),2,Passive,No,Use Hidden Storage to store item within modified body via cybernetics surgery or prosthetics.,CAM
+Hold Together,2,Active (Incidental; Out of Turn),No,Spend Story Point immediately after vehicle damage to turn it into system strain.,ACRB; ECRB
+Hunter,2,Passive,No,Knowledge (Geography) Ranged and Survival are career skills.,ROT
+Hunter's Quarry,2,Active (Action),No,Make Hard Survival check to upgrade attacks against target within long range until end of next turn.,ETU; SS
+Impaling Strike,2,Active (Incidental),No,When inflicting Critical Injury with melee weapon immobilize target until end of next turn.,ROT
+Improvised Defenses,2,Active (Action),No,Make Average Survival check to fashion defenses for 4 characters providing cover. Spend advantages or triumph to increase ranged defense to 2.,FO
+Inspiration,2,Active (Maneuver),No,Once per encounter spend Story Point to tell ally to perform task. If know motivation reroll up to three dice.,EOTI
+Inspiring Rhetoric,2,Active (Action),No,Make Average Leadership check. Each success heals one ally strain. Each advantage heals one additional.,GCRB
+Inventor,2,Active (Incidental),Yes,When constructing items add setback equal to ranks. May attempt to reconstruct devices without plans.,GCRB
+Knockdown,2,Passive,No,After melee hit spend triumph to knock target prone.,ABGR; ACRB; EBGR; ECRB
+Know the Enemy,2,Passive,No,Use appropriate Knowledge skill when making initiative checks.,DOR
+Know-It-All,2,Active (Incidental),No,Once per session perfectly recall important fact as if Story Point spent.,DA
+Known Schematic,2,Active (Maneuver),No,Once per session make Hard Knowledge check to gain familiarity with building or ship design.,ACRB; ECRB
+Knows the Ropes,2,Passive,No,Add setback per Skullduggery ranks to escape restraint checks. Spend triumph to free allies within short range.,DOR
+Leverage,2,Active (Maneuver),No,Once per encounter spend Story Point to target ally within hearing range. If know Flaw or Fear force target to perform action next turn.,EOTI
+Long Game,2,Passive,No,Increase agenda benchmarks by 2. When completing agenda double received rewards.,EOTI
+Loom,2,Passive,No,When ally makes successful Charm Deception Negotiation check add success per Coercion rank.,DC
+Lucky Strike,2,Active (Incidental),No,Choose characteristic. After successful combat check spend Story Point to add damage equal to characteristic ranks.,GCRB
+Multiple Opponents,2,Passive,No,Add setback to Brawl and Melee checks when engaged with multiple opponents.,FCRB
+Mystic Theurge,2,Passive,No,Choose magic skill as career skill. Can only use once per encounter.,GHC
+Natural Communion,2,Passive,No,When casting Conjure spell always add Summon Ally effect without increasing difficulty. Summon natural animals.,ROT
+Net Hunter,2,Passive,No,When successfully tracing character during Network encounter gain one additional trace.,SOTB
+Overheat,2,Active (Incidental),No,Must be Hylar Gashlai or have allegiance. When making equipment check add successes and advantages. Equipment becomes damaged one step or vehicle suffers 2 strain.,EOTI
+Overstocked Ammo,2,Passive,Yes,Must have Signature Vehicle talent. Increase Limited Ammo on mounted weapons by 1 per rank.,SOT
+Parkour!,2,Active (Maneuver),No,Once per round suffer 1 strain to move to location within short range. Must have object or path to move along.,SOTB
+Physical Training,2,Passive,Yes,Add setback per rank to Athletics and Resilience checks.,ACRB; DOH
+Precision Strike,2,Active (Incidental),Yes,When making Brawl or Melee check remove setback per rank from pool and suffer 1 strain per removed setback then add equal successes.,EOTI
+Pride and Joy,2,Passive,No,Choose vehicle silhouette 4+. Upgrade social checks while within short range.,DOR
+Probing Question,2,Passive,No,If know opponent's Flaw or Fear when inflicting strain with social skill opponent suffers 3 additional strain.,SOTB
+Quick Draw (Improved),2,Passive,No,Must have Quick Draw talent. May use Quick Draw twice per round. Reduce prepare rating by 2 minimum 1.,FC
+Quick Fix,2,Active (Maneuver),No,Spend Story Point to temporarily repair damaged item. Works without penalty for rounds equal to Mechanics ranks then damaged one additional step.,SOTB
+Reckless Charge,2,Active (Incidental),No,After using maneuver to engage suffer 2 strain to add successes and help to next Brawl Melee (Light) or Melee (Heavy) check.,ROT
+Reconstruct the Scene,2,Active (Action),No,Make Hard Perception check to identify physical characteristics of person present at scene within 24 hours.,ND; EV
+Researcher,2,Passive,Yes,On successful Knowledge check character and allies gain automatic advantage per rank until end of next turn.,DA; LBE
+Resist Disarm,2,Active (Incidental; Out of Turn),No,Suffer 2 strain to avoid being disarmed or weapon damaged or destroyed.,FCRB
+Runic Lore,2,Passive,No,Knowledge (Lore) and Runes are career skills.,ROT
+Scathing Tirade,2,Active (Action),No,Make Average Coercion check. Each success inflicts 1 strain on enemy. Each advantage inflicts 1 additional strain.,GCRB
+Selective Detonation,2,Active (Incidental),Yes,With Blast quality weapon spend advantage to exclude 1 target per rank from explosion.,ACRB; DC
+Sense Emotions,2,Passive,No,Add setback to all Charm Coercion and Deception checks.,ECRB; FBGR; FCRB
+Shapeshifter (Improved),2,Passive,No,Once per session make Hard Discipline check to trigger Shapeshifter or avoid triggering when exceeding strain.,ROT
+Shepherding Command,2,Active (Incidental; Out of Turn),No,Must be Xxcha Titan or have allegiance. Once per encounter when ally within short range targeted by attack reduce damage by ranks in Leadership before soak.,EOTI
+Shortcut,2,Passive,Yes,During chase add setback per rank to catch or escape checks.,ACRB; ECRB; EV; SS
+Side-Step,2,Active (Maneuver),Yes,Once per round suffer strain up to ranks to upgrade ranged attack difficulty until end of next turn.,GCRB
+Signature Spell,2,Passive,No,Choose signature spell combination. Reduce difficulty of casting signature spell by one.,ROT
+Sneak Attack,2,Passive,No,When making Melee check use Cunning instead of Brawn. Add Cunning to weapon damage.,EOTI
+Sound Investments,2,Passive,Yes,At beginning of session receive aurei equal to ranks x 100.,ACRB; EOTI; FH
+Speaks Binary,2,Passive,Yes,When directing non-sentient artificial life grant setback per rank on checks.,ABGR; ACRB; ECRB
+Special Use Permit,2,Passive,No,Do not treat Ranged (Heavy) weapons as restricted. Can carry without arrest.,SOTB
+Stalker,2,Passive,Yes,Add setback per rank to all Stealth and Coordination checks.,ABGR; ACRB; ECRB
+Strong Arm,2,Passive,No,Treat thrown weapons as having 1 greater range.,ACRB; EBGR; ECRB
+Stunning Blow,2,Active (Incidental),No,While making Melee checks inflict damage as strain instead of wounds. Does not ignore soak.,ACRB; ECRB
+Sustained Fire,2,Active (Incidental),Yes,After Ranged check spend advantages or triumph to add successes per rank to same target until end of encounter.,EOTI
+Tactical Focus,2,Passive,No,When making Ranged (Heavy) check if did not ready or stow weapon this turn add success.,SOTB
+Technical Aptitude,2,Passive,No,When making Computer check spend advantages or triumph to reduce time by 50%.,ACRB; ECRB; FCRB
+Templar (Improved),2,Passive,No,Must have Templar talent. When casting Divine spell do not add setback for heavy armor shield or no free hand.,ROT
+Threaten,2,Active (Incidental; Out of Turn),Yes,After adversary within short range damages ally suffer 3 strain to inflict strain equal to Coercion ranks. Range increases per rank.,ROT
+Time to Go,2,Active (Maneuver),No,Spend Story Point to perform Move maneuver as incidental to move into cover or blast range.,ACRB; DC
+Tinkerer,2,Passive,Yes,Add 1 hard point to items equal to ranks. Each item modified once.,ACRB; ECRB; KTP
+Touch of Fate,2,Active (Incidental),No,Once per session add two setbacks to any check.,ACRB; ECRB; FCRB
+Two-Handed Stance,2,Passive,No,When making Ranged (Light) check with nothing in other hand add success.,SOTB
+Unarmed Parry,2,Passive,No,May Parry while unarmed. Reduce strain cost to 1 minimum. May use for Reflect vs thrown weapons per GM.,ND
+Uncanny Senses,2,Passive,Yes,Add setback per rank to all Perception and Vigilance checks.,ACRB; ECRB; FCRB
+Undercity Contacts,2,Active (Incidental),No,Once per session spend Story Point to learn if target character is in New Angeles and location.,SOTB
+Vehicle Combat Training,2,Passive,No,Gunnery and Driving become career skills.,ACRB
+Well Read,2,Passive,No,Choose any 3 Knowledge skills. Permanently become career skills.,LBE
+Well-Travelled,2,Passive,No,Knowledge (Geography) Negotiation and Vigilance are career skills.,ROT
+Wraithbane,2,Passive,No,Count weapon's Critical rating as one lower minimum 1 against undead.,ROT
+Aethersprite (Improved),3,Active (Maneuver),No,Must have Aethersprite talent. Spend Story Point to make self and 5 allies invisible to electronic sensors for rounds equal to Computers ranks.,EOTI
+Alchemical Arts,3,Active (Incidental),Yes,After poison crafting check suffer strain up to 2x ranks. For every 2 strain add successes and advantages.,UP
+Ambush,3,Active (Maneuver),No,Once per round while benefiting from cover add damage equal to Stealth skill to successful combat check.,FIB
+Animal Companion,3,Passive,Yes,Bond with silhouette 0 animal. Bond persists as chosen. Animal follows and acts per direction. Silhouette increases per rank.,GCRB
+Applied Research,3,Active (Incidental),Yes,Before knowledge check use Intellect instead of required skill and characteristic. Use per session equal to ranks.,SOTB
+Armor Master (Improved),3,Passive,No,Must have Armor Master talent. When wearing armor with +2 soak increase defense by 1.,ACRB; ECRB; KTP
+Backstab,3,Active (Action),No,Attack unaware adversary with Melee (Light) using Skullduggery skill. Each uncanceled success adds +2 damage.,ROT
+Bad Habit,3,Active (Maneuver),No,Become disoriented for remainder of encounter. At start of each turn heal 2 strain if disoriented.,SOTB
+Bad Press,3,Active (Action),No,Once per session make Hard Deception check. Organization members strain thresholds reduced by 1 plus 1 per success until session end.,DA
+Barrel Roll,3,Active (Incidental; Out of Turn),No,While piloting silhouette 3 or less starfighter when hit suffered make check. Vehicle suffers 3 system strain to reduce damage by Piloting ranks.,GCRB
+Battle Casting,3,Passive,No,Do not add setback to magic checks for heavy armor shield or no free hand.,ROT
+Blind Spot,3,Passive,No,Character and allies within short range add automatic advantage to combat checks while benefiting from cover.,FIB; KTP
+Blooded (Improved),3,Active (Action),Yes,Make Hard Resilience check to immediately recover from all poisons and drugs. Reduce difficulty per rank.,UP
+Bodyguard,3,Active (Maneuver),Yes,Once per round suffer strain up to ranks to upgrade difficulty of melee checks on engaged ally.,SOTB
+Capital Sendoff,3,Active (Action),No,Target two ships or vehicles at Close range. Make Hard Cool check to cause minor collision.,SOT
+Cavalier,3,Active (Maneuver),No,While riding battle mount direct mount to perform action once per round.,ROT
+Ccrysusian Methodology,3,Active (Incidental; Out of Turn),Yes,Once per session when targeted by social check reduce strain by Negotiation ranks minimum 1. Each rank increases uses per session.,EOTI
+Center of Being,3,Active (Maneuver),Yes,While wielding Defensive weapon perform maneuver. Critical rating counts as 1 higher per rank until next turn.,FCRB
+Combat Veteran,3,Passive,No,Add setback to Brawl and Discipline checks.,DOR
+Confidence (Improved),3,Passive,No,Must have Confidence talent. Spend advantage on fear check so allies within short range making fear check add automatic successes.,LBE
+Congenial,3,Active (Incidental),Yes,Suffer strain up to ranks to downgrade Charm or Negotiation difficulty or upgrade when targeted.,FH; FC; DOH
+Constant Vigilance,3,Passive,No,Always use Vigilance when making initiative checks.,EV
+Counterattack,3,Active (Incidental; Out of Turn),No,Must have Parry talent. When using Parry to hit attacker activate weapon quality as if spent advantages.,ROT
+Creative Killer,3,Passive,No,Reduce improvised weapon critical rating by 2 minimum 1.,ACRB
+Cunning Persona,3,Active (Incidental),No,Suffer 2 strain to make Charm check using Cunning instead of Presence.,CAM
+Cunning Snare,3,Active (Action),No,Once per encounter as action create trap. Others moving to engaged range must make opposed Vigilance vs Survival check.,FIB
+Customized Cooling Unit,3,Passive,Yes,Must have Signature Vehicle talent. Increase system strain threshold by 2 per rank.,SOT
+Daring Turn,3,Active (Maneuver),No,When opponent has advantage on piloted vehicle suffer 2 strain to remove effects.,SOT
+Deliberate Tactics,3,Active (Incidental),No,Must be Titan Xxcha or have allegiance. Take no maneuvers or actions to reduce strain to 0 until next turn and add advantages to combat checks.,EOTI
+Disarm,3,Passive,No,Spend triumph or advantages with successful Brawl or Melee check to disarm opponent.,FCRB
+Disarming Smile,3,Active (Action),Yes,Make opposed Charm check against target within short range to lower all defenses until encounter end.,FC
+Dissonance,3,Active (Action),No,With musical instrument make Average Charm or Verse check. Each success inflicts 1 wound. Each advantage inflicts 1 additional.,ROT
+Distinctive Style,3,Active (Incidental),No,When making Computers hacking check before rolling add successes and help to results.,GCRB
+Dockyard Expertise,3,Active (Action),Yes,At dry dock make Average Knowledge check. Reduce repair cost and time by 20% per rank minimum 100 units and 1 day.,FO
+Dodge,3,Active (Incidental; Out of Turn),Yes,When targeted by combat check suffer strain up to ranks to upgrade difficulty equal to strain.,GCRB
+Double or Nothing,3,Active (Incidental),No,Suffer 2 strain to increase check difficulty by one. After canceling symbols double remaining advantages.,FC
+Druid,3,Passive,No,When casting Conjure with Primal skill always add Summon Ally effect. Must summon living animal. Animal remains even without concentrate.,GEPG
+Dual Blow,3,Active (Incidental),No,When resolving combined melee attack suffer 3 strain to hit with secondary weapon instead of spending advantages.,EOTI
+Dual Strike,3,Active (Incidental),No,When resolving combined melee attack suffer 2 strain to hit with secondary weapon instead of spending advantages.,ROT
+Dumb Luck,3,Active (Incidental),No,Once per session spend Story Point after Critical Injury but before rolling. Opponent rolls two results and you choose.,SOTB
+Eagle Eyes,3,Active (Incidental),No,Once per encounter before ranged combat check increase weapon range by one band to maximum extreme.,GCRB
+Easy Prey,3,Active (Maneuver),No,Suffer 3 strain until next turn. Character and allies within short range add two setbacks to immobilized target checks.,ROT
+Elementalist (Improved),3,Passive,No,Must have Elementalist talent. Gain immunity based on element (fire heat water air earth) and add effect without increasing difficulty.,GEPG
+Encoded Communique,3,Passive,No,Upgrade difficulty to decrypt coded messages by Computers ranks.,DA
+Encouraging Words,3,Active (Incidental; Out of Turn),No,After engaged ally fails check suffer 1 strain to assist next check this encounter.,DA; LBE; DOH
+Ensorcelled (Improved),3,Active (Incidental),No,Must have Ensorcelled with 2+ magic ranks. Once per session force enemies within medium range to make Hard Discipline check. Appearance noticeably enhanced.,GEPG
+Exhaustive Questioning,3,Active (Incidental),No,When successful social check on captured enemy within short range reduce strain threshold by 2. Spend advantage to inflict 1 strain.,CAM
+Expert Gunner,3,Active (Incidental),No,When making Gunnery check suffer 3 strain to reduce advantages needed to activate weapon qualities by 1 minimum 1.,EOTI
+Expert Scrapper,3,Active (Action),No,Must be Saar or have allegiance. Once per encounter engaged with vehicle make Mechanics check. Vehicle suffers 1 hull trauma per success and Critical Hit per triumph.,EOTI
+Explosive Casting,3,Active (Incidental),No,When casting Attack spell treat Blast rating as 2x ranks. Spend Story Point to trigger Blast instead of advantages.,GEPG
+Extended Reach,3,Active (Incidental),No,While armed with two-handed melee weapon suffer 1 strain to target up to short range instead of engaged.,DOR
+Eye for Detail,3,Active (Incidental),Yes,After Mechanics or Computers check suffer strain up to ranks to convert that many successes to advantages.,SM
+Face of the Wild,3,Active (Incidental),No,When casting transform spell with Primal skill spend Story Point to maintain until encounter end without concentrate.,GEPG
+Fear the Shadows,3,Active (Action),No,Once per session make Hard Deception check to force minion group or rival to flee.,EV
+Fearsome Rep,3,Passive,Yes,Add advantage to Coercion check results per rank.,DOR
+Feint,3,Passive,Yes,Spend triumph or advantages from missed melee attack to upgrade opponent's next attack difficulty per rank.,FCRB
+Feral Strength,3,Passive,Yes,Add 1 damage per rank to melee or Brawl hits.,ABGR; ACRB; EBGR; ECRB
+Field Commander,3,Active (Action),No,Make Average Leadership check. Allies equal to Presence may suffer 1 strain to perform maneuver out of turn.,GCRB
+Fire Control,3,Active (Maneuver),No,All starship or vehicle combat checks count target silhouette as one higher until next turn.,ACRB
+Forgot to Count?,3,Active (Incidental; Out of Turn),No,When opponent makes ranged check spend help to cause weapon to run out of ammo.,GCRB
+Form on Me,3,Passive,No,Allies equal to Leadership ranks in short range gain Gain the Advantage benefits.,ACRB
+Formation Tactics,3,Active (Action),No,Make Hard Leadership check. Allies within short range equal to successes upgrade attack difficulty until end of next turn.,DOR
+Fortified Structure,3,Passive,Yes,Must have Signature Vehicle talent. Increase hull trauma threshold by 1 per rank.,SOT
+Frenzied Attack,3,Active (Incidental),Yes,When making Melee or Brawl check suffer strain up to ranks to upgrade attack equal times.,ACRB; ECRB
+Full Throttle,3,Active (Action),No,Make Hard Piloting or Driving check. Vehicle top speed increases by 1 maximum 5 for rounds equal to Cunning.,GCRB
+Greased Palms,3,Active (Maneuver),Yes,Before social check spend up to 50 credits per rank to upgrade ability once per 50 spent.,ACRB; JOY; FH
+Grenadier,3,Active (Incidental),Yes,When making Blast weapon check spend Story Point to trigger Blast instead of advantages. Treat grenades as medium range.,GCRB
+Harass,3,Active (Incidental),No,When animal companion makes successful combat check forgo damage to upgrade target's next difficulty.,SS
+Hard-Boiled,3,Active (Incidental),No,When recovering strain at encounter end make Simple Resilience check instead. Heal 1 strain per success and 1 wound per advantage.,SOTB
+Heroic Resilience,3,Active (Incidental),Yes,After attack hits but before damage spend Story Point to increase soak by Resilience ranks.,FIB; DC
+Heroic Will,3,Active (Incidental; Out of Turn),No,Choose two characteristics. Spend Story Point to ignore Critical Injury effects on those characteristics until end of encounter.,GCRB
+Hindering Shot,3,Active (Incidental),Yes,Spend Story Point and increase next Gunnery check difficulty by 1. If deals damage target suffers system strain equal to speed.,ND
+Hold It Steady,3,Active (Incidental),No,Before Auto-fire check use talent without increasing difficulty. Trigger additional hits cost 2 strain each.,SOTB
+Hunter's Quarry (Improved),3,Passive,No,Must have Hunter's Quarry talent. Suffer 2 strain to perform Hunter's Quarry as maneuver.,ETU; SS
+Informant,3,Active (Incidental),No,Once per session reveal contact who can shed light on chosen subject.,DA; ND
+Innate Focus,3,Active (Incidental),No,Without magic implement increase base damage of Attack spells by 2. Decrease difficulty by one or increase strain by one.,GEPG
+Inspiring Rhetoric (Improved),3,Passive,No,Must have Inspiring Rhetoric talent. Allies affected add setback to all checks for rounds equal to Leadership ranks.,GCRB
+Interjection,3,Active (Incidental; Out of Turn),No,After social check suffer 3 strain. Make Average Vigilance check to add successes or failures and advantages or help.,DA
+Intense Focus,3,Active (Maneuver),No,Perform maneuver suffer 1 strain to upgrade next skill check once.,ABGR; ACRB; ECRB; DOH
+Intimidating,3,Active (Incidental; Out of Turn),Yes,Suffer strain up to ranks to downgrade Coercion difficulty or upgrade when targeted.,ACRB; ECRB; FBGR; FCRB
+Iron Body,3,Passive,Yes,Remove setback per rank from Coordination and Resilience checks. Reduce unarmed critical by 1 per rank minimum 1.,ND
+Jury Rigged,3,Passive,Yes,Choose personal weapon or armor per rank. Increase weapon damage by 1 or reduce critical by 1 or decrease encumbrance by 2 minimum 1.,ACRB; EBGR; ECRB
+Justice of the Citadel,3,Active (Incidental),No,Once per round on turn suffer 3 strain to add damage equal to Discipline ranks to melee hit.,ROT
+Larger Project,3,Passive,Yes,Must have Signature Vehicle talent. Signature Vehicle can be 1 silhouette larger per rank.,SOT; SM
+Laugh It Off,3,Active (Incidental; Out of Turn),No,When targeted by social check spend help or despair to reduce strain. Targeter suffers equal strain.,SOTB
+Lethal Blows,3,Passive,Yes,Add +10 per rank to Critical Injury results.,ACRB; ECRB; SS
+Made You Talk,3,Active (Action),No,Once per session make opposed social check on captured enemy within short range adding setback per 2 strain suffered.,CAM
+Martial Grace,3,Active (Incidental),No,Once per round suffer 3 strain to add damage equal to Coordination ranks to Brawl hit.,KOF
+Martial Weapons Master,3,Active (Action),No,With Melee weapon make Average check. Force engaged target to drop weapon or move one range band.,SOTB
+Master of Illusion,3,Active (Incidental),No,After successful Mask spell spend Story Point to maintain until encounter end. Two Story Points for session end.,GEPG
+Master of the Blade,3,Passive,No,Must be Hacan Letnev N'orr or have allegiance. Add failures to melee check results when engaged with multiple enemies.,EOTI
+Mercantile Savant,3,Active (Incidental),No,Must be Naaz-Rokha Hacan or have allegiance. Once per session spend Story Point to reduce item cost by 50% or increase reward by 50%.,EOTI
+Mind Bender,3,Active (Maneuver),No,Must be Druaa or have allegiance. Once per session spend Story Point make opposed Discipline vs Vigilance. Make target adopt emotional state or believe false information.,EOTI
+Natural,3,Active (Incidental),No,Choose two skills. Once per session reroll check using one of those skills.,GCRB
+Net Warrior,3,Active (Action),No,While accessing system via brain-machine interface make opposed Computers vs Computers check. Target suffers 1 strain per success and 1 wound if using interface.,SOTB
+Nimble,3,Active (Incidental),No,At turn start spend Story Point to perform Move maneuver as incidental. One additional move maneuver allowed.,SOTB
+No Escape,3,Passive,No,Spend advantages from Coercion or help from foe's Discipline. Target cannot perform free maneuver next turn.,KTP
+Nobody's Fool,3,Passive,Yes,Upgrade incoming Charm Coercion Deception difficulty once per rank.,ACRB; ECRB; FCRB
+Not Even in Death,3,Active (Incidental; Out of Turn),No,Must be N'orr Shikrai or have allegiance. When incapacitated from wounds spend Story Point to immediately make combat check.,EOTI
+Opportunist,3,Active (Incidental),Yes,Choose non-combat non-magic skill. Suffer strain up to ranks to convert equal successes to advantages.,SM
+Outside the Box,3,Passive,No,Choose characteristic. Once per session make check using that characteristic instead of linked one.,ACRB
+Overwhelm Defenses,3,Active (Incidental),Yes,Upon unsuccessful starship or vehicle attack spend advantages per rank to reduce defense by 1 per pair.,ACRB; ND
+Painkiller Specialization,3,Passive,Yes,When using painkillers target heals one additional wound per rank. Sixth painkiller still has no effect.,GCRB
+Parry (Improved),3,Active (Incidental; Out of Turn),No,Must have Parry talent. When using Parry to reduce damage spend despair or help to automatically hit attacker.,GCRB
+Pin,3,Active (Action),No,Make opposed Athletics check to immobilize engaged opponent until end of next turn. Spend triumph to extend one round.,ETU
+Plausible Deniability,3,Active (Action),No,Make Hard Coercion check to convince bystanders equal to Willpower to depart quietly.,DA
+Primacy,3,Active (Incidental),No,Must be Letnev Winnu or have allegiance. Once per session upgrade non-Presence checks by Presence rating.,EOTI
+Point Blank,3,Passive,Yes,Add 1 damage per rank to ranged checks at short range or engaged.,ABGR; ACRB; EBGR; ECRB
+Potent Concoctions,3,Passive,No,When Alchemy check generates triumph roll additional die and add results. Each effect once per check.,ROT
+Powerful Blast,3,Passive,Yes,Increase Blast damage by +1 per rank.,ACRB; DC
+Precise Archery,3,Passive,No,When making ranged check targeting character engaged with ally downgrade difficulty once.,ROT
+Preemptive Avoidance,3,Active (Incidental; Out of Turn),No,Spend Story Point to disengage from engaged enemy.,FCRB
+Pressure Point,3,Active (Incidental),No,When making unarmed Brawl check deal strain damage instead and inflict additional strain equal to Medicine ranks.,ROT
+Pride and Joy (Improved),3,Passive,No,While inside Pride and Joy recover +1 strain. Spend advantage to heal ally 1 strain.,DOR
+Rapid Archery,3,Active (Maneuver),No,While armed with bow suffer 2 strain to gain Linked quality with value equal to Ranged ranks.,GCRB
+Raptor's Flight,3,Active (Action),No,Must be Druaa Shikrai or have allegiance. Make Hard Piloting check to change vehicle speed instantly. Spend advantages to increase difficulty of attacks.,EOTI
+Reflect (Improved),3,Active (Incidental; Out of Turn),No,Must have Reflect talent. When reflecting hit with despair or help hit one target in medium range with same damage.,FBGR; FCRB
+Resist Questioning,3,Active (Out of Turn Incidental),No,When targeted by social check suffer 2 strain adding setback. If fails spend despair to provide false information they believe.,CAM
+Resourceful Refit,3,Active (Action),No,Make Average Mechanics check to scavenge old attachment to construct new reducing price.,SM
+Scathing Tirade (Improved),3,Passive,No,Must have Scathing Tirade talent. Enemies affected add setback to checks for rounds equal to Coercion ranks.,GCRB
+Scything Strike,3,Passive,Yes,Unarmed Brawl attacks gain Pierce quality with rating equal to ranks.,KOF
+Seize the Initiative,3,Active (Maneuver),No,Once per session make Hard Athletics check as maneuver. On success other PCs may take turns.,FIB
+Sense Advantage,3,Active (Incidental; Out of Turn),No,Once per session add two setbacks to 1 NPC check.,FBGR; FCRB
+Share Pain,3,Active (Incidental; Out of Turn),No,When animal companion suffers wounds reduce to half then character suffers equal wounds.,FCRB
+Shockwave,3,Passive,No,Treat Melee (Heavy) weapons as possessing Blast quality with rating equal to ranks. Don't suffer weapon's Blast damage.,ROT
+Shortcut (Improved),3,Passive,No,Must have Shortcut talent. During chase suffer 2 strain to add successes per rank.,ND; EV; SS
+Skilled Teacher,3,Active (Incidental; Out of Turn),Yes,Before ally within short range skill check if ally has fewer ranks suffer strain up to ranks to add equal successes.,DOH
+Smart Handling,3,Active (Action),No,Once per session aboard silhouette 4+ ship make Smart Handling action making Hard Knowledge check. Ship handling increases by 2 plus 1 per advantage maximum +4.,FO
+Snare,3,Active (Action),No,Once per session make Hard Computers check. Once per encounter spend Story Point to force character to make Daunting Vigilance check. If fail stagger until end of next turn.,SOTB
+Solo Flight,3,Active (Incidental),No,Before Operating check increase difficulty by 1 to use Piloting skill. Operate multi-pilot vehicle alone.,EOTI
+Sorry About the Mess,3,Passive,No,Decrease weapon Critical Rating by 1 minimum 1 against targets not yet acted.,FC
+Spec Ops Elimination,3,Active (Incidental),No,Must be Human Yssaril or have allegiance. After successful combat against unaware target inflict Critical Injury without spending advantages.,EOTI
+Spur,3,Active (Action),No,Make Hard Riding check to increase beast top speed by 1. Beast suffers 2 strain every round spurred.,SOT
+Studious Plotting,3,Passive,No,When making Streetwise or Survival navigation check use Intellect instead of Cunning.,SS
+Stunning Blow (Improved),3,Active (Incidental),No,Must have Stunning Blow talent. When dealing strain damage spend triumph to stagger target per triumph.,ACRB; ECRB
+Sunder Expertise,3,Passive,No,Each advantage spent to activate Sunder quality damages item two steps instead of one.,DOH
+Suppressing Fire,3,Active (Maneuver),Yes,If not making combat check target one character within long range. Target upgrades ranged difficulty once. Affect one additional per rank.,SOTB
+Takedown,3,Active (Action),No,Make opposed Brawl vs Resilience against engaged opponent. If succeeds knock prone and immobilize until end of next turn.,SOTB
+Time to Go (Improved),3,Active (Maneuver),No,Must have Time to Go talent. When activating allow one engaged ally to perform Move maneuver as incidental.,ACRB; DC
+Toughened (Improved),3,Active (Incidental),No,Once per session heal wounds equal to Toughened ranks.,KOF
+Tricky Target,3,Passive,No,Count piloted vehicle or starship silhouette as 1 lower when attacked.,ABGR; ACRB; ECRB; FCRB
+Trust the Captain,3,Active (Action),Yes,Make Hard Leadership check. If successful allies within short range increase Discipline ranks until encounter end.,DOR
+Tuned Maneuvering Thrusters,3,Passive,Yes,Must have Signature Vehicle talent. Increase Signature Vehicle handling by 1 per rank.,SOT
+Twisted Words,3,Active (Incidental; Out of Turn),No,When incoming check generates help or despair suffer 1 strain to inflict strain equal to Coercion ranks.,DA
+Undercity Contacts (Improved),3,Active (Incidental),No,Must have Undercity Contacts talent. Spend two Story Points to learn target's specific location.,SOTB
+University Training,3,Active (Maneuver),No,Must be Hylar or have allegiance. Once per encounter make Intellect skill check as maneuver and add successes.,EOTI
+Unremarkable (Improved),3,Passive,No,Extend Unremarkable effects to allies within short range equal to Deception ranks.,CAM
+Up the Ante,3,Passive,Yes,When gambling win 10% more credits per rank.,FC
+Valuable Facts,3,Active (Action),No,Once per encounter make Average Knowledge check. If successful add triumph to ally check during encounter.,DA; FBGR; FCRB
+Well Rounded,3,Passive,No,Choose 2 non-magic skills. Permanently become career skills.,ACRB; EBGR; ECRB; FBGR; FCRB
+You Owe Me One,3,Active (Incidental),No,Once per session spend two Story Points to have NPC owe character favor.,SOTB
+A Step Ahead,4,Active (Incidental),No,Once per session suffer 2 strain to count Cunning as 1 higher for remainder of encounter.,CAM
+AetherSprite (Supreme),4,Active (Action),No,Must have Aethersprite talent. Make Hard Computers check to falsify major distraction. Opponents ignore characters and leave installations unguarded.,EOTI
+Analyze Data,4,Active (Action),No,Once per session after capturing data make Average Knowledge check. Add automatic successes equal to ranks to related check.,CAM
+Back-to-Back,4,Passive,No,While engaged with allies add setback to combat checks. Cumulative maximum two setbacks.,ROT
+Beam Fighter,4,Active (Maneuver),No,When using Pierce beam weapon lose that quality to assign additional hits from weapon equal to Pierce value.,EOTI
+Better Luck Next Time,4,Active (Action),No,Make Hard Cool check to force competitor to suffer major misfortune.,EV
+Bodyguard (Improved),4,Passive,No,Must have Bodyguard talent. Once per session when protected ally suffers hit suffer it instead.,LBE; FIB; EBGR; FCRB
+Bolstered Armor,4,Passive,Yes,Must have Signature Vehicle talent. Increase armor value by 1 per rank.,SOT
+Brilliant Evasion,4,Active (Action),No,Once per vehicle encounter make opposed Driving or Piloting check. Stop opponent attacking for rounds equal to Agility.,ACRB; ECRB
+Burn Through,4,Active (Incidental),No,After successful break ice action suffer 3 strain to perform second override ice as incidental.,SOTB
+By the Book,4,Active (Incidental),Yes,Once per encounter before combat check suffer 2 strain to add success per rank.,DOR
+Can't We Talk About This?,4,Active (Action),No,Make opposed Charm or Deception vs Discipline against non-nemesis within medium range. Target cannot attack until end of next turn. Spend advantages to extend or triumph for allies.,GCRB
+Capital Sendoff (Improved),4,Passive,No,Must have Capital Sendoff talent. Targets suffer major collision.,SOT
+Careful Planning,4,Active (Action),No,Once per session introduce fact into narrative as if Story Point spent.,ACRB; KTP
+Center of Being (Improved),4,Passive,No,Suffer 1 strain to use Center of Being maneuver as incidental.,FCRB
+Combat Command,4,Active (Incidental),No,When making Initiative check make Simple Leadership check instead. Spend triumph to add successes to all allies' first round checks.,EOTI
+Commanding Presence,4,Passive,No,Once per session make opposed Cool vs Discipline check to force target to leave encounter.,LBE
+Comrades in Arms,4,Active (Action),No,Once per encounter make Hard Discipline check. Allies up to Presence within short range gain +1 defense.,DOR
+Conduit,4,Active (Maneuver),No,Once per encounter spend Story Point to perform magic action as maneuver.,ROT
+Deadeye,4,Active (Incidental),No,After inflicting Critical Injury with ranged weapon suffer 2 strain to select any Critical Injury of same severity.,GCRB
+Deadly Accuracy,4,Passive,Yes,Choose combat skill. Add damage equal to ranks to hit from that skill. Cannot choose same skill twice.,ABGR; ACRB; ECRB
+Death Rage,4,Passive,No,Add +2 damage to melee attacks per Critical Injury suffered.,ROT
+Defensive,4,Passive,Yes,Each rank increases melee and ranged defense by one.,GCRB
+Defensive Driving,4,Passive,Yes,Increase vehicle defense by 1 per rank piloted.,GCRB
+Deflection,4,Active (Incidental; Out of Turn),No,Must have Reflect talent. After using Reflect spend Story Point to Move as incidental to engage opponent.,FCRB
+Discredit,4,Active (Action),No,Once per encounter make Hard Deception check to upgrade one character's social checks difficulty once plus once per pair of advantages until encounter end.,DA
+Distracting Behavior (Improved),4,Passive,No,Must have Distracting Behavior talent. Inflict two help on NPC checks when NPCs target allies.,FH
+Dodge (Improved),4,Active (Incidental),No,When performing Dodge may make Move maneuver as out-of-turn incidental after attack resolves.,KOF
+Don't Shoot!,4,Active (Action),No,Once per session make Hard Charm check. Cannot be target of combat checks until encounter end or making combat check.,FC
+Dormant Personality Overlay,4,Active (Incidental),No,Select three skills with one or no ranks. Once per session spend Story Point. Count as 4 ranks in those skills until end of encounter. Suffer 1 strain at turn start.,EOTI
+Double or Nothing (Improved),4,Passive,No,Must have Double or Nothing talent. When performing also double remaining successes.,FC
+Double-Talk,4,Passive,No,Spend advantages or triumph from successful Charm or Deception to disorient opponents within short range equal to Presence.,DOR
+Elementary,4,Active (Action),No,Once per session make Hard Perception check at crime scene. Identify all physical characteristics of one person per check success.,SOTB
+Elementalist (Supreme),4,Active (Incidental),No,Must have Elementalist talent. When casting Augment Barrier or Transform spell targets gain Elementalist (Improved) ability for duration.,GEPG
+Enduring,4,Passive,Yes,Each rank increases soak value by one.,GCRB
+Field Commander (Improved),4,Passive,No,Must have Field Commander talent. Affect allies equal to 2x Presence. Spend triumph to allow ally to perform action instead of maneuver.,GCRB
+Flicker Step,4,Active (Incidental),No,When casting Arcana spell spend advantages or triumph to vanish and reappear within long range.,GEPG
+Fly Quiet,4,Active (Action),No,Once per encounter make Hard Piloting or Operating check. Ship vanishes from sensors until firing weapons or defeated.,EOTI
+Formation Tactics (Improved),4,Passive,No,Reduce Formation Tactics difficulty to Average. Spend triumph or advantages to extend effect until encounter end.,DOR
+Fortune Favors the Bold,4,Active (Incidental),No,Once per session suffer 2 strain as incidental to flip GM Story Point to Player Story Point.,FC
+Full Throttle (Improved),4,Active (Action),No,Must have Full Throttle talent. Suffer 1 strain to attempt Full Throttle as maneuver with Average difficulty. Top speed increases by 2 instead of 1.,ABGR; ACRB; EBGR; ECRB; EV
+Future Sight,4,Active (Incidental),No,Must have Nomad allegiance. Once per session after performing action cancel results and perform different action.,EOTI
+Holistic Navigation,4,Active (Incidental),No,When making Astrocartography check spend Story Point to remove despair or remove help equal to Perception ranks.,SS
+How Convenient!,4,Active (Action),No,Once per session make Hard Mechanics check. One device in encounter spontaneously fails.,GCRB
+Improvised Position,4,Active (Action),No,Make Hard Mechanics check spending 12 hours constructing position. Vehicle silhouettes total 4 or less. Provides cover and narrative benefits.,FO
+In the Know,4,Active (Action),No,Once per session make opposed Deception vs Vigilance with difficulty downgraded per Deception ranks to make target believe false intelligence.,DA
+Incite Distraction,4,Active (Action),No,In crowd or populated area make Average Deception check. Enemies treat area as difficult terrain. Spend triumph for impassable terrain.,CAM
+Incite Rebellion,4,Active (Action),No,Once per session make Hard Coercion check to cause beings equal to Coercion ranks to become rebellious until encounter end.,ACRB
+Inspiring Rhetoric (Supreme),4,Active (Incidental),No,Must have Inspiring Rhetoric talent. Suffer 1 strain to use Inspiring Rhetoric as maneuver instead of action.,GCRB
+It's Not that Bad,4,Active (Action),No,Once per session when ally would suffer Critical Injury make Hard Medicine check to prevent it.,ACRB
+Lose Them,4,Active (Action),No,When followed or chased make Hard Stealth check. Add two setbacks to follow checks. Spend triumph to lose pursuers completely.,CAM
+Mad Inventor,4,Active (Action),No,Once per session make Mechanics check to cobble together functional equivalent of item. Difficulty based on rarity.,GCRB
+Masterful Casting,4,Active (Incidental),No,When casting spell spend triumph to trigger up to three different qualities or effects instead of one.,GEPG
+Menace,4,Active (Maneuver),No,Once per round spend maneuver to allow silhouette 2+ creature linked through Animal Companion at short range with enemy to perform Menace. Enemy gains setback.,SS
+Moving Target,4,Passive,Yes,If character already acted this round increase ranged defense by 1 per rank.,FIB
+Multitasking,4,Active (Incidental),No,Must be Naaz-Rokha or have allegiance. Once per encounter exchange two maneuvers for action to perform two actions.,EOTI
+Not Today,4,Active (Incidental),No,Must have Signature Vehicle talent. Once per session spend Story Point to save Signature Vehicle from destruction.,SOT
+Offensive Driving,4,Active (Action),No,While driving or piloting select vehicle within medium range. Make opposed Driving or Piloting check. Roll twice on Critical Hit table choosing which applies to each vehicle.,SOTB
+Overbalance,4,Passive,No,After enemy engaged makes combat check spend despair or help to stagger attacker until end of next turn.,ND; KTP
+Overcharge,4,Active (Action),No,Once per encounter make Hard Mechanics check. Choose cybernetic providing +1 characteristic skill or talent. Provides +2 until encounter end. GM spends despair or help to short out.,GCRB
+Parkour! (Improved),4,Active (Incidental),No,Must have Parkour! talent. Once per round suffer 4 strain to move within medium range instead of short range.,SOTB
+Polymorph,4,Passive,No,If have Arcana or Divine rank can cast transform spell to transform into magical creatures.,GEPG
+Pommel Smash,4,Active (Maneuver),No,After Melee check with two-handed weapon suffer 3 strain to stagger engaged opponent silhouette 2 or less.,EOTI
+Precise Aim,4,Active (Incidental),Yes,Once per round when performing Aim maneuver suffer strain up to ranks. Decrease target defense by 1 per strain.,EBGR; ECRB; SS
+Prey on the Weak,4,Passive,Yes,Add +1 damage to disoriented target hits per rank.,FIB; FCRB
+Pride and Joy (Supreme),4,Active (Incidental),No,Once per session inside Pride and Joy reduce silhouette by 2 minimum 0 for current and following round.,DOR
+Prime Positions,4,Passive,Yes,When character or ally takes cover increase ranged attack soak by 1 per rank.,FIB; KTP
+Prophetic Aim,4,Passive,No,While benefiting from Aim maneuver despair cannot cause attacks to hit engaged allies.,KTP
+Push the Specs,4,Active (Action),No,Make Average Knowledge check in ship or vehicle. Top speed increases by 1 for rounds equal to Intellect. Spend advantage to extend or suffer 2 strain.,FO
+Quick-Witted,4,Active (Incidental; Out of Turn),No,Once per encounter after social check make Average Vigilance check. Add successes or advantages per Charm ranks or suffer 3 strain.,SOTB
+Rain of Death,4,Active (Maneuver),No,Perform Rain of Death maneuver to ignore Auto-fire increased difficulty this turn.,FIB; DC
+Reflect (Supreme),4,Active (Incidental; Out of Turn),No,Must have Reflect talent. If did not make combat check last turn suffer 1 strain to use Reflect.,FCRB
+Reinforced Frame,4,Passive,No,Must have Signature Vehicle talent. Signature Vehicle gains Massive 1 quality.,SOT
+Reroute Processors,4,Active (Action),No,Once per encounter make Average Computers check to reduce one artificial life characteristic by 1 and increase another.,SM
+Resist Questioning (Improved),4,Passive,No,When ally within short range targeted by social check use Resist Questioning. If fails spend despair to provide false information they believe.,CAM
+Resolve,4,Passive,Yes,When involuntarily suffering strain suffer 1 less per rank minimum 1.,ABGR; ACRB; EBGR; ECRB
+Savvy Negotiator,4,Active (Action),No,During debate make Hard Negotiation check. Number of bystanders equal to Presence see opponent's point as unreasonable.,DOH
+Scathing Tirade (Supreme),4,Active (Incidental),No,Must have Scathing Tirade talent. Suffer 1 strain to use Scathing Tirade as maneuver instead of action.,GCRB
+Second Chances,4,Active (Incidental),Yes,Once per encounter choose positive dice equal to ranks and reroll.,SOT; FC
+Seen a Lot of Things,4,Passive,No,When failing Knowledge check spend triumph to roll again next turn.,DOR
+Showboat,4,Active (Incidental),No,When making vehicle check suffer 2 strain to gain triumph on success or despair on failure.,SOT
+Signature Spell (Improved),4,Passive,No,Must have Signature Spell talent. Reduce casting difficulty by two instead of one.,ROT
+Skilled Slicer,4,Active (Incidental),No,When making Computers check spend triumph to make further Computers checks within system as maneuvers.,ACRB; ECRB
+Strength of Faith,4,Active (Maneuver),No,Once per session add successes equal to Discipline ranks and advantages equal to Willpower to next Divine check.,GEPG
+Speaks Binary (Improved),4,Passive,No,Must have Speaks Binary talent. NPCs grant additional setback besides other benefits.,SM
+Spit Fire,4,Passive,No,After successful combined check with two Ranged (Light) weapons allocate additional hits to other targets within range.,FC
+Spur (Improved),4,Active (Maneuver),No,Must have Spur talent. Suffer 1 strain to attempt Spur as maneuver with Average difficulty.,SOT
+Steady Aim,4,Passive,No,Do not lose Aim maneuver benefits performing other maneuvers including moving.,DOR
+Street Smarts,4,Active (Action),Yes,Once per session make Formidable Streetwise or Knowledge check to learn vital clue. Reduce difficulty per rank.,ACRB; EBGR; ECRB; FCRB
+Supporting Evidence,4,Passive,Yes,When assisting ally with Charm Deception Leadership or Negotiation check add automatic advantage per rank.,DA
+Targeted Firepower,4,Active (Action),No,Once per session identify enemy target and make Hard Knowledge check. Allies within short range add advantage to attacks per success until encounter end.,DOR
+Teleportation,4,Active (Action),No,With Arcana rank once per session make Daunting Arcana check. Vanish and reappear in known location. Bring 5 allies adding setback per ally. Upgrade difficulty for other planes.,GEPG
+That's How It's Done,4,Active (Incidental),Yes,On successful check suffer 1 strain to add advantage to same skill check made by allies equal to Willpower within short range.,LBE
+Trust No One,4,Active (Incidental; Out of Turn),No,When targeted by social check suffer 1 strain adding failure. If fails with despair perform maneuver as out-of-turn incidental.,DOR
+Unrelenting,4,Active (Incidental),No,Once per round after successful Brawl or Melee check suffer 4 strain to make additional melee attack. Increase difficulty by 1 or 2.,ROT
+Unrelenting Skeptic,4,Passive,No,When targeted by Deception check automatically add failure equal to Vigilance ranks.,FH; EV
+Unstoppable,4,Passive,No,When receiving Critical Injury if percentile roll is 1 do not receive Critical Injury.,ACRB
+Urban Combatant,4,Active (Incidental; Out of Turn),No,When targeted by combat check in urban environment spend Story Point before rolling. Remove setback from check and add equal failure.,SOTB
+Venom-Soaked Blade,4,Passive,No,When making poisoned Melee (Light) check treat weapon as possessing Burn 2 quality.,ROT
+Weak Foundation,4,Active (Action),No,Once per session identify fixed combat structure and make Hard Knowledge check. Character and allies add advantages or successes to attacks until encounter end.,FO
+You Owe Me One (Improved),4,Active (Incidental),No,Must have You Owe Me One talent. Once per session spend two Story Points to have NPC owe big favor.,SOTB
+Against All Odds,5,Active (Incidental),No,Once per session after check select failure help or despair. Remove all and add equal successes advantages or triumph.,EOTI
+Altered Deal,5,Active (Action),No,Once per session make Hard Coercion check to radically change previous deal or bargain.,DOR
+Armor Master (Supreme),5,Active (Incidental; Out of Turn),No,Must have Armor Master talent. Once per round when suffering Critical Injury suffer 3 strain to reduce by 10 per soak minimum 1.,KTP
+Baleful Gaze,5,Active (Incidental; Out of Turn),No,When targeted by combat check within medium range spend Story Point to upgrade difficulty per Coercion ranks.,KTP
+Biggest Fan,5,Active (Action),No,Once per session make Hard Charm check to turn one NPC into biggest fan with various benefits.,FH
+Bodyguard (Supreme),5,Passive,No,Must have Bodyguard talent. Bodyguard maneuver protects allies equal to Resilience ranks.,FIB
+Comrades in Arms (Improved),5,Passive,No,Spend triumph or advantages during Comrades in Arms to give +1 soak or give affected ally +1 soak.,DOR
+Coordination Dodge,5,Active (Incidental),No,When targeted by combat check spend Story Point to add failure equal to Coordination ranks.,FH; ND
+Crucial Point,5,Active (Incidental),No,Once per session introduce negotiation concession opponent will do nearly anything to obtain.,DOH
+Crushing Blow,5,Active (Incidental),No,Once per session after rolling melee attack before resolving suffer 4 strain. Weapon gains Breach 1 Knockdown and destroys non-Reinforced item.,ROT
+Custom Loadout,5,Passive,No,Must have Signature Vehicle talent. Add one weapon or equipment mount.,SM
+Dedication,5,Passive,Yes,Each rank increases one characteristic by one. Cannot exceed 5. Cannot increase same characteristic twice.,GCRB
+Dire Animal Companion,5,Passive,No,Must have Animal Companion with Primal rank. Increase Brawn by 1 maximum 5 increase wound threshold by 4. Increase silhouette 0 to 1. Increase Agility or Willpower by 1.,GEPG
+Double or Nothing (Supreme),5,Passive,No,Must have Double or Nothing talent. Also double triumph and despair when performing.,FC
+Drone Master,5,Passive,No,Control two drones or minion groups maximum Willpower silhouette. Resolve turns individually.,SOTB
+Full Throttle (Supreme),5,Passive,No,Must have Full Throttle talent. Top speed increases by 2 instead of 1.,ACRB; ECRB; EV
+Ghost in The Machine,5,Active (Action),No,With Network access make Hard Computers check. Select drone vehicle equipment or cybernetics wearer and dictate actions until next turn.,SOTB
+Heavy Hitter,5,Active (Incidental),No,Once per session spend triumph on successful Ranged (Heavy) or Gunnery check to add Breach 1 or increase existing.,FIB; DC
+Indomitable,5,Active (Incidental; Out of Turn),No,Once per encounter when would be incapacitated spend Story Point. Not incapacitated until end of next turn.,GCRB
+Inside Knowledge,5,Active (Action),No,Once per session within enemy facility make Hard Skullduggery check. Find personal scale weapon or gain narrative benefit.,CAM
+Inside Person,5,Active (Action),No,Once per session spend Story Point to establish previously undercover at identified location. Add advantages to related checks until session end.,CAM
+Inspiring Leadership,5,Active (Action),No,Make Hard Leadership check. Allies not exceeding Presence within short range add successes to next check.,DOR
+Integral Weapon,5,Passive,No,Must be Titan. Choose integral particle beam or integral grav-field. Equipped as palm weapon. Cannot be disarmed.,EOTI
+Just Kidding!,5,Active (Incidental),No,Once per round spend Story Point to ignore despair from social check.,FC
+Let's Talk This Over,5,Active (Incidental; Out of Turn),No,Once per session when combat about to begin make Daunting Charm check. Combat becomes social encounter.,ROT
+Master,5,Active (Incidental),No,Choose skill. Once per round suffer 2 strain to reduce next check difficulty by two minimum Easy.,GCRB
+Master Demolitionist,5,Active (Incidental),No,When resolving personal scale explosive attack spend advantage or triumph to have Blast affect all within short range.,FO
+Master Driver/Pilot,5,Passive,No,Once per round when piloting suffer 2 strain to perform any action as maneuver.,ACRB; ETU; ECRB
+Master Grenadier,5,Passive,No,Decrease advantage cost to activate Blast on any attack by 1 minimum 1.,ACRB; DC
+Master Instructor,5,Active (Incidental; Out of Turn),No,Once per round suffer 2 strain to allow ally within short range count as having character's Discipline ranks.,DOH
+Master Merchant,5,Active (Incidental),No,When buying or selling suffer 2 strain to sell for 25% more or buy for 25% less.,ACRB; ECRB
+Master Plan,5,Active (Action),No,Once per session make Hard Discipline check. Reveal circumstances are part of brilliant plan. Turn one non-nemesis adversary into ally.,SOTB
+Mind Breaker,5,Active (Action),No,Must be Druaa or have allegiance. Once per session spend Story Point make Hard Discipline check. Opponents within medium range suffer strain equal to Willpower. Each success inflicts Compromised Critical Injury.,EOTI
+Most Impressive,5,Active (Incidental),No,Spend triumph from any check to allow allies not exceeding Presence within short range add advantage to next check.,DOR
+Overcharge (Improved),5,Passive,No,Must have Overcharge talent. Spend advantages or triumph to immediately take one additional action. Once per check.,GCRB
+Overwatch,5,Active (Incidental; Out of Turn),No,Once per round when opponent attacks ally within long range spend Story Point and despair or help to hit opponent automatically.,EOTI
+Power of Darkness,5,Active (Maneuver),No,Once per session perform maneuver. Increase Wound and Strain Thresholds by 1 per GM Story Point until encounter end.,UP
+Prepare to be Boarded,5,Active (Action),No,Once per encounter make opposed Coercion vs Discipline against enemy ship captain. Target suffers 1 strain per success and surrenders if exceeding threshold.,DOR
+Remote Personal Wormhole,5,Active (Maneuver),No,Must be Creuss or have allegiance. Once per session teleport to seen or visited location instantly. Within extreme range no check. Beyond requires Hard Discipline check.,EOTI
+Retribution,5,Active (Incidental; Out of Turn),No,Once per round when adversary attacks ally within medium range spend Story Point to hit enemy automatically.,ROT
+Ruinous Repartee,5,Active (Action),No,Once per encounter make opposed Charm or Coercion vs Discipline within medium range. Target suffers strain equal to 2x Presence plus 1 per success.,GCRB
+Speaks Binary (Supreme),5,Active (Maneuver),No,Once per encounter perform maneuver. NPCs artificial life use character's ranks for one chosen skill.,SM
+Spur (Supreme),5,Passive,No,Must have Spur talent. Beast suffers 1 strain instead of 2 when spurred.,SOT
+Superhuman Reflexes,5,Active (Incidental),No,Once per session after generating despair on Piloting check cancel and add successes equal to Cool ranks.,EV
+Teleportation (Improved),5,Active (Action),Yes,Must have Teleportation talent. Make Hard Arcana check to create permanent beacon glyph or circle. Teleport there with Average difficulty. Two beacons per rank.,GEPG
+Thorough Assessment,5,Active (Action),No,Once per session make Hard Knowledge check to gain setback equal to successes to distribute during encounter.,DA; LBE
+Trick of The Light,5,Active (Incidental),No,When making laser or maser check spend advantage to inflict one additional hit with same damage.,SOTB
+Unrelenting Skeptic (Improved),5,Active (Incidental),No,Must have Unrelenting Skeptic talent. When Deception check fails spend Story Point to add despair.,FH
+Web of Knowledge,5,Active (Action),No,Once per session make Average Knowledge (Net) check during Network encounter. Know all ice and characters on accessed system. Spend advantages or triumph to add successes.,SOTB
+Whirlwind,5,Active (Action),No,Suffer 4 strain to make Brawl Melee (Light) or Melee (Heavy) attack against hardest engaged adversary. Each engaged adversary suffers one hit.,ROT
+Void Baron,5,Active (Incidental),No,After Piloting check spend advantages or triumph to make combat check as maneuver.,EOTI
+Zealous Fire,5,Passive,No,Each time GM spends Story Point character heals 2 strain.,ROT
+Catfall,1,Passive,Yes,When rolling Athletics or Coordination to reduce fall damage add setback. Reduce fall damage and strain by 1 per rank.,CCC-Tom Cruise
+Deflect Spell,1,Active (Incidental; Out of Turn),Yes,When hit from magic combat check after damage calculated suffer 3 strain to reduce damage by 2 plus ranks.,CCC-Richardbuxton
+Intuitive Casting,1,Passive,Yes,Add setback per rank to spell casting when character first PC to act in encounter.,CCC-TheSapient
+Overchannel,1,Active (Incidental),Yes,When casting spell select additional difficulty effects up to ranks. Gain 2 threat per effect instead of increasing difficulty.,CCC-ESP77
+Respected,1,Passive,Yes,Choose social group. Downgrade difficulty to interact with members per rank.,CCC-SavageBob
+Specialist Knowledge,1,Passive,Yes,Choose specific expertise area. Reduce Knowledge check difficulty once for that area.,CCC-Tom Cruise
+Street Slang,1,Active (Incidental),Yes,When making social check in criminal company suffer strain up to ranks to add equal advantages.,CCC-Klort
+Covert Infiltration Training,1,Passive,No,Computers or Skullduggery become career skill. Spend 2 advantages to leave security device undamaged.,CCC-GM Ryan
+Adroitness,2,Passive,No,Choose general skill. Reduce time required by 25%.,CCC-Swordbreaker
+Familiar,2,Passive,Yes,Choose silhouette 0 creature as familiar. Bond persists as chosen. Familiar acts telepathically but only exchange actions for maneuvers. Assist magic checks from short range.,CCC-ESP77
+Fighter's Stance,2,Active (Incidental),No,When making combat check if performed Guarded Stance suffer 1 strain to ignore penalties.,CCC-ESP77
+Pact Magic,2,Passive,No,Entered Pact with otherworldly being. Choose one spell type normally cannot cast. Once per encounter cast using any magic skill. GM spends help to inflict wound.,CCC-ESP77
+Prepared Spell,2,Active (Action),No,Once per session make spell casting check without suffering strain.,CCC-TheSapient
+Blindsense,3,Passive,Yes,As long as can hear ignore setback from darkness or blindness within short range.,CCC-ESP77
+Blood Magic,3,Active (Incidental),No,When casting spell take two wounds instead of two strain.,CCC-ESP77
+Bonded Implement,3,Active (Action),No,Choose magical implement and bond to it. No other may use. Summon with Hard Magic check. Select new if lost or destroyed.,CCC-TheSapient
+Combat Caster,3,Passive,No,Once per session add Deadly quality to spell without increasing difficulty.,CCC-ESP77
+Distant Spell,3,Passive,No,Once per session first range enhancement does not increase spell difficulty.,CCC-ESP77
+Familiar (Improved),3,Active (Action),No,Must have Familiar talent. Suffer 2 strain and make Easy Magic check to see using familiar senses one round. Familiar assists with two setbacks.,CCC-ESP77
+Forbidden Knowledge,3,Active (Maneuver),No,Once per session suffer strain up to Knowledge ranks to increase Knowledge ranks by equal for spell effect strength determination. Temporary ranks may exceed 5.,CCC-Klort
+Life or Death,3,Passive,No,When suffering wounds equal to half threshold add setback to combat checks.,CCC-Swordbreaker
+Lingering Spell,3,Active (Incidental),No,Spend Story Point to make concentration maneuver as incidental.,CCC-TheSapient
+Magic Resistance,3,Passive,Yes,Spell casters add setback to checks. Add setback when making negative magic effect resistance checks.,CCC-Klort
+Maximize Spell,3,Active (Incidental),Yes,Once per session add setback per rank to spell casting check.,CCC-ESP77
+Overchannel (Improved),3,Passive,No,Must have Overchannel talent. Add double difficulty effects. Gain one despair per effect instead of increasing difficulty.,CCC-ESP77
+Pinning Fire,3,Active (Action),Yes,Select target within range and make Pinning Fire action. Target adds setback per rank and suffers 1 strain until next turn.,CCC-Tom Cruise
+Shape Spell,3,Active (Incidental),Yes,When casting Blast spell spend advantage to exclude 1 target per rank.,CCC-ESP77
+Shield Master,3,Active (Maneuver),No,While wielding shield take maneuver suffering 1 strain. Shield Defensive and Deflection increase by 1 each until end of next turn.,CCC-Direach
+Sneak Attack,3,Active (Incidental),No,Once per round when performing Aim maneuver suffer 1 strain to add Pierce 2 or increase Pierce by 1.,CCC-yeti1069
+Turn Undead,3,Active (Action),Yes,Force all undead within short range to make fear check with difficulty equal to Discipline. Failed check forces moving away spending maneuvers.,CCC-ESP77
+Assassin Strike,4,Active (Incidental),No,After successful melee check spend Story Point to disengage as incidental.,CCC-Tom Cruise
+Blood Magic (Improved),4,Active (Incidental),No,Must have Blood Magic talent. Once per encounter suffer additional 2 wounds to add one effect difficulty modifier without increasing difficulty.,CCC-ESP77
+Faith Healing,4,Active (Incidental),Yes,After Heal spell check change one success to advantage per rank.,CCC-TheSapient
+Familiar (Supreme),4,Active (Incidental),No,Must have Familiar talent. Spend Story Point to use familiar as spell origin point.,CCC-ESP77
+Finesse (Improved),4,Passive,No,Must have Finesse talent. Use Agility instead of Brawn for Brawl and Melee (Light) base damage.,CCC-Dragonshadow
+Flurry of Blows,4,Active (Maneuver),No,Perform maneuver suffering strain up to Coordination ranks. Gain Linked quality equal to strain on next Melee or Brawl check.,CCC-Klort
+Life or Death (Improved),4,Passive,No,Must have Life or Death talent. When suffering half or more wounds upgrade combat checks ability.,CCC-Swordbreaker
+Mage Hunter,4,Active (Action),Yes,When targeted by curse spell make Daunting Discipline check to remove status. Reduce difficulty per rank.,CCC-ESP77
+Mystic Theurge (Improved),4,Passive,No,Must have Mystic Theurge talent. No longer limits magic skill use to once per encounter.,CCC-yeti1069
+Pinning Fire (Improved),4,Active (Action),No,Must have Pinning Fire talent. Affect multiple targets equal to Pinning Fire ranks.,CCC-Tom Cruise
+Quickened Spell,4,Active (Maneuver),No,Once per session suffer 2 strain to make magic check as maneuver.,CCC-ESP77
+Reflexive Barrier,4,Active (Incidental; Out of Turn),No,Once per session when targeted by attack cast Barrier as out-of-turn incidental.,CCC-ESP77
+Sneak Attack (Improved),4,Active (Incidental),No,Must have Sneak Attack talent. Once per round when Aiming suffer 1 strain to add Vicious 2 or increase Vicious by 1.,CCC-Richardbuxton
+Vision of the Future,4,Active (Incidental),No,Once per session after successful spell spend advantages or triumph to add effect normally increasing difficulty by 1.,CCC-TheSapient
+Barbaric Strength,5,Passive,No,Use Melee (Heavy) weapons one-handed using Melee (Heavy) skill.,CCC-Klort
+Blood Magic (Supreme),5,Active (Incidental),No,Once per session suffer critical. Decrease next spell check difficulty by three minimum Average.,CCC-ESP77
+Bouncing Spell,5,Active (Incidental),No,When spell casting fails targeting character or NPC spend triumph or advantages to reroll with new target.,CCC-TheSapient
+Sneak Attack (Supreme),5,Active (Incidental),No,Must have Sneak Attack talent. Once per encounter spend Story Point to add triumph to Attack action without usual successes.,CCC-Richardbuxton
+Turn Undead (Improved),5,Active (Incidental),No,When taking Turn Undead action flip Story Point to deal 2 strain per rank to failed creatures. Perform Concentration maneuver to maintain subsequent rounds.,CCC-ESP77
