@@ -29,35 +29,64 @@
         .tag-filter-bar {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 10px;
             margin-bottom: 20px;
         }
         .tag-btn {
-            padding: 6px 14px;
-            border-radius: 20px;
+            padding: 7px 16px;
+            border-radius: 30px;
             font-size: 13px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
-            border: none;
+            transition: all 0.25s ease;
+            border: 2px solid #cbd5e0;
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+        .tag-btn:hover {
+            border-color: #a0aec0;
+            background: #edf2f7;
         }
         .tag-btn.active {
-            transform: scale(1.05);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            color: white;
+            border-color: transparent;
+            transform: scale(1.08);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
         }
-        /* Tag colors */
-        .tag-combat { background: #e53e3e; color: white; }
-        .tag-defense { background: #3182ce; color: white; }
-        .tag-healing { background: #38a169; color: white; }
-        .tag-social { background: #d69e2e; color: white; }
-        .tag-vehicle { background: #805ad5; color: white; }
-        .tag-magic { background: #d53f8c; color: white; }
-        .tag-fear { background: #4c51bf; color: white; }
-        .tag-knowledge { background: #319795; color: white; }
-        .tag-movement { background: #dd6b20; color: white; }
-        .tag-strain { background: #718096; color: white; }
-        .tag-critical { background: #9b2c2c; color: white; }
-        .tag-leadership { background: #2c7a7b; color: white; }
+        /* Active state colors */
+        .tag-btn.active.tag-combat { background: #e53e3e; }
+        .tag-btn.active.tag-defense { background: #3182ce; }
+        .tag-btn.active.tag-healing { background: #38a169; }
+        .tag-btn.active.tag-social { background: #d69e2e; }
+        .tag-btn.active.tag-vehicle { background: #805ad5; }
+        .tag-btn.active.tag-magic { background: #d53f8c; }
+        .tag-btn.active.tag-fear { background: #4c51bf; }
+        .tag-btn.active.tag-knowledge { background: #319795; }
+        .tag-btn.active.tag-movement { background: #dd6b20; }
+        .tag-btn.active.tag-strain { background: #718096; }
+        .tag-btn.active.tag-critical { background: #9b2c2c; }
+        .tag-btn.active.tag-leadership { background: #2c7a7b; }
+
+        /* Talent card tags (small ones inside cards) */
+        .talent-tag {
+            font-size: 11px;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+            color: white;
+        }
+        .talent-tag.tag-combat { background: #e53e3e; }
+        .talent-tag.tag-defense { background: #3182ce; }
+        .talent-tag.tag-healing { background: #38a169; }
+        .talent-tag.tag-social { background: #d69e2e; }
+        .talent-tag.tag-vehicle { background: #805ad5; }
+        .talent-tag.tag-magic { background: #d53f8c; }
+        .talent-tag.tag-fear { background: #4c51bf; }
+        .talent-tag.tag-knowledge { background: #319795; }
+        .talent-tag.tag-movement { background: #dd6b20; }
+        .talent-tag.tag-strain { background: #718096; }
+        .talent-tag.tag-critical { background: #9b2c2c; }
+        .talent-tag.tag-leadership { background: #2c7a7b; }
 
         .stats { display: flex; gap: 15px; flex-wrap: wrap; }
         .stat-card { background: white; padding: 15px 20px; border-radius: 8px; border-left: 4px solid #667eea; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
@@ -79,19 +108,9 @@
         .talent-name { font-size: 1.4em; font-weight: bold; color: #2d3748; }
         .talent-tier { background: var(--tier-color); color: white; padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: bold; }
 
-        .talent-tags {
-            display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0;
-        }
-        .talent-tag {
-            font-size: 11px;
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-weight: 600;
-        }
-
+        .talent-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
         .talent-meta { display: flex; gap: 15px; flex-wrap: wrap; margin: 10px 0; font-size: 13px; color: #718096; }
         .meta-item span.meta-label { font-weight: 600; color: #4a5568; }
-
         .talent-description { color: #4a5568; line-height: 1.6; font-size: 14.5px; }
         .talent-source { font-size: 11px; color: #a0aec0; font-style: italic; text-align: right; margin-top: 10px; }
 
@@ -107,7 +126,7 @@
 <body>
     <div class="container">
         <header>
-            <h1>⚔️ Genesys Talents Reference ⚔️</h1>
+            <h1>Genesys Talents Reference</h1>
             <p>Complete Database + Smart Tags + Fuzzy Search</p>
         </header>
 
@@ -139,7 +158,6 @@
                 <button id="resetBtn">Reset All</button>
             </div>
 
-            <!-- Tag Filter Bar -->
             <div class="tag-filter-bar" id="tagBar"></div>
 
             <div class="stats">
@@ -161,7 +179,6 @@
         let fuse;
         const activeTags = new Set();
 
-        // Tag definitions with keywords and colors
         const tagDefinitions = [
             { name: "combat", color: "tag-combat", keywords: ["attack", "damage", "hit", "melee", "ranged", "brawl", "weapon", "combat check", "deadly", "lethal"] },
             { name: "defense", color: "tag-defense", keywords: ["defense", "soak", "parr", "reflect", "dodge", "sidestep", "armor", "shield"] },
@@ -185,7 +202,6 @@
                     tags.push({ name: def.name, color: def.color });
                 }
             }
-            // Special overrides
             if (talent.name.toLowerCase().includes("parry")) tags.push({name: "defense", color: "tag-defense"});
             if (talent.name.toLowerCase().includes("reflect")) tags.push({name: "defense", color: "tag-defense"});
             if (talent.name.toLowerCase().includes("dodge")) tags.push({name: "defense", color: "tag-defense"});
@@ -220,31 +236,15 @@
                 talents = lines.slice(1).map(line => {
                     const [name, tierStr, activation, ranked, description, source] = parseCSVLine(line);
                     const tier = parseInt(tierStr) || 1;
-                    const talent = {
-                        name: name || '',
-                        tier,
-                        activation: activation || '',
-                        ranked: ranked || '',
-                        description: description || '',
-                        source: source || '',
-                        tags: [] // will be filled below
-                    };
+                    const talent = { name: name || '', tier, activation: activation || '', ranked: ranked || '', description: description || '', source: source || '', tags: [] };
                     talent.tags = generateTagsForTalent(talent);
                     return talent;
                 }).filter(t => t.name);
 
-                // Init Fuse.js
-                fuse = new Fuse(talents, {
-                    keys: ['name', 'description'],
-                    threshold: 0.35,
-                    includeScore: true,
-                    shouldSort: true
-                });
+                fuse = new Fuse(talents, { keys: ['name', 'description'], threshold: 0.35, includeScore: true, shouldSort: true });
 
-                // Set total count
                 document.getElementById('totalCount').textContent = talents.length;
 
-                // Build tag bar
                 buildTagBar();
                 applyFilters();
             } catch (err) {
@@ -279,14 +279,9 @@
 
         function applyFilters() {
             let results = talents;
-
-            // Fuzzy search
             const query = document.getElementById('searchInput').value.trim();
-            if (query) {
-                results = fuse.search(query).map(r => r.item);
-            }
+            if (query) results = fuse.search(query).map(r => r.item);
 
-            // Hard filters
             const tier = document.getElementById('tierFilter').value;
             const act = document.getElementById('activationFilter').value.toLowerCase();
             const ranked = document.getElementById('rankedFilter').value.toLowerCase();
@@ -317,11 +312,9 @@
                         <div class="talent-name">${t.name}</div>
                         <div class="talent-tier">Tier ${t.tier}</div>
                     </div>
-
                     <div class="talent-tags">
                         ${t.tags.map(tag => `<span class="talent-tag ${tag.color}">${tag.name}</span>`).join('')}
                     </div>
-
                     <div class="talent-meta">
                         <div class="meta-item"><span class="meta-label">Activation:</span> ${t.activation}</div>
                         <div class="meta-item"><span class="meta-label">Ranked:</span> ${t.ranked}</div>
@@ -334,7 +327,6 @@
             document.getElementById('shownCount').textContent = list.length;
         }
 
-        // Event listeners
         document.getElementById('searchInput').addEventListener('input', applyFilters);
         document.getElementById('tierFilter').addEventListener('change', applyFilters);
         document.getElementById('activationFilter').addEventListener('change', applyFilters);
@@ -349,7 +341,6 @@
             applyFilters();
         });
 
-        // Init
         loadTalents();
     </script>
 </body>
