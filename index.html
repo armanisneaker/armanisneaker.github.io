@@ -64,13 +64,26 @@
         .stat-card .label { font-size: 12px; color: #718096; text-transform: uppercase; margin-top: 5px; }
 
         .content { padding: 30px; max-height: 800px; overflow-y: auto; }
-        #builder { padding: 30px; display: none; }
-        .pyramid-row { display: flex; justify-content: center; margin-bottom: 20px; }
-        .pyramid-slot { width: 220px; margin: 0 15px; border: 2px solid #e2e8f0; border-radius: 8px; padding: 15px; background: #f7fafc; position: relative; }
+        #builder { padding: 30px; display: none; max-height: 800px; overflow-y: auto; }
+        .builder-header { text-align: center; margin-bottom: 30px; }
+        .builder-header h2 { font-size: 2em; color: #2d3748; margin-bottom: 10px; }
+        .builder-header p { color: #718096; font-size: 1.1em; }
+        .pyramid-row { display: flex; justify-content: center; margin-bottom: 20px; gap: 15px; }
+        .pyramid-slot { width: 220px; border: 2px solid #e2e8f0; border-radius: 12px; padding: 20px; background: white; position: relative; transition: all 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .pyramid-slot:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); border-color: #667eea; }
+        .pyramid-slot::before { content: ''; position: absolute; top: 0; left: 0; width: 6px; height: 100%; background: var(--tier-color); border-radius: 12px 0 0 12px; }
+        .pyramid-slot.tier-1 { --tier-color: #48bb78; }
+        .pyramid-slot.tier-2 { --tier-color: #4299e1; }
+        .pyramid-slot.tier-3 { --tier-color: #9f7aea; }
+        .pyramid-slot.tier-4 { --tier-color: #ed8936; }
+        .pyramid-slot.tier-5 { --tier-color: #f56565; }
         .pyramid-slot label { display: block; font-weight: 600; margin-bottom: 5px; color: #4a5568; }
-        .pyramid-slot select { width: 100%; padding: 8px; border: 1px solid #cbd5e0; border-radius: 4px; margin-bottom: 10px; }
-        .pyramid-slot .active-label { font-size: 13px; color: #718096; }
-        .pyramid-slot .description { font-size: 12px; color: #718096; margin-top: 10px; line-height: 1.4; display: none; }
+        .pyramid-slot select { width: 100%; padding: 10px 12px; border: 2px solid #cbd5e0; border-radius: 8px; margin-bottom: 10px; font-size: 14px; background: white; transition: all 0.3s; }
+        .pyramid-slot select:hover { border-color: #667eea; }
+        .pyramid-slot select:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102,126,234,0.1); }
+        .pyramid-slot .active-label { font-size: 13px; color: #4a5568; font-weight: 600; display: flex; align-items: center; gap: 8px; margin-top: 12px; cursor: pointer; }
+        .pyramid-slot .active-label input[type="checkbox"] { cursor: pointer; width: 18px; height: 18px; }
+        .pyramid-slot .description { font-size: 13px; color: #4a5568; margin-top: 12px; line-height: 1.6; display: none; background: #f7fafc; padding: 12px; border-radius: 8px; border-left: 3px solid var(--tier-color); }
         .talent-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 22px; }
         .talent-card { background: white; border: 2px solid #e2e8f0; border-radius: 12px; padding: 22px; transition: all 0.3s; position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
         .talent-card:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.2); border-color: #667eea; }
@@ -97,7 +110,8 @@
             .talent-grid { grid-template-columns: 1fr; }
             .filters { flex-direction: column; align-items: stretch; }
             .filter-group { width: 100%; }
-            .pyramid-slot { width: 100%; margin: 10px 0; }
+            .pyramid-row { flex-direction: column; align-items: center; }
+            .pyramid-slot { width: 100%; max-width: 400px; margin: 10px 0; }
         }
     </style>
 </head>
@@ -315,19 +329,19 @@
         }
 
         // Talent Tree Builder
+        const rowTiers = [5, 4, 3, 2, 1]; // Top row Tier 5, bottom Tier 1
+        const rowSlots = [1, 2, 3, 4, 5]; // Top 1 slot, bottom 5 slots
+
         function buildPyramid() {
             const pyramid = document.getElementById('pyramid');
-            pyramid.innerHTML = '';
-            const rowSlots = [1, 2, 3, 4, 5];
-            const rowTiers = [5, 4, 3, 2, 1]; // Top: Tier 5 (1 slot), Bottom: Tier 1 (5 slots)
-
+            pyramid.innerHTML = '<div class="builder-header"><h2>Talent Tree Builder</h2><p>Build your character\'s talent pyramid following tier progression rules</p></div>';
             for (let r = 0; r < 5; r++) {
                 const row = document.createElement('div');
                 row.className = 'pyramid-row';
                 const tier = rowTiers[r];
                 for (let s = 0; s < rowSlots[r]; s++) {
                     const slot = document.createElement('div');
-                    slot.className = 'pyramid-slot';
+                    slot.className = `pyramid-slot tier-${tier}`;
 
                     const select = document.createElement('select');
                     select.dataset.oldValue = '';
@@ -351,10 +365,12 @@
 
                     const activeChk = document.createElement('input');
                     activeChk.type = 'checkbox';
+                    activeChk.id = `active-${r}-${s}`;
                     const activeLabel = document.createElement('label');
                     activeLabel.className = 'active-label';
-                    activeLabel.textContent = 'Active? ';
-                    activeLabel.appendChild(activeChk);
+                    activeLabel.htmlFor = `active-${r}-${s}`;
+                    activeLabel.innerHTML = '<span>Active?</span>';
+                    activeLabel.insertBefore(activeChk, activeLabel.firstChild);
                     slot.appendChild(activeLabel);
 
                     row.appendChild(slot);
@@ -363,10 +379,9 @@
             }
         }
 
-        async function handleTalentChange(e) {
+        function handleTalentChange(e) {
             const select = e.target;
             const newValue = select.value;
-            const tier = rowTiers[Array.from(document.querySelectorAll('.pyramid-row')).indexOf(select.closest('.pyramid-row'))];
             const talent = talents.find(t => t.name === newValue);
             const desc = select.nextSibling;
             if (talent) {
@@ -378,7 +393,7 @@
             }
 
             if (!validatePyramid()) {
-                alert('Invalid selection! Violates talent pyramid rules or non-ranked duplicate.');
+                alert('Invalid selection! Violates talent pyramid rules (higher tier cannot have more talents than lower tier) or non-ranked duplicate.');
                 select.value = select.dataset.oldValue;
                 return;
             }
@@ -386,7 +401,7 @@
         }
 
         function validatePyramid() {
-            const counts = [0, 0, 0, 0, 0, 0];
+            const counts = [0, 0, 0, 0, 0, 0]; // Index 1 for Tier 1 (bottom), 5 for Tier 5 (top)
             const nameCounts = {};
             document.querySelectorAll('#pyramid select').forEach(sel => {
                 const value = sel.value;
@@ -399,9 +414,9 @@
                 }
             });
 
-            // Check pyramid rule: #tier1 > #tier2 > #tier3 > #tier4 > #tier5
+            // Check pyramid rule: counts[5] <= counts[4] <= counts[3] <= counts[2] <= counts[1]
             for (let k = 1; k <= 4; k++) {
-                if (counts[k] <= counts[k + 1]) return false;
+                if (counts[k + 1] > counts[k]) return false;
             }
 
             // Check non-ranked duplicates
