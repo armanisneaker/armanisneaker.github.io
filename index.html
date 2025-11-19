@@ -18,7 +18,6 @@
         .search-bar { display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
         .search-bar input { flex: 1; min-width: 250px; padding: 12px 20px; border: 2px solid #cbd5e0; border-radius: 8px; font-size: 16px; transition: all 0.3s; }
         .search-bar input:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102,126,234,0.1); }
-
         .filters { display: flex; gap: 15px; flex-wrap: wrap; align-items: end; margin-bottom: 15px; }
         .filter-group { display: flex; flex-direction: column; gap: 5px; }
         .filter-group label { font-size: 12px; font-weight: 600; color: #4a5568; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -26,7 +25,6 @@
         select:hover, button:hover { border-color: #667eea; }
         button { background: #667eea; color: white; border: none; font-weight: 600; }
         button:hover { background: #5568d3; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(102,126,234,0.4); }
-
         .tag-filter-bar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
         .tag-btn { padding: 7px 16px; border-radius: 30px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.25s ease; border: 2px solid #cbd5e0; background: #e2e8f0; color: #4a5568; }
         .tag-btn:hover { border-color: #a0aec0; background: #edf2f7; }
@@ -43,7 +41,6 @@
         .tag-btn.active.tag-strain { background: #718096; }
         .tag-btn.active.tag-critical { background: #9b2c2c; }
         .tag-btn.active.tag-leadership { background: #2c7a7b; }
-
         .talent-tag { font-size: 11px; padding: 3px 10px; border-radius: 12px; font-weight: 600; color: white; }
         .talent-tag.tag-combat { background: #e53e3e; }
         .talent-tag.tag-defense { background: #3182ce; }
@@ -57,20 +54,26 @@
         .talent-tag.tag-strain { background: #718096; }
         .talent-tag.tag-critical { background: #9b2c2c; }
         .talent-tag.tag-leadership { background: #2c7a7b; }
-
         .stats { display: flex; gap: 15px; flex-wrap: wrap; }
         .stat-card { background: white; padding: 15px 20px; border-radius: 8px; border-left: 4px solid #667eea; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
         .stat-card .number { font-size: 24px; font-weight: bold; color: #667eea; }
         .stat-card .label { font-size: 12px; color: #718096; text-transform: uppercase; margin-top: 5px; }
-
         .content { padding: 30px; max-height: 800px; overflow-y: auto; }
         #builder { padding: 30px; display: none; }
         .pyramid-row { display: flex; justify-content: center; margin-bottom: 20px; }
-        .pyramid-slot { width: 220px; margin: 0 15px; border: 2px solid #e2e8f0; border-radius: 8px; padding: 15px; background: #f7fafc; position: relative; }
-        .pyramid-slot label { display: block; font-weight: 600; margin-bottom: 5px; color: #4a5568; }
-        .pyramid-slot select { width: 100%; padding: 8px; border: 1px solid #cbd5e0; border-radius: 4px; margin-bottom: 10px; }
-        .pyramid-slot .active-label { font-size: 13px; color: #718096; }
-        .pyramid-slot .description { font-size: 12px; color: #718096; margin-top: 10px; line-height: 1.4; display: none; }
+        .pyramid-slot { width: 360px; margin: 0 15px; border: 2px solid #e2e8f0; border-radius: 12px; padding: 22px; transition: all 0.3s; position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); background: white; }
+        .pyramid-slot:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.2); border-color: #667eea; }
+        .pyramid-slot::before { content: ''; position: absolute; top: 0; left: 0; width: 6px; height: 100%; background: var(--tier-color); }
+        .pyramid-slot .talent-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px; gap: 10px; }
+        .pyramid-slot .talent-name { font-size: 1.4em; font-weight: bold; color: #2d3748; }
+        .pyramid-slot .talent-tier { background: var(--tier-color); color: white; padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+        .pyramid-slot .talent-description { color: #4a5568; line-height: 1.6; font-size: 14.5px; margin-top: 10px; display: none; }
+        .pyramid-slot .talent-meta { display: flex; gap: 15px; flex-wrap: wrap; margin: 10px 0; font-size: 13px; color: #718096; }
+        .pyramid-slot .meta-item span.meta-label { font-weight: 600; color: #4a5568; }
+        .pyramid-slot .talent-source { font-size: 11px; color: #a0aec0; font-style: italic; text-align: right; margin-top: 10px; display: none; }
+        .pyramid-slot .active-label { font-size: 13px; color: #718096; display: flex; align-items: center; gap: 5px; }
+        .pyramid-slot select { width: 100%; padding: 10px 16px; border: 2px solid #cbd5e0; border-radius: 8px; font-size: 14px; cursor: pointer; transition: all 0.3s; background: white; margin-bottom: 15px; }
+        .pyramid-slot select:hover { border-color: #667eea; }
         .talent-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 22px; }
         .talent-card { background: white; border: 2px solid #e2e8f0; border-radius: 12px; padding: 22px; transition: all 0.3s; position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
         .talent-card:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.2); border-color: #667eea; }
@@ -80,19 +83,15 @@
         .tier-3 { --tier-color: #9f7aea; }
         .tier-4 { --tier-color: #ed8936; }
         .tier-5 { --tier-color: #f56565; }
-
         .talent-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px; gap: 10px; }
         .talent-name { font-size: 1.4em; font-weight: bold; color: #2d3748; }
         .talent-tier { background: var(--tier-color); color: white; padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: bold; }
-
         .talent-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
         .talent-meta { display: flex; gap: 15px; flex-wrap: wrap; margin: 10px 0; font-size: 13px; color: #718096; }
         .meta-item span.meta-label { font-weight: 600; color: #4a5568; }
         .talent-description { color: #4a5568; line-height: 1.6; font-size: 14.5px; }
         .talent-source { font-size: 11px; color: #a0aec0; font-style: italic; text-align: right; margin-top: 10px; }
-
         .no-results, .loading { text-align: center; padding: 60px 20px; color: #718096; font-size: 1.3em; }
-
         @media (max-width: 768px) {
             .talent-grid { grid-template-columns: 1fr; }
             .filters { flex-direction: column; align-items: stretch; }
@@ -108,12 +107,10 @@
             <p>Complete Database + Smart Tags + Fuzzy Search + Talent Tree Builder</p>
             <button id="builderBtn">Build Talent Tree</button>
         </header>
-
         <div class="controls">
             <div class="search-bar">
                 <input type="text" id="searchInput" placeholder="Fuzzy search: pary strain, doge, full trottle, heal crit..." autocomplete="off">
             </div>
-
             <div class="filters">
                 <div class="filter-group">
                     <label>Tier</label>
@@ -136,33 +133,27 @@
                 </div>
                 <button id="resetBtn">Reset All</button>
             </div>
-
             <div class="tag-filter-bar" id="tagBar"></div>
-
             <div class="stats">
                 <div class="stat-card"><div class="number" id="totalCount">0</div><div class="label">Total</div></div>
                 <div class="stat-card"><div class="number" id="shownCount">0</div><div class="label">Shown</div></div>
                 <div class="stat-card"><div class="number" id="tagCount">0</div><div class="label">Active Tags</div></div>
             </div>
         </div>
-
         <div class="content" id="referenceContent">
             <div id="talentGrid" class="talent-grid">
                 <div class="loading">Loading talents from talents.csv...</div>
             </div>
         </div>
-
         <div id="builder" style="display: none;">
             <div id="pyramid"></div>
         </div>
     </div>
-
     <script>
         let talents = [];
         let fuse;
         let talentsByTier = Array(6).fill().map(() => []);
         const activeTags = new Set();
-
         const tagDefinitions = [
             { name: "combat", color: "tag-combat", keywords: ["attack", "damage", "hit", "melee", "ranged", "brawl", "weapon", "combat check", "deadly", "lethal"] },
             { name: "defense", color: "tag-defense", keywords: ["defense", "soak", "parr", "reflect", "dodge", "sidestep", "armor", "shield"] },
@@ -177,7 +168,6 @@
             { name: "critical", color: "tag-critical", keywords: ["critical", "vicious", "deadly accuracy", "lethal blows"] },
             { name: "leadership", color: "tag-leadership", keywords: ["leadership", "command", "field commander", "inspiring"] }
         ];
-
         function generateTagsForTalent(talent) {
             const text = (talent.name + " " + talent.description).toLowerCase();
             const tags = [];
@@ -191,7 +181,6 @@
             if (talent.name.toLowerCase().includes("dodge")) tags.push({name: "defense", color: "tag-defense"});
             return tags;
         }
-
         function parseCSVLine(line) {
             const values = [];
             let current = '';
@@ -209,13 +198,11 @@
             values.push(current.trim());
             return values;
         }
-
         async function loadTalents() {
             try {
                 const response = await fetch('talents.csv');
                 if (!response.ok) throw new Error('talents.csv not found');
                 const csvText = await response.text();
-
                 const lines = csvText.trim().split('\n');
                 talents = lines.slice(1).map(line => {
                     const [name, tierStr, activation, ranked, description, source] = parseCSVLine(line);
@@ -224,13 +211,9 @@
                     talent.tags = generateTagsForTalent(talent);
                     return talent;
                 }).filter(t => t.name);
-
                 fuse = new Fuse(talents, { keys: ['name', 'description'], threshold: 0.35, includeScore: true, shouldSort: true });
-
                 talents.forEach(t => talentsByTier[t.tier].push(t));
-
                 document.getElementById('totalCount').textContent = talents.length;
-
                 buildTagBar();
                 applyFilters();
                 buildPyramid();
@@ -238,7 +221,6 @@
                 document.getElementById('talentGrid').innerHTML = `<div class="no-results"><h2>Error</h2><p>${err.message}</p></div>`;
             }
         }
-
         function buildTagBar() {
             const bar = document.getElementById('tagBar');
             bar.innerHTML = '';
@@ -251,7 +233,6 @@
                 bar.appendChild(btn);
             });
         }
-
         function toggleTag(tagName) {
             const btn = document.querySelector(`.tag-btn[data-tag="${tagName}"]`);
             if (activeTags.has(tagName)) {
@@ -263,16 +244,13 @@
             }
             applyFilters();
         }
-
         function applyFilters() {
             let results = talents;
             const query = document.getElementById('searchInput').value.trim();
             if (query) results = fuse.search(query).map(r => r.item);
-
             const tier = document.getElementById('tierFilter').value;
             const act = document.getElementById('activationFilter').value.toLowerCase();
             const ranked = document.getElementById('rankedFilter').value.toLowerCase();
-
             results = results.filter(t => {
                 const matchTier = tier === 'all' || t.tier.toString() === tier;
                 const matchAct = act === 'all' || t.activation.toLowerCase().includes(act);
@@ -280,11 +258,9 @@
                 const matchTags = activeTags.size === 0 || t.tags.some(tag => activeTags.has(tag.name));
                 return matchTier && matchAct && matchRanked && matchTags;
             });
-
             renderTalents(results);
             document.getElementById('tagCount').textContent = activeTags.size;
         }
-
         function renderTalents(list) {
             const grid = document.getElementById('talentGrid');
             if (list.length === 0) {
@@ -292,7 +268,6 @@
                 document.getElementById('shownCount').textContent = 0;
                 return;
             }
-
             grid.innerHTML = list.map(t => `
                 <div class="talent-card tier-${t.tier}">
                     <div class="talent-header">
@@ -310,26 +285,36 @@
                     <div class="talent-source">Source: ${t.source}</div>
                 </div>
             `).join('');
-
             document.getElementById('shownCount').textContent = list.length;
         }
-
         // Talent Tree Builder
         function buildPyramid() {
             const pyramid = document.getElementById('pyramid');
             pyramid.innerHTML = '';
             const rowSlots = [1, 2, 3, 4, 5];
             const rowTiers = [5, 4, 3, 2, 1]; // Top: Tier 5 (1 slot), Bottom: Tier 1 (5 slots)
-
             for (let r = 0; r < 5; r++) {
                 const row = document.createElement('div');
                 row.className = 'pyramid-row';
                 const tier = rowTiers[r];
                 for (let s = 0; s < rowSlots[r]; s++) {
                     const slot = document.createElement('div');
-                    slot.className = 'pyramid-slot';
-
+                    slot.className = `pyramid-slot tier-${tier}`;
+                    slot.innerHTML = `
+                        <div class="talent-header">
+                            <div class="talent-name">--</div>
+                            <div class="talent-tier">Tier ${tier}</div>
+                        </div>
+                        <div class="talent-meta" style="display: none;">
+                            <div class="meta-item"><span class="meta-label">Activation:</span> --</div>
+                            <div class="meta-item"><span class="meta-label">Ranked:</span> --</div>
+                        </div>
+                        <div class="talent-description"></div>
+                        <div class="talent-source"></div>
+                        <label class="active-label"><input type="checkbox"> Active?</label>
+                    `;
                     const select = document.createElement('select');
+                    select.style.marginBottom = '15px';
                     select.dataset.oldValue = '';
                     select.addEventListener('focus', (e) => e.target.dataset.oldValue = e.target.value);
                     select.addEventListener('change', handleTalentChange);
@@ -343,48 +328,47 @@
                         opt.text = t.name + (t.ranked === 'Yes' ? ' (Ranked)' : '');
                         select.add(opt);
                     });
-                    slot.appendChild(select);
-
-                    const desc = document.createElement('p');
-                    desc.className = 'description';
-                    slot.appendChild(desc);
-
-                    const activeChk = document.createElement('input');
-                    activeChk.type = 'checkbox';
-                    const activeLabel = document.createElement('label');
-                    activeLabel.className = 'active-label';
-                    activeLabel.textContent = 'Active? ';
-                    activeLabel.appendChild(activeChk);
-                    slot.appendChild(activeLabel);
-
+                    slot.insertBefore(select, slot.querySelector('.talent-meta'));
                     row.appendChild(slot);
                 }
                 pyramid.appendChild(row);
             }
         }
-
         async function handleTalentChange(e) {
             const select = e.target;
             const newValue = select.value;
             const tier = rowTiers[Array.from(document.querySelectorAll('.pyramid-row')).indexOf(select.closest('.pyramid-row'))];
             const talent = talents.find(t => t.name === newValue);
-            const desc = select.nextSibling;
+            const slot = select.closest('.pyramid-slot');
+            const nameEl = slot.querySelector('.talent-name');
+            const meta = slot.querySelector('.talent-meta');
+            const desc = slot.querySelector('.talent-description');
+            const source = slot.querySelector('.talent-source');
             if (talent) {
+                nameEl.textContent = talent.name;
+                meta.querySelectorAll('.meta-item')[0].querySelector('span + span').textContent = talent.activation;
+                meta.querySelectorAll('.meta-item')[1].querySelector('span + span').textContent = talent.ranked;
+                meta.style.display = 'flex';
                 desc.textContent = talent.description;
                 desc.style.display = 'block';
+                source.textContent = `Source: ${talent.source}`;
+                source.style.display = 'block';
             } else {
+                nameEl.textContent = '--';
+                meta.style.display = 'none';
                 desc.textContent = '';
                 desc.style.display = 'none';
+                source.textContent = '';
+                source.style.display = 'none';
             }
-
             if (!validatePyramid()) {
                 alert('Invalid selection! Violates talent pyramid rules or non-ranked duplicate.');
                 select.value = select.dataset.oldValue;
+                handleTalentChange({target: select}); // Reset display
                 return;
             }
             select.dataset.oldValue = newValue;
         }
-
         function validatePyramid() {
             const counts = [0, 0, 0, 0, 0, 0];
             const nameCounts = {};
@@ -398,21 +382,17 @@
                     nameCounts[value] = (nameCounts[value] || 0) + 1;
                 }
             });
-
             // Check pyramid rule: #tier1 > #tier2 > #tier3 > #tier4 > #tier5
             for (let k = 1; k <= 4; k++) {
                 if (counts[k] <= counts[k + 1]) return false;
             }
-
             // Check non-ranked duplicates
             for (const name in nameCounts) {
                 const talent = talents.find(t => t.name === name);
                 if (talent && talent.ranked === 'No' && nameCounts[name] > 1) return false;
             }
-
             return true;
         }
-
         // Switch between reference and builder
         document.getElementById('builderBtn').addEventListener('click', () => {
             const reference = document.getElementById('referenceContent');
@@ -431,7 +411,6 @@
                 btn.textContent = 'Build Talent Tree';
             }
         });
-
         document.getElementById('searchInput').addEventListener('input', applyFilters);
         document.getElementById('tierFilter').addEventListener('change', applyFilters);
         document.getElementById('activationFilter').addEventListener('change', applyFilters);
@@ -445,7 +424,6 @@
             document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
             applyFilters();
         });
-
         loadTalents();
     </script>
 </body>
