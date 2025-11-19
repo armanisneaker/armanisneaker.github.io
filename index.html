@@ -154,6 +154,7 @@
         const activeTags = new Set();
         let pendingSlot = null;
         const pyramidTalents = Array.from({length: 5}, () => Array(5).fill(null)); // Row 0 (Tier 5): 1 slot, etc.
+        const rowTiers = [5, 4, 3, 2, 1];
         const tagDefinitions = [
             { name: "combat", color: "tag-combat", keywords: ["attack", "damage", "hit", "melee", "ranged", "brawl", "weapon", "combat check", "deadly", "lethal"] },
             { name: "defense", color: "tag-defense", keywords: ["defense", "soak", "parr", "reflect", "dodge", "sidestep", "armor", "shield"] },
@@ -297,7 +298,6 @@
             const pyramid = document.getElementById('pyramid');
             pyramid.innerHTML = '';
             const rowSlots = [1, 2, 3, 4, 5];
-            const rowTiers = [5, 4, 3, 2, 1]; // Top: Tier 5 (1 slot), Bottom: Tier 1 (5 slots)
             for (let r = 0; r < 5; r++) {
                 const row = document.createElement('div');
                 row.className = 'pyramid-row';
@@ -321,7 +321,7 @@
                         <div class="talent-source" style="display: none;"></div>
                         <label class="active-label" style="display: none;"><input type="checkbox"> Active?</label>
                     `;
-                    slot.addEventListener('click', (e) => openSearchForSlot(e.currentTarget));
+                    slot.addEventListener('click', () => openSearchForSlot(slot));
                     row.appendChild(slot);
                 }
                 pyramid.appendChild(row);
@@ -331,7 +331,7 @@
             pendingSlot = slot;
             const tier = rowTiers[slot.dataset.row];
             document.getElementById('tierFilter').value = tier.toString();
-            document.getElementById('tierFilter').dispatchEvent(new Event('change'));
+            applyFilters(); // Directly call to update
             switchToReference();
         }
         function assignTalentToSlot(talent) {
