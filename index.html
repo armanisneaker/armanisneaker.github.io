@@ -153,7 +153,7 @@
         let talentsByTier = Array(6).fill().map(() => []);
         const activeTags = new Set();
         let pendingSlot = null;
-        const pyramidTalents = Array.from({length: 5}, () => Array(5).fill(null)); // Row 0 (Tier 5): 1 slot, etc.
+        const pyramidTalents = Array.from({length: 5}, () => Array(5).fill(null));
         const rowTiers = [5, 4, 3, 2, 1];
         const tagDefinitions = [
             { name: "combat", color: "tag-combat", keywords: ["attack", "damage", "hit", "melee", "ranged", "brawl", "weapon", "combat check", "deadly", "lethal"] },
@@ -330,26 +330,29 @@
         function openSearchForSlot(slot) {
             pendingSlot = slot;
             const tier = rowTiers[slot.dataset.row];
-            document.getElementById('tierFilter').value = tier.toString();
-            applyFilters(); // Directly call to update
+            // Switch to reference view first
             switchToReference();
+            // Then set filter and apply
+            document.getElementById('tierFilter').value = tier.toString();
+            applyFilters();
         }
         function assignTalentToSlot(talent) {
             if (!pendingSlot) return;
-            const row = pendingSlot.dataset.row;
-            const slotIndex = pendingSlot.dataset.slot;
+            const row = parseInt(pendingSlot.dataset.row);
+            const slotIndex = parseInt(pendingSlot.dataset.slot);
             const temp = pyramidTalents[row][slotIndex];
             pyramidTalents[row][slotIndex] = talent;
             if (!validatePyramid()) {
                 alert('Invalid selection! Violates talent pyramid rules or non-ranked duplicate.');
                 pyramidTalents[row][slotIndex] = temp;
+                pendingSlot = null;
                 return;
             }
             pendingSlot.querySelector('.talent-name').textContent = talent.name;
             pendingSlot.querySelector('.talent-tags').innerHTML = talent.tags.map(tag => `<span class="talent-tag ${tag.color}">${tag.name}</span>`).join('');
             pendingSlot.querySelector('.talent-tags').style.display = talent.tags.length > 0 ? 'flex' : 'none';
-            pendingSlot.querySelectorAll('.meta-item')[0].querySelector('span + span').textContent = talent.activation;
-            pendingSlot.querySelectorAll('.meta-item')[1].querySelector('span + span').textContent = talent.ranked;
+            pendingSlot.querySelectorAll('.meta-item')[0].innerHTML = `<span class="meta-label">Activation:</span> ${talent.activation}`;
+            pendingSlot.querySelectorAll('.meta-item')[1].innerHTML = `<span class="meta-label">Ranked:</span> ${talent.ranked}`;
             pendingSlot.querySelector('.talent-meta').style.display = 'flex';
             pendingSlot.querySelector('.talent-description').textContent = talent.description;
             pendingSlot.querySelector('.talent-description').style.display = 'block';
@@ -361,25 +364,36 @@
         }
         function validatePyramid() {
             const counts = [0, 0, 0, 0, 0, 0];
-            const nameCounts = {};
+            const talentOccurrences = {};
+            
             pyramidTalents.forEach((row, r) => {
                 row.forEach(t => {
                     if (t) {
                         const tier = rowTiers[r];
                         counts[tier]++;
-                        nameCounts[t.name] = (nameCounts[t.name] || 0) + 1;
+                        
+                        // Track occurrences of each talent
+                        if (!talentOccurrences[t.name]) {
+                            talentOccurrences[t.name] = { count: 0, talent: t };
+                        }
+                        talentOccurrences[t.name].count++;
                     }
                 });
             });
+            
             // Check pyramid rule: tier5 <= tier4 <= tier3 <= tier2 <= tier1
             for (let k = 1; k <= 4; k++) {
                 if (counts[k+1] > counts[k]) return false;
             }
-            // Check non-ranked duplicates
-            for (const name in nameCounts) {
-                const talent = talents.find(t => t.name === name);
-                if (talent && talent.ranked === 'No' && nameCounts[name] > 1) return false;
+            
+            // Check for invalid duplicates (non-ranked talents appearing more than once)
+            for (const name in talentOccurrences) {
+                const {count, talent} = talentOccurrences[name];
+                if (count > 1 && talent.ranked.toLowerCase() === 'no') {
+                    return false;
+                }
             }
+            
             return true;
         }
         function switchToReference() {
