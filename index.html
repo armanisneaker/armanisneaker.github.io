@@ -6,199 +6,734 @@
     <title>Genesys Talents Complete Reference</title>
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
-        .container { max-width: 1400px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); overflow: hidden; }
-        header { background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%); color: white; padding: 30px; text-align: center; position: relative; }
-        header h1 { font-size: 2.5em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-        header p { font-size: 1.1em; opacity: 0.9; }
-        #builderBtn { position: absolute; top: 20px; right: 20px; padding: 10px 20px; background: #4299e1; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
-        #builderBtn:hover { background: #3182ce; }
-        .controls { background: #f7fafc; padding: 25px; border-bottom: 2px solid #e2e8f0; }
-        .search-bar { display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
-        .search-bar input { flex: 1; min-width: 250px; padding: 12px 20px; border: 2px solid #cbd5e0; border-radius: 8px; font-size: 16px; transition: all 0.3s; }
-        .search-bar input:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102,126,234,0.1); }
-        .filters { display: flex; gap: 15px; flex-wrap: wrap; align-items: end; margin-bottom: 15px; }
-        .filter-group { display: flex; flex-direction: column; gap: 5px; }
-        .filter-group label { font-size: 12px; font-weight: 600; color: #4a5568; text-transform: uppercase; letter-spacing: 0.5px; }
-        select, button { padding: 10px 16px; border: 2px solid #cbd5e0; border-radius: 8px; font-size: 14px; cursor: pointer; transition: all 0.3s; background: white; }
-        select:hover, button:hover { border-color: #667eea; }
-        button { background: #667eea; color: white; border: none; font-weight: 600; }
-        button:hover { background: #5568d3; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(102,126,234,0.4); }
-        .tag-filter-bar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
-        .tag-btn { padding: 7px 16px; border-radius: 30px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.25s ease; border: 2px solid #cbd5e0; background: #e2e8f0; color: #4a5568; }
-        .tag-btn:hover { border-color: #a0aec0; background: #edf2f7; }
-        .tag-btn.active { color: white; border-color: transparent; transform: scale(1.08); box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
-        .tag-btn.active.tag-combat { background: #e53e3e; }
-        .tag-btn.active.tag-defense { background: #3182ce; }
-        .tag-btn.active.tag-healing { background: #38a169; }
-        .tag-btn.active.tag-social { background: #d69e2e; }
-        .tag-btn.active.tag-vehicle { background: #805ad5; }
-        .tag-btn.active.tag-magic { background: #d53f8c; }
-        .tag-btn.active.tag-fear { background: #4c51bf; }
-        .tag-btn.active.tag-knowledge { background: #319795; }
-        .tag-btn.active.tag-movement { background: #dd6b20; }
-        .tag-btn.active.tag-strain { background: #718096; }
-        .tag-btn.active.tag-critical { background: #9b2c2c; }
-        .tag-btn.active.tag-leadership { background: #2c7a7b; }
-        .talent-tag { font-size: 11px; padding: 3px 10px; border-radius: 12px; font-weight: 600; color: white; }
-        .talent-tag.tag-combat { background: #e53e3e; }
-        .talent-tag.tag-defense { background: #3182ce; }
-        .talent-tag.tag-healing { background: #38a169; }
-        .talent-tag.tag-social { background: #d69e2e; }
-        .talent-tag.tag-vehicle { background: #805ad5; }
-        .talent-tag.tag-magic { background: #d53f8c; }
-        .talent-tag.tag-fear { background: #4c51bf; }
-        .talent-tag.tag-knowledge { background: #319795; }
-        .talent-tag.tag-movement { background: #dd6b20; }
-        .talent-tag.tag-strain { background: #718096; }
-        .talent-tag.tag-critical { background: #9b2c2c; }
-        .talent-tag.tag-leadership { background: #2c7a7b; }
-        .stats { display: flex; gap: 15px; flex-wrap: wrap; }
-        .stat-card { background: white; padding: 15px 20px; border-radius: 8px; border-left: 4px solid #667eea; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        .stat-card .number { font-size: 24px; font-weight: bold; color: #667eea; }
-        .stat-card .label { font-size: 12px; color: #718096; text-transform: uppercase; margin-top: 5px; }
-        .content { padding: 30px; max-height: 800px; overflow-y: auto; }
-        #builder { padding: 30px; display: none; }
-        .pyramid-row { display: flex; justify-content: center; margin-bottom: 20px; }
-        .pyramid-slot { width: 360px; margin: 0 15px; border: 2px solid #e2e8f0; border-radius: 12px; padding: 22px; transition: all 0.3s; position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); background: white; cursor: pointer; }
-        .pyramid-slot:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.2); border-color: #667eea; }
-        .pyramid-slot::before { content: ''; position: absolute; top: 0; left: 0; width: 6px; height: 100%; background: var(--tier-color); }
-        .pyramid-slot .talent-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px; gap: 10px; }
-        .pyramid-slot .talent-name { font-size: 1.4em; font-weight: bold; color: #2d3748; }
-        .pyramid-slot .talent-tier { background: var(--tier-color); color: white; padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: bold; }
-        .pyramid-slot .talent-description { color: #4a5568; line-height: 1.6; font-size: 14.5px; margin-top: 10px; display: none; }
-        .pyramid-slot .talent-meta { display: flex; gap: 15px; flex-wrap: wrap; margin: 10px 0; font-size: 13px; color: #718096; display: none; }
-        .pyramid-slot .meta-item span.meta-label { font-weight: 600; color: #4a5568; }
-        .pyramid-slot .talent-source { font-size: 11px; color: #a0aec0; font-style: italic; text-align: right; margin-top: 10px; display: none; }
-        .pyramid-slot .active-label { font-size: 13px; color: #718096; display: flex; align-items: center; gap: 5px; margin-top: 10px; display: none; }
-        .talent-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 22px; }
-        .talent-card { background: white; border: 2px solid #e2e8f0; border-radius: 12px; padding: 22px; transition: all 0.3s; position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); cursor: pointer; }
-        .talent-card:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.2); border-color: #667eea; }
-        .talent-card::before { content: ''; position: absolute; top: 0; left: 0; width: 6px; height: 100%; background: var(--tier-color); }
-        .tier-1 { --tier-color: #48bb78; }
-        .tier-2 { --tier-color: #4299e1; }
-        .tier-3 { --tier-color: #9f7aea; }
-        .tier-4 { --tier-color: #ed8936; }
-        .tier-5 { --tier-color: #f56565; }
-        .talent-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px; gap: 10px; }
-        .talent-name { font-size: 1.4em; font-weight: bold; color: #2d3748; }
-        .talent-tier { background: var(--tier-color); color: white; padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: bold; }
-        .talent-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
-        .talent-meta { display: flex; gap: 15px; flex-wrap: wrap; margin: 10px 0; font-size: 13px; color: #718096; }
-        .meta-item span.meta-label { font-weight: 600; color: #4a5568; }
-        .talent-description { color: #4a5568; line-height: 1.6; font-size: 14.5px; }
-        .talent-source { font-size: 11px; color: #a0aec0; font-style: italic; text-align: right; margin-top: 10px; }
-        .no-results, .loading { text-align: center; padding: 60px 20px; color: #718096; font-size: 1.3em; }
-        @media (max-width: 768px) {
-            .talent-grid { grid-template-columns: 1fr; }
-            .filters { flex-direction: column; align-items: stretch; }
-            .filter-group { width: 100%; }
-            .pyramid-slot { width: 100%; margin: 10px 0; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        :root {
+            --color-primary: #6366f1;
+            --color-primary-dark: #4f46e5;
+            --color-primary-light: #818cf8;
+            --color-secondary: #14b8a6;
+            --color-secondary-dark: #0d9488;
+            --color-accent: #f59e0b;
+            
+            --color-background: #0f172a;
+            --color-surface: #1e293b;
+            --color-surface-elevated: #334155;
+            --color-card: #1e293b;
+            
+            --color-text: #f1f5f9;
+            --color-text-secondary: #94a3b8;
+            --color-text-muted: #64748b;
+            
+            --color-border: #334155;
+            --color-border-light: #475569;
+            
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 0.75rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+            
+            --radius-sm: 0.5rem;
+            --radius-md: 0.75rem;
+            --radius-lg: 1rem;
+            --radius-xl: 1.5rem;
+            --radius-full: 9999px;
+            
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+            --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.3);
+            
+            --tier-1-color: #10b981;
+            --tier-2-color: #3b82f6;
+            --tier-3-color: #a855f7;
+            --tier-4-color: #f59e0b;
+            --tier-5-color: #ef4444;
         }
-
-        /* ============ CHATBOT STYLES ============ */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Animated gradient background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(20, 184, 166, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: var(--spacing-md);
+        }
+        
+        /* Modern Header with Glassmorphism */
+        header {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+            box-shadow: var(--shadow-xl), var(--shadow-glow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(99, 102, 241, 0.05), transparent);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-50%) translateY(-50%) rotate(0deg); }
+            50% { transform: translateX(-30%) translateY(-30%) rotate(180deg); }
+        }
+        
+        header h1 {
+            font-size: clamp(1.75rem, 5vw, 3rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--color-primary-light), var(--color-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--spacing-xs);
+            position: relative;
+            z-index: 1;
+        }
+        
+        header p {
+            color: var(--color-text-secondary);
+            font-size: clamp(0.875rem, 2vw, 1.125rem);
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-lg);
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .btn {
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border: none;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+            color: white;
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--color-text);
+            border: 1px solid var(--color-border-light);
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--color-primary);
+        }
+        
+        /* Modern Search Bar */
+        .search-section {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .search-wrapper {
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: var(--spacing-md) var(--spacing-xl) var(--spacing-md) 3.5rem;
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-full);
+            color: var(--color-text);
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-text-muted);
+            pointer-events: none;
+        }
+        
+        /* Filter Pills */
+        .filters-section {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .filter-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-md);
+            transition: all 0.3s ease;
+        }
+        
+        .filter-card:hover {
+            border-color: var(--color-primary);
+            background: rgba(30, 41, 59, 0.8);
+        }
+        
+        .filter-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text-muted);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .filter-select {
+            width: 100%;
+            padding: var(--spacing-sm);
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            color: var(--color-text);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+        
+        /* Tag Pills */
+        .tag-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .tag-pill {
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: var(--radius-full);
+            font-size: 0.813rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tag-pill::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        
+        .tag-pill:hover::before {
+            opacity: 1;
+        }
+        
+        .tag-pill:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        .tag-pill.active {
+            border-color: rgba(255,255,255,0.3);
+            box-shadow: 0 0 20px currentColor;
+            transform: scale(1.05);
+        }
+        
+        .tag-combat { background: linear-gradient(135deg, #dc2626, #991b1b); }
+        .tag-defense { background: linear-gradient(135deg, #2563eb, #1e40af); }
+        .tag-healing { background: linear-gradient(135deg, #059669, #047857); }
+        .tag-social { background: linear-gradient(135deg, #d97706, #b45309); }
+        .tag-vehicle { background: linear-gradient(135deg, #9333ea, #7e22ce); }
+        .tag-magic { background: linear-gradient(135deg, #c026d3, #a21caf); }
+        .tag-fear { background: linear-gradient(135deg, #4f46e5, #4338ca); }
+        .tag-knowledge { background: linear-gradient(135deg, #0d9488, #0f766e); }
+        .tag-movement { background: linear-gradient(135deg, #ea580c, #c2410c); }
+        .tag-strain { background: linear-gradient(135deg, #475569, #334155); }
+        .tag-critical { background: linear-gradient(135deg, #7f1d1d, #450a0a); }
+        .tag-leadership { background: linear-gradient(135deg, #0891b2, #0e7490); }
+        
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .stat-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--color-primary), var(--color-secondary));
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--color-primary-light), var(--color-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .stat-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text-muted);
+        }
+        
+        /* Talent Cards Grid */
+        .talents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(100%, 350px), 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-2xl);
+        }
+        
+        .talent-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-lg);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .talent-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--tier-color);
+            box-shadow: 0 0 20px var(--tier-color);
+        }
+        
+        .talent-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-xl), 0 0 30px rgba(99, 102, 241, 0.2);
+        }
+        
+        .tier-1 { --tier-color: var(--tier-1-color); }
+        .tier-2 { --tier-color: var(--tier-2-color); }
+        .tier-3 { --tier-color: var(--tier-3-color); }
+        .tier-4 { --tier-color: var(--tier-4-color); }
+        .tier-5 { --tier-color: var(--tier-5-color); }
+        
+        .talent-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .talent-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-text);
+            line-height: 1.3;
+        }
+        
+        .talent-tier {
+            background: var(--tier-color);
+            color: white;
+            padding: 0.375rem 0.75rem;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 700;
+            white-space: nowrap;
+            box-shadow: 0 0 15px var(--tier-color);
+        }
+        
+        .talent-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-xs);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .talent-tag {
+            font-size: 0.688rem;
+            padding: 0.25rem 0.625rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            color: white;
+        }
+        
+        .talent-meta {
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--color-border);
+            font-size: 0.813rem;
+        }
+        
+        .meta-label {
+            font-weight: 700;
+            color: var(--color-primary-light);
+        }
+        
+        .talent-description {
+            color: var(--color-text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .talent-source {
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            font-style: italic;
+        }
+        
+        /* Pyramid Builder */
+        .pyramid-section {
+            padding: var(--spacing-xl);
+        }
+        
+        .pyramid-intro {
+            text-align: center;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-xl);
+            font-size: 0.938rem;
+        }
+        
+        .pyramid-row {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .pyramid-slot {
+            flex: 1;
+            max-width: 400px;
+            min-width: 200px;
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-lg);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pyramid-slot::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--tier-color);
+            box-shadow: 0 0 20px var(--tier-color);
+        }
+        
+        .pyramid-slot:hover {
+            transform: translateY(-4px);
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-xl), 0 0 30px rgba(99, 102, 241, 0.2);
+        }
+        
+        .pyramid-slot .talent-name {
+            font-size: 1.125rem;
+        }
+        
+        .pyramid-slot .talent-name:not(:has(span)) {
+            color: var(--color-text-muted);
+            font-style: italic;
+        }
+        
+        .active-label {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-md);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+        }
+        
+        .active-label input[type="checkbox"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            cursor: pointer;
+            accent-color: var(--color-secondary);
+        }
+        
+        .validation-status {
+            text-align: center;
+            margin-top: var(--spacing-xl);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+        
+        .validation-status.valid {
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid var(--tier-1-color);
+            color: var(--tier-1-color);
+        }
+        
+        .validation-status.invalid {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid var(--tier-5-color);
+            color: var(--tier-5-color);
+        }
+        
+        /* Chatbot */
         #chatbot-container {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: var(--spacing-lg);
+            right: var(--spacing-lg);
             z-index: 1000;
-            font-family: 'Segoe UI', sans-serif;
         }
+        
         #chatbot-toggle {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-dark));
             border-radius: 50%;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            box-shadow: 0 8px 24px rgba(20, 184, 166, 0.4);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 28px;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
-        #chatbot-toggle:hover { transform: scale(1.1); }
+        
+        #chatbot-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 32px rgba(20, 184, 166, 0.6);
+        }
+        
         #chatbot-window {
             display: none;
             flex-direction: column;
-            width: 380px;
-            height: 520px;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+            width: min(400px, calc(100vw - 2rem));
+            height: min(600px, calc(100vh - 8rem));
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+            margin-bottom: var(--spacing-md);
             overflow: hidden;
-            margin-bottom: 12px;
         }
+        
         #chatbot-header {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
             color: white;
-            padding: 16px;
-            font-weight: 600;
-            font-size: 18px;
+            padding: var(--spacing-lg);
+            font-weight: 700;
             text-align: center;
             position: relative;
         }
+        
         #chatbot-close {
             position: absolute;
-            right: 12px;
-            top: 14px;
-            background: none;
+            right: var(--spacing-md);
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
             border: none;
             color: white;
-            font-size: 24px;
+            font-size: 1.5rem;
             cursor: pointer;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
         }
+        
+        #chatbot-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
         #chatbot-messages {
             flex: 1;
-            padding: 16px;
+            padding: var(--spacing-lg);
             overflow-y: auto;
-            background: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
         }
+        
         .message {
-            margin-bottom: 14px;
             max-width: 85%;
-            padding: 10px 14px;
-            border-radius: 18px;
+            padding: var(--spacing-md);
+            border-radius: var(--radius-lg);
             line-height: 1.5;
-            word-wrap: break-word;
+            font-size: 0.875rem;
         }
+        
         .user-message {
             align-self: flex-end;
-            background: #667eea;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
             color: white;
-            border-radius: 18px 18px 4px 18px;
+            border-radius: var(--radius-lg) var(--radius-lg) 0.25rem var(--radius-lg);
         }
+        
         .bot-message {
             align-self: flex-start;
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 18px 18px 18px 4px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            background: rgba(51, 65, 85, 0.8);
+            border: 1px solid var(--color-border);
+            color: var(--color-text);
+            border-radius: var(--radius-lg) var(--radius-lg) var(--radius-lg) 0.25rem;
         }
+        
         #chatbot-input-area {
             display: flex;
-            padding: 12px;
-            background: white;
-            border-top: 1px solid #e2e8f0;
+            padding: var(--spacing-lg);
+            gap: var(--spacing-sm);
+            border-top: 1px solid var(--color-border);
+            background: rgba(15, 23, 42, 0.8);
         }
+        
         #chatbot-input {
             flex: 1;
-            padding: 12px 16px;
-            border: 2px solid #e2e8f0;
-            border-radius: 30px;
+            padding: var(--spacing-md);
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-full);
+            color: var(--color-text);
+            font-size: 0.875rem;
             outline: none;
-            font-size: 15px;
+            transition: all 0.2s ease;
         }
+        
         #chatbot-input:focus {
-            border-color: #667eea;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
         }
+        
         #chatbot-send {
-            margin-left: 10px;
-            width: 44px;
-            height: 44px;
-            background: #667eea;
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-dark));
             color: white;
             border: none;
             border-radius: 50%;
@@ -206,543 +741,765 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
         }
-        .typing {
-            font-style: italic;
-            color: #888;
+        
+        #chatbot-send:hover {
+            transform: scale(1.1);
+        }
+        
+        .loading, .no-results {
+            text-align: center;
+            padding: var(--spacing-2xl);
+            color: var(--color-text-secondary);
+            font-size: 1.125rem;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            .container {
+                padding: var(--spacing-sm);
+            }
+            
+            header {
+                padding: var(--spacing-lg);
+                border-radius: var(--radius-lg);
+            }
+            
+            .talents-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-md);
+            }
+            
+            .pyramid-row {
+                flex-direction: column;
+            }
+            
+            .pyramid-slot {
+                max-width: 100%;
+            }
+            
+            .filter-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: var(--spacing-sm);
+            }
+            
+            #chatbot-container {
+                bottom: var(--spacing-md);
+                right: var(--spacing-md);
+            }
+            
+            #chatbot-toggle {
+                width: 56px;
+                height: 56px;
+            }
+        }
+        
+        /* Smooth scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--color-surface);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-border-light);
+            border-radius: var(--radius-full);
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-primary);
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Genesys Talents Reference</h1>
-            <p>Chwała Pierwszemu!</p>
-            <button id="builderBtn">Build Talent Tree</button>
+            <h1>Genesys Talents</h1>
+            <p>Ultimate Character Builder - Glory to the First!</p>
+            <div class="header-actions">
+                <button id="builderBtn" class="btn btn-primary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    </svg>
+                    Build Talent Tree
+                </button>
+                <button id="resetBtn" class="btn btn-secondary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+                    </svg>
+                    Reset Filters
+                </button>
+            </div>
         </header>
-        <div class="controls">
-            <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Fuzzy search: pary strain, doge, full trottle, heal crit..." autocomplete="off">
-            </div>
-            <div class="filters">
-                <div class="filter-group">
-                    <label>Tier</label>
-                    <select id="tierFilter">
-                        <option value="all">All Tiers</option><option value="1">Tier 1</option><option value="2">Tier 2</option>
-                        <option value="3">Tier 3</option><option value="4">Tier 4</option><option value="5">Tier 5</option>
-                    </select>
+        
+        <div id="referenceContent">
+            <div class="search-section">
+                <div class="search-wrapper">
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                    </svg>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search talents: Parry, strain, dodge, full throttle..." autocomplete="off">
                 </div>
-                <div class="filter-group">
-                    <label>Activation</label>
-                    <select id="activationFilter">
-                        <option value="all">All</option><option value="passive">Passive</option><option value="active">Active</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label>Ranked</label>
-                    <select id="rankedFilter">
-                        <option value="all">All</option><option value="yes">Yes</option><option value="no">No</option>
-                    </select>
-                </div>
-                <button id="resetBtn">Reset All</button>
             </div>
-            <div class="tag-filter-bar" id="tagBar"></div>
-            <div class="stats">
-                <div class="stat-card"><div class="number" id="totalCount">0</div><div class="label">Total</div></div>
-                <div class="stat-card"><div class="number" id="shownCount">0</div><div class="label">Shown</div></div>
-                <div class="stat-card"><div class="number" id="tagCount">0</div><div class="label">Active Tags</div></div>
+            
+            <div class="filters-section">
+                <div class="filter-grid">
+                    <div class="filter-card">
+                        <div class="filter-label">Tier</div>
+                        <select id="tierFilter" class="filter-select">
+                            <option value="all">All Tiers</option>
+                            <option value="1">Tier 1</option>
+                            <option value="2">Tier 2</option>
+                            <option value="3">Tier 3</option>
+                            <option value="4">Tier 4</option>
+                            <option value="5">Tier 5</option>
+                        </select>
+                    </div>
+                    <div class="filter-card">
+                        <div class="filter-label">Activation</div>
+                        <select id="activationFilter" class="filter-select">
+                            <option value="all">All Types</option>
+                            <option value="passive">Passive</option>
+                            <option value="active">Active</option>
+                        </select>
+                    </div>
+                    <div class="filter-card">
+                        <div class="filter-label">Ranked</div>
+                        <select id="rankedFilter" class="filter-select">
+                            <option value="all">All</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="tag-pills" id="tagBar"></div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalCount">0</div>
+                        <div class="stat-label">Total Talents</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="shownCount">0</div>
+                        <div class="stat-label">Shown</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="tagCount">0</div>
+                        <div class="stat-label">Active Tags</div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="content" id="referenceContent">
-            <div id="talentGrid" class="talent-grid">
+            
+            <div id="talentGrid" class="talents-grid">
                 <div class="loading">Loading talents from talents.csv...</div>
             </div>
         </div>
-        <div id="builder" style="display: none;">
-            <div id="pyramid"></div>
+        
+        <div id="builder" class="hidden">
+            <div class="pyramid-section">
+                <p class="pyramid-intro">
+                    Click on an empty slot to filter talents by tier, then select a talent to assign it to your pyramid.
+                </p>
+                <div id="pyramid"></div>
+                <div id="validationStatus" class="validation-status"></div>
+            </div>
         </div>
     </div>
 
     <div id="chatbot-container">
-        <div id="chatbot-toggle">Chat</div>
+        <div id="chatbot-toggle" title="Open Genesys Assistant">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 11a5 5 0 0 0-7.54-4.88A3.5 3.5 0 0 0 5 13H4a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-1.62"/>
+                <circle cx="9" cy="13" r="1"/><circle cx="15" cy="13" r="1"/>
+            </svg>
+        </div>
         <div id="chatbot-window">
             <div id="chatbot-header">
-                Genesys Assistant (Gemini)
+                Genesys Assistant
                 <button id="chatbot-close">×</button>
             </div>
             <div id="chatbot-messages">
                 <div class="message bot-message">
-                    Hello! I'm your Genesys/Star Wars FFG expert. Ask me anything about talents, rules, pyramid building, or character optimization!
+                    Hello! I'm your Genesys/Star Wars FFG expert. Ask me anything about talents, rules, or character optimization!
                 </div>
             </div>
             <div id="chatbot-input-area">
                 <input type="text" id="chatbot-input" placeholder="Ask about talents..." autocomplete="off">
-                <button id="chatbot-send">Send</button>
+                <button id="chatbot-send">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                    </svg>
+                </button>
             </div>
         </div>
     </div>
 
     <script>
-        let talents = [];
-        let fuse;
-        let talentsByTier = Array(6).fill().map(() => []);
-        const activeTags = new Set();
-        let pendingSlot = null;
-        const pyramidTalents = Array.from({length: 5}, () => Array(10).fill(null));
-        const rowTiers = [5, 4, 3, 2, 1];
-        const tagDefinitions = [
-            { name: "combat", color: "tag-combat", keywords: ["attack", "damage", "hit", "melee", "ranged", "brawl", "weapon", "combat check", "deadly", "lethal"] },
-            { name: "defense", color: "tag-defense", keywords: ["defense", "soak", "parr", "reflect", "dodge", "sidestep", "armor", "shield"] },
-            { name: "healing", color: "tag-healing", keywords: ["heal", "wound", "strain", "medicine", "physician", "surgeon", "apothecary", "recovery"] },
-            { name: "social", color: "tag-social", keywords: ["charm", "coercion", "deception", "leadership", "negotiation", "scathing", "inspiring", "presence"] },
-            { name: "vehicle", color: "tag-vehicle", keywords: ["piloting", "driving", "vehicle", "speed", "handling", "full throttle", "all-terrain"] },
-            { name: "magic", color: "tag-magic", keywords: ["magic", "spell", "arcana", "divine", "primal", "curse", "barrier", "augment"] },
-            { name: "fear", color: "tag-fear", keywords: ["fear", "terrifying", "scathing", "confidence", "nobody's fool"] },
-            { name: "knowledge", color: "tag-knowledge", keywords: ["knowledge", "education", "lore", "xenology", "astrogation"] },
-            { name: "movement", color: "tag-movement", keywords: ["move", "swift", "jump up", "disengage", "shortcut"] },
-            { name: "strain", color: "tag-strain", keywords: ["strain", "second wind", "grit", "resolve"] },
-            { name: "critical", color: "tag-critical", keywords: ["critical", "vicious", "deadly accuracy", "lethal blows"] },
-            { name: "leadership", color: "tag-leadership", keywords: ["leadership", "command", "field commander", "inspiring"] }
-        ];
-        function generateTagsForTalent(talent) {
-            const text = (talent.name + " " + talent.description).toLowerCase();
-            const tags = [];
-            for (const def of tagDefinitions) {
-                if (def.keywords.some(kw => text.includes(kw))) {
-                    tags.push({ name: def.name, color: def.color });
+        const GenesysApp = (function() {
+            let talents = [];
+            let fuse;
+            let talentsByTier = Array(6).fill().map(() => []);
+            const activeTags = new Set();
+            let pendingSlot = null;
+            const pyramidTalents = Array.from({length: 5}, () => Array(5).fill(null));
+            const rowTiers = [5, 4, 3, 2, 1];
+            const rowSlotCounts = [1, 2, 3, 4, 5];
+
+            const tagDefinitions = [
+                { name: "combat", color: "tag-combat", keywords: ["attack", "damage", "hit", "melee", "ranged", "brawl", "weapon", "combat check", "deadly", "lethal"] },
+                { name: "defense", color: "tag-defense", keywords: ["defense", "soak", "parry", "reflect", "dodge", "sidestep", "armor", "shield"] },
+                { name: "healing", color: "tag-healing", keywords: ["heal", "wound", "strain", "medicine", "physician", "surgeon", "apothecary", "recovery"] },
+                { name: "social", color: "tag-social", keywords: ["charm", "coercion", "deception", "leadership", "negotiation", "scathing", "inspiring", "presence"] },
+                { name: "vehicle", color: "tag-vehicle", keywords: ["piloting", "driving", "vehicle", "speed", "handling", "full throttle", "all-terrain"] },
+                { name: "magic", color: "tag-magic", keywords: ["magic", "spell", "arcana", "divine", "primal", "curse", "barrier", "augment"] },
+                { name: "fear", color: "tag-fear", keywords: ["fear", "terrifying", "scathing", "confidence", "nobody's fool"] },
+                { name: "knowledge", color: "tag-knowledge", keywords: ["knowledge", "education", "lore", "xenology", "astrogation"] },
+                { name: "movement", color: "tag-movement", keywords: ["move", "swift", "jump up", "disengage", "shortcut"] },
+                { name: "strain", color: "tag-strain", keywords: ["strain", "second wind", "grit", "resolve"] },
+                { name: "critical", color: "tag-critical", keywords: ["critical", "vicious", "deadly accuracy", "lethal blows"] },
+                { name: "leadership", color: "tag-leadership", keywords: ["leadership", "command", "field commander", "inspiring"] }
+            ];
+
+            function generateTagsForTalent(talent) {
+                const text = (talent.name + " " + talent.description).toLowerCase();
+                const tags = [];
+                for (const def of tagDefinitions) {
+                    if (def.keywords.some(kw => text.includes(kw))) {
+                        tags.push({ name: def.name, color: def.color });
+                    }
                 }
+                if (talent.name.toLowerCase().includes("parry")) tags.push({name: "defense", color: "tag-defense"});
+                if (talent.name.toLowerCase().includes("reflect")) tags.push({name: "defense", color: "tag-defense"});
+                if (talent.name.toLowerCase().includes("dodge")) tags.push({name: "defense", color: "tag-defense"});
+                const uniqueTags = Array.from(new Set(tags.map(t => t.name)))
+                    .map(name => tags.find(t => t.name === name));
+                return uniqueTags;
             }
-            if (talent.name.toLowerCase().includes("parry")) tags.push({name: "defense", color: "tag-defense"});
-            if (talent.name.toLowerCase().includes("reflect")) tags.push({name: "defense", color: "tag-defense"});
-            if (talent.name.toLowerCase().includes("dodge")) tags.push({name: "defense", color: "tag-defense"});
-            return tags;
-        }
-        function parseCSVLine(line) {
-            const values = [];
-            let current = '';
-            let inQuote = false;
-            for (let i = 0; i < line.length; i++) {
-                const char = line[i];
-                if (char === '"' && !inQuote) inQuote = true;
-                else if (char === '"' && inQuote) {
-                    if (i + 1 < line.length && line[i+1] === '"') { current += '"'; i++; }
-                    else inQuote = false;
+
+            function parseCSVLine(line) {
+                const values = [];
+                let current = '';
+                let inQuote = false;
+                for (let i = 0; i < line.length; i++) {
+                    const char = line[i];
+                    if (char === '"' && !inQuote) inQuote = true;
+                    else if (char === '"' && inQuote) {
+                        if (i + 1 < line.length && line[i+1] === '"') { current += '"'; i++; }
+                        else inQuote = false;
+                    }
+                    else if (char === ',' && !inQuote) { values.push(current.trim()); current = ''; }
+                    else current += char;
                 }
-                else if (char === ',' && !inQuote) { values.push(current.trim()); current = ''; }
-                else current += char;
+                values.push(current.trim());
+                return values;
             }
-            values.push(current.trim());
-            return values;
-        }
-        async function loadTalents() {
-            try {
-                const response = await fetch('talents.csv');
-                if (!response.ok) throw new Error('talents.csv not found');
-                const csvText = await response.text();
-                const lines = csvText.trim().split('\n');
-                talents = lines.slice(1).map(line => {
-                    const [name, tierStr, activation, ranked, description, source] = parseCSVLine(line);
-                    const tier = parseInt(tierStr) || 1;
-                    const talent = { name: name || '', tier, activation: activation || '', ranked: ranked || '', description: description || '', source: source || '', tags: [] };
-                    talent.tags = generateTagsForTalent(talent);
-                    return talent;
-                }).filter(t => t.name);
-                fuse = new Fuse(talents, { keys: ['name', 'description'], threshold: 0.35, includeScore: true, shouldSort: true });
-                talents.forEach(t => talentsByTier[t.tier].push(t));
-                document.getElementById('totalCount').textContent = talents.length;
-                buildTagBar();
-                applyFilters();
-                buildPyramid();
-            } catch (err) {
-                document.getElementById('talentGrid').innerHTML = `<div class="no-results"><h2>Error</h2><p>${err.message}</p></div>`;
-            }
-        }
-        function buildTagBar() {
-            const bar = document.getElementById('tagBar');
-            bar.innerHTML = '';
-            tagDefinitions.forEach(def => {
-                const btn = document.createElement('button');
-                btn.className = `tag-btn ${def.color}`;
-                btn.textContent = def.name.charAt(0).toUpperCase() + def.name.slice(1);
-                btn.dataset.tag = def.name;
-                btn.onclick = () => toggleTag(def.name);
-                bar.appendChild(btn);
-            });
-        }
-        function toggleTag(tagName) {
-            const btn = document.querySelector(`.tag-btn[data-tag="${tagName}"]`);
-            if (activeTags.has(tagName)) {
-                activeTags.delete(tagName);
-                btn.classList.remove('active');
-            } else {
-                activeTags.add(tagName);
-                btn.classList.add('active');
-            }
-            applyFilters();
-        }
-        function applyFilters() {
-            let results = talents;
-            const query = document.getElementById('searchInput').value.trim();
-            if (query) results = fuse.search(query).map(r => r.item);
-            const tier = document.getElementById('tierFilter').value;
-            const act = document.getElementById('activationFilter').value.toLowerCase();
-            const ranked = document.getElementById('rankedFilter').value.toLowerCase();
-            results = results.filter(t => {
-                const matchTier = tier === 'all' || t.tier.toString() === tier;
-                const matchAct = act === 'all' || t.activation.toLowerCase().includes(act);
-                const matchRanked = ranked === 'all' || t.ranked.toLowerCase() === ranked;
-                const matchTags = activeTags.size === 0 || t.tags.some(tag => activeTags.has(tag.name));
-                return matchTier && matchAct && matchRanked && matchTags;
-            });
-            renderTalents(results);
-            document.getElementById('tagCount').textContent = activeTags.size;
-        }
-        function renderTalents(list) {
-            const grid = document.getElementById('talentGrid');
-            grid.innerHTML = '';
-            if (list.length === 0) {
-                grid.innerHTML = `<div class="no-results"><h2>No talents found</h2><p>Try different filters or search terms</p></div>`;
-                document.getElementById('shownCount').textContent = 0;
-                return;
-            }
-            list.forEach(t => {
-                const card = document.createElement('div');
-                card.className = `talent-card tier-${t.tier}`;
-                card.innerHTML = `
-                    <div class="talent-header">
-                        <div class="talent-name">${t.name}</div>
-                        <div class="talent-tier">Tier ${t.tier}</div>
-                    </div>
-                    <div class="talent-tags">
-                        ${t.tags.map(tag => `<span class="talent-tag ${tag.color}">${tag.name}</span>`).join('')}
-                    </div>
-                    <div class="talent-meta">
-                        <div class="meta-item"><span class="meta-label">Activation:</span> ${t.activation}</div>
-                        <div class="meta-item"><span class="meta-label">Ranked:</span> ${t.ranked}</div>
-                    </div>
-                    <div class="talent-description">${t.description}</div>
-                    <div class="talent-source">Source: ${t.source}</div>
-                `;
-                card.addEventListener('click', () => assignTalentToSlot(t));
-                grid.appendChild(card);
-            });
-            document.getElementById('shownCount').textContent = list.length;
-        }
-        // Talent Tree Builder
-        function buildPyramid() {
-            const pyramid = document.getElementById('pyramid');
-            pyramid.innerHTML = '';
-            const rowSlots = [1, 2, 3, 4, 5];
-            for (let r = 0; r < 5; r++) {
-                const row = document.createElement('div');
-                row.className = 'pyramid-row';
-                const tier = rowTiers[r];
-                for (let s = 0; s < rowSlots[r]; s++) {
-                    const slot = document.createElement('div');
-                    slot.className = `pyramid-slot tier-${tier}`;
-                    slot.dataset.row = r;
-                    slot.dataset.slot = s;
-                    slot.innerHTML = `
-                        <div class="talent-header">
-                            <div class="talent-name">-- Select Talent --</div>
-                            <div class="talent-tier">Tier ${tier}</div>
-                        </div>
-                        <div class="talent-tags" style="display: none;"></div>
-                        <div class="talent-meta" style="display: none;">
-                            <div class="meta-item"><span class="meta-label">Activation:</span> --</div>
-                            <div class="meta-item"><span class="meta-label">Ranked:</span> --</div>
-                        </div>
-                        <div class="talent-description" style="display: none;"></div>
-                        <div class="talent-source" style="display: none;"></div>
-                        <label class="active-label" style="display: none;"><input type="checkbox"> Active?</label>
-                    `;
-                    slot.addEventListener('click', () => openSearchForSlot(slot));
-                    row.appendChild(slot);
-                }
-                pyramid.appendChild(row);
-            }
-        }
-        function openSearchForSlot(slot) {
-            pendingSlot = slot;
-            const tier = rowTiers[slot.dataset.row];
-            // Switch to reference view first
-            switchToReference();
-            // Then set filter and apply
-            document.getElementById('tierFilter').value = tier.toString();
-            applyFilters();
-        }
-        function assignTalentToSlot(talent) {
-            if (!pendingSlot) return;
-            const row = parseInt(pendingSlot.dataset.row);
-            const slotIndex = parseInt(pendingSlot.dataset.slot);
-            const temp = pyramidTalents[row][slotIndex];
-            pyramidTalents[row][slotIndex] = talent;
-            if (!validatePyramid()) {
-                alert('Invalid selection! Violates talent pyramid rules or non-ranked duplicate.');
-                pyramidTalents[row][slotIndex] = temp;
-                pendingSlot = null;
-                return;
-            }
-            pendingSlot.querySelector('.talent-name').textContent = talent.name;
-            pendingSlot.querySelector('.talent-tags').innerHTML = talent.tags.map(tag => `<span class="talent-tag ${tag.color}">${tag.name}</span>`).join('');
-            pendingSlot.querySelector('.talent-tags').style.display = talent.tags.length > 0 ? 'flex' : 'none';
-            pendingSlot.querySelectorAll('.meta-item')[0].innerHTML = `<span class="meta-label">Activation:</span> ${talent.activation}`;
-            pendingSlot.querySelectorAll('.meta-item')[1].innerHTML = `<span class="meta-label">Ranked:</span> ${talent.ranked}`;
-            pendingSlot.querySelector('.talent-meta').style.display = 'flex';
-            pendingSlot.querySelector('.talent-description').textContent = talent.description;
-            pendingSlot.querySelector('.talent-description').style.display = 'block';
-            pendingSlot.querySelector('.talent-source').textContent = `Source: ${talent.source}`;
-            pendingSlot.querySelector('.talent-source').style.display = 'block';
-            pendingSlot.querySelector('.active-label').style.display = 'flex';
-            pendingSlot = null;
-            switchToBuilder();
-        }
-        function validatePyramid() {
-            const counts = [0, 0, 0, 0, 0, 0];
-            const talentOccurrences = {};
-          
-            pyramidTalents.forEach((row, r) => {
-                row.forEach(t => {
-                    if (t) {
-                        const tier = rowTiers[r];
-                        counts[tier]++;
-                      
-                        // Track occurrences of each talent
-                        if (!talentOccurrences[t.name]) {
-                            talentOccurrences[t.name] = { count: 0, talent: t };
+
+            async function loadTalents() {
+                try {
+                    const response = await fetch('talents.csv');
+                    if (!response.ok) throw new Error('talents.csv not found or failed to load.');
+                    const csvText = await response.text();
+                    const lines = csvText.trim().split('\n');
+                    talents = lines.slice(1).map(line => {
+                        const [name, tierStr, activation, ranked, description, source] = parseCSVLine(line);
+                        const tier = parseInt(tierStr) || 1;
+                        const talent = { 
+                            name: name || '', 
+                            tier, 
+                            activation: activation || '', 
+                            ranked: ranked ? ranked.toLowerCase() : 'no', 
+                            description: description || '', 
+                            source: source || '', 
+                            tags: [] 
+                        };
+                        if (talent.name) {
+                            talent.tags = generateTagsForTalent(talent);
+                            return talent;
                         }
-                        talentOccurrences[t.name].count++;
+                        return null;
+                    }).filter(t => t);
+                    
+                    fuse = new Fuse(talents, { 
+                        keys: ['name', 'description'], 
+                        threshold: 0.35, 
+                        includeScore: true, 
+                        shouldSort: true 
+                    });
+                    talents.forEach(t => talentsByTier[t.tier].push(t));
+
+                    document.getElementById('totalCount').textContent = talents.length;
+                    buildTagBar();
+                    applyFilters();
+                    buildPyramid();
+                    initializeAIWithFullKnowledge();
+                } catch (err) {
+                    console.error("Talent Loading Error:", err);
+                    document.getElementById('talentGrid').innerHTML = `<div class="no-results"><h2>Error Loading Data</h2><p>Could not load talents.csv. (${err.message})</p></div>`;
+                }
+            }
+
+            function buildTagBar() {
+                const bar = document.getElementById('tagBar');
+                bar.innerHTML = '';
+                tagDefinitions.forEach(def => {
+                    const btn = document.createElement('button');
+                    btn.className = `tag-pill ${def.color}`;
+                    btn.textContent = def.name.charAt(0).toUpperCase() + def.name.slice(1);
+                    btn.dataset.tag = def.name;
+                    btn.onclick = () => toggleTag(def.name);
+                    bar.appendChild(btn);
+                });
+            }
+
+            function toggleTag(tagName) {
+                const btn = document.querySelector(`.tag-pill[data-tag="${tagName}"]`);
+                if (activeTags.has(tagName)) {
+                    activeTags.delete(tagName);
+                    btn.classList.remove('active');
+                } else {
+                    activeTags.add(tagName);
+                    btn.classList.add('active');
+                }
+                applyFilters();
+            }
+
+            function applyFilters() {
+                let results = talents;
+                const query = document.getElementById('searchInput').value.trim();
+                
+                if (query) {
+                    results = fuse.search(query).map(r => r.item);
+                }
+
+                const tier = document.getElementById('tierFilter').value;
+                const act = document.getElementById('activationFilter').value.toLowerCase();
+                const ranked = document.getElementById('rankedFilter').value.toLowerCase();
+
+                results = results.filter(t => {
+                    const matchTier = tier === 'all' || t.tier.toString() === tier;
+                    const matchAct = act === 'all' || t.activation.toLowerCase().includes(act);
+                    const matchRanked = ranked === 'all' || t.ranked === ranked;
+                    const matchTags = activeTags.size === 0 || t.tags.some(tag => activeTags.has(tag.name));
+                    return matchTier && matchAct && matchRanked && matchTags;
+                });
+
+                renderTalents(results);
+                document.getElementById('tagCount').textContent = activeTags.size;
+            }
+
+            function renderTalents(list) {
+                const grid = document.getElementById('talentGrid');
+                grid.innerHTML = '';
+                if (list.length === 0) {
+                    grid.innerHTML = `<div class="no-results"><h2>No talents found</h2><p>Try different filters or search terms</p></div>`;
+                    document.getElementById('shownCount').textContent = 0;
+                    return;
+                }
+                list.forEach(t => {
+                    const card = document.createElement('div');
+                    card.className = `talent-card tier-${t.tier}`;
+                    card.innerHTML = `
+                        <div class="talent-header">
+                            <div class="talent-name">${t.name}</div>
+                            <div class="talent-tier">T${t.tier}</div>
+                        </div>
+                        <div class="talent-tags">
+                            ${t.tags.map(tag => `<span class="talent-tag ${tag.color}">${tag.name.toUpperCase()}</span>`).join('')}
+                        </div>
+                        <div class="talent-meta">
+                            <div><span class="meta-label">Activation:</span> ${t.activation}</div>
+                            <div><span class="meta-label">Ranked:</span> ${t.ranked.charAt(0).toUpperCase() + t.ranked.slice(1)}</div>
+                        </div>
+                        <div class="talent-description">${t.description}</div>
+                        <div class="talent-source">Source: ${t.source}</div>
+                    `;
+                    card.addEventListener('click', () => assignTalentToSlot(t));
+                    grid.appendChild(card);
+                });
+                document.getElementById('shownCount').textContent = list.length;
+            }
+
+            function buildPyramid() {
+                const pyramid = document.getElementById('pyramid');
+                pyramid.innerHTML = '';
+                
+                for (let r = 0; r < 5; r++) {
+                    const row = document.createElement('div');
+                    row.className = 'pyramid-row';
+                    const tier = rowTiers[r];
+                    const slotsInRow = rowSlotCounts[r];
+                    
+                    if (pyramidTalents[r].length !== slotsInRow) {
+                        pyramidTalents[r] = Array(slotsInRow).fill(null);
+                    }
+
+                    for (let s = 0; s < slotsInRow; s++) {
+                        const slot = document.createElement('div');
+                        slot.className = `pyramid-slot tier-${tier}`;
+                        slot.dataset.row = r;
+                        slot.dataset.slot = s;
+                        
+                        const currentTalent = pyramidTalents[r][s];
+                        
+                        slot.innerHTML = `
+                            <div class="talent-header">
+                                <div class="talent-name">${currentTalent ? currentTalent.name : '-- Select Talent --'}</div>
+                                <div class="talent-tier">T${tier}</div>
+                            </div>
+                            <div class="talent-tags" style="display: ${currentTalent ? 'flex' : 'none'};">
+                                ${currentTalent ? currentTalent.tags.map(tag => `<span class="talent-tag ${tag.color}">${tag.name.toUpperCase()}</span>`).join('') : ''}
+                            </div>
+                            <div class="talent-meta" style="display: ${currentTalent ? 'flex' : 'none'};">
+                                <div><span class="meta-label">Activation:</span> ${currentTalent ? currentTalent.activation : '--'}</div>
+                                <div><span class="meta-label">Ranked:</span> ${currentTalent ? (currentTalent.ranked.charAt(0).toUpperCase() + currentTalent.ranked.slice(1)) : '--'}</div>
+                            </div>
+                            <div class="talent-description" style="display: ${currentTalent ? 'block' : 'none'};">${currentTalent ? currentTalent.description : ''}</div>
+                            <div class="talent-source" style="display: ${currentTalent ? 'block' : 'none'};">Source: ${currentTalent ? currentTalent.source : ''}</div>
+                            <label class="active-label" style="display: ${currentTalent ? 'flex' : 'none'};">
+                                <input type="checkbox" ${currentTalent?.active ? 'checked' : ''}> Active
+                            </label>
+                        `;
+
+                        slot.addEventListener('click', () => openSearchForSlot(slot));
+                        row.appendChild(slot);
+                    }
+                    pyramid.appendChild(row);
+                }
+                updateValidationStatus();
+            }
+            
+            function updateValidationStatus() {
+                const statusDiv = document.getElementById('validationStatus');
+                const isValid = validatePyramid();
+                statusDiv.className = `validation-status ${isValid ? 'valid' : 'invalid'}`;
+                if (isValid) {
+                    statusDiv.innerHTML = `✓ Pyramid Valid`;
+                } else {
+                    statusDiv.innerHTML = `✗ Pyramid Invalid - Check tier count and non-ranked duplicates`;
+                }
+            }
+
+            function openSearchForSlot(slot) {
+                if (pendingSlot) {
+                    pendingSlot.classList.remove('selected-slot');
+                }
+                
+                pendingSlot = slot;
+                pendingSlot.classList.add('selected-slot');
+                
+                const tier = rowTiers[parseInt(slot.dataset.row)];
+                
+                switchToReference();
+                
+                document.getElementById('tierFilter').value = tier.toString();
+                document.getElementById('searchInput').value = '';
+                document.getElementById('activationFilter').value = 'all';
+                document.getElementById('rankedFilter').value = 'all';
+                activeTags.clear();
+                document.querySelectorAll('.tag-pill').forEach(b => b.classList.remove('active'));
+                
+                applyFilters();
+                document.getElementById('searchInput').focus();
+            }
+
+            function assignTalentToSlot(talent) {
+                if (!pendingSlot) return;
+
+                const row = parseInt(pendingSlot.dataset.row);
+                const slotIndex = parseInt(pendingSlot.dataset.slot);
+                const temp = pyramidTalents[row][slotIndex];
+                
+                pyramidTalents[row][slotIndex] = {...talent, active: temp?.active || false};
+
+                if (!validatePyramid()) {
+                    alert('Invalid selection! This violates talent pyramid rules or adds a non-ranked duplicate.');
+                    pyramidTalents[row][slotIndex] = temp;
+                    if (pendingSlot) pendingSlot.classList.remove('selected-slot');
+                    pendingSlot = null;
+                    updateValidationStatus();
+                    return;
+                }
+
+                const rankedText = talent.ranked.charAt(0).toUpperCase() + talent.ranked.slice(1);
+                
+                pendingSlot.querySelector('.talent-name').textContent = talent.name;
+                pendingSlot.querySelector('.talent-tags').innerHTML = talent.tags.map(tag => `<span class="talent-tag ${tag.color}">${tag.name.toUpperCase()}</span>`).join('');
+                pendingSlot.querySelector('.talent-tags').style.display = talent.tags.length > 0 ? 'flex' : 'none';
+                pendingSlot.querySelectorAll('.talent-meta div')[0].innerHTML = `<span class="meta-label">Activation:</span> ${talent.activation}`;
+                pendingSlot.querySelectorAll('.talent-meta div')[1].innerHTML = `<span class="meta-label">Ranked:</span> ${rankedText}`;
+                pendingSlot.querySelector('.talent-meta').style.display = 'flex';
+                pendingSlot.querySelector('.talent-description').textContent = talent.description;
+                pendingSlot.querySelector('.talent-description').style.display = 'block';
+                pendingSlot.querySelector('.talent-source').textContent = `Source: ${talent.source}`;
+                pendingSlot.querySelector('.talent-source').style.display = 'block';
+                pendingSlot.querySelector('.active-label').style.display = 'flex';
+                
+                if (pendingSlot) pendingSlot.classList.remove('selected-slot');
+                pendingSlot = null;
+                updateValidationStatus();
+                switchToBuilder();
+                
+                pushPyramidUpdateToAI();
+            }
+
+            function validatePyramid() {
+                const counts = [0, 0, 0, 0, 0, 0];
+                const talentOccurrences = {};
+                
+                pyramidTalents.forEach((row, r) => {
+                    row.forEach(t => {
+                        if (t) {
+                            const tier = rowTiers[r];
+                            counts[tier]++;
+                            
+                            if (!talentOccurrences[t.name]) {
+                                talentOccurrences[t.name] = { count: 0, talent: t };
+                            }
+                            talentOccurrences[t.name].count++;
+                        }
+                    });
+                });
+                
+                if (counts[5] > counts[4]) return false;
+                if (counts[4] > counts[3]) return false;
+                if (counts[3] > counts[2]) return false;
+                if (counts[2] > counts[1]) return false;
+                
+                for (const name in talentOccurrences) {
+                    const {count, talent} = talentOccurrences[name];
+                    if (count > 1 && talent.ranked === 'no') {
+                        return false;
+                    }
+                }
+                
+                return true;
+            }
+
+            function switchToReference() {
+                document.getElementById('referenceContent').classList.remove('hidden');
+                document.getElementById('builder').classList.add('hidden');
+                document.getElementById('builderBtn').innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    </svg>
+                    Back to Builder
+                `;
+            }
+            
+            function switchToBuilder() {
+                document.getElementById('referenceContent').classList.add('hidden');
+                document.getElementById('builder').classList.remove('hidden');
+                document.getElementById('builderBtn').innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                    </svg>
+                    Search Talents
+                `;
+                updateValidationStatus();
+            }
+
+            function setupEventListeners() {
+                document.getElementById('builderBtn').addEventListener('click', () => {
+                    if (document.getElementById('builder').classList.contains('hidden')) {
+                        if (pendingSlot) {
+                            pendingSlot.classList.remove('selected-slot');
+                            pendingSlot = null;
+                        }
+                        switchToBuilder();
+                    } else {
+                        switchToReference();
                     }
                 });
-            });
-          
-            // Check pyramid rule: tier5 <= tier4 <= tier3 <= tier2 <= tier1
-            for (let k = 1; k <= 4; k++) {
-                if (counts[k+1] > counts[k]) return false;
+
+                document.getElementById('searchInput').addEventListener('input', applyFilters);
+                document.getElementById('tierFilter').addEventListener('change', applyFilters);
+                document.getElementById('activationFilter').addEventListener('change', applyFilters);
+                document.getElementById('rankedFilter').addEventListener('change', applyFilters);
+                document.getElementById('resetBtn').addEventListener('click', () => {
+                    document.getElementById('searchInput').value = '';
+                    document.getElementById('tierFilter').value = 'all';
+                    document.getElementById('activationFilter').value = 'all';
+                    document.getElementById('rankedFilter').value = 'all';
+                    activeTags.clear();
+                    document.querySelectorAll('.tag-pill').forEach(b => b.classList.remove('active'));
+                    applyFilters();
+                });
+
+                document.getElementById('pyramid')?.addEventListener('change', e => {
+                    if (e.target.matches('.active-label input')) {
+                        const slotDiv = e.target.closest('.pyramid-slot');
+                        const r = parseInt(slotDiv.dataset.row);
+                        const s = parseInt(slotDiv.dataset.slot);
+                        if (pyramidTalents[r][s]) {
+                            pyramidTalents[r][s].active = e.target.checked;
+                        }
+                        setTimeout(pushPyramidUpdateToAI, 100);
+                    }
+                });
             }
-          
-            // Check for invalid duplicates (non-ranked talents appearing more than once)
-            for (const name in talentOccurrences) {
-                const {count, talent} = talentOccurrences[name];
-                if (count > 1 && talent.ranked.toLowerCase() === 'no') {
-                    return false;
+
+            // Chatbot Logic
+            const GEMINI_API_KEY = "AIzaSyBDqTM2lMKdT6Khz6RdJmdLwYdDt898vj0";
+            const chatbotToggle = document.getElementById('chatbot-toggle');
+            const chatbotWindow = document.getElementById('chatbot-window');
+            const chatbotClose = document.getElementById('chatbot-close');
+            const chatbotMessages = document.getElementById('chatbot-messages');
+            const chatbotInput = document.getElementById('chatbot-input');
+            const chatbotSend = document.getElementById('chatbot-send');
+
+            let conversationHistory = [];
+
+            function getCurrentPyramidText() {
+                const lines = [];
+                const rowNames = ["Tier 5", "Tier 4", "Tier 3", "Tier 2", "Tier 1"];
+
+                for (let r = 0; r < 5; r++) {
+                    const tierName = rowNames[r];
+                    const slots = [];
+                    const slotsInRow = rowSlotCounts[r];
+                    for (let s = 0; s < slotsInRow; s++) {
+                        const talent = pyramidTalents[r][s];
+                        if (talent) {
+                            const activeCheckbox = document.querySelector(`.pyramid-slot[data-row="${r}"][data-slot="${s}"] .active-label input`);
+                            const active = activeCheckbox ? activeCheckbox.checked : (talent.active || false);
+                            slots.push(`${talent.name} (${active ? "Active" : "Passive"})`);
+                        } else {
+                            slots.push("(empty)");
+                        }
+                    }
+                    lines.push(`${tierName} (${slotsInRow} Slots): ${slots.join(" | ")}`);
+                }
+
+                const validity = validatePyramid() ? "VALID" : "INVALID";
+                lines.push(`\nPyramid status: ${validity}`);
+                return lines.join("\n");
+            }
+
+            function addMessage(content, isUser = false) {
+                const msgDiv = document.createElement('div');
+                msgDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+                msgDiv.innerHTML = content.replace(/\n/g, '<br>');
+                chatbotMessages.appendChild(msgDiv);
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            }
+
+            async function sendToGemini(userMessage = null) {
+                if (!GEMINI_API_KEY || GEMINI_API_KEY.includes("YOUR_API_KEY_HERE")) {
+                    addMessage("Error: Gemini API key missing!", false);
+                    return;
+                }
+
+                const contents = [...conversationHistory];
+                if (userMessage) {
+                    addMessage(userMessage, true);
+                    contents.push({ role: "user", parts: [{ text: userMessage }] });
+                }
+
+                addMessage("Thinking...", false);
+                const typing = chatbotMessages.lastElementChild;
+
+                try {
+                    const response = await fetch(
+                        `https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`,
+                        {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                                contents,
+                                generationConfig: { temperature: 0.7, maxOutputTokens: 1500 }
+                            })
+                        }
+                    );
+
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+                    const data = await response.json();
+                    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text;
+                    
+                    if (!reply) throw new Error("API returned no text.");
+
+                    typing.remove();
+                    addMessage(reply, false);
+
+                    if (userMessage) conversationHistory.push({ role: "user", parts: [{ text: userMessage }] });
+                    conversationHistory.push({ role: "model", parts: [{ text: reply }] });
+                    if (conversationHistory.length > 40) conversationHistory = conversationHistory.slice(-35);
+                } catch (err) {
+                    typing.remove();
+                    addMessage(`Error: ${err.message}`, false);
+                    console.error(err);
                 }
             }
-          
-            return true;
-        }
-        function switchToReference() {
-            document.getElementById('referenceContent').style.display = 'block';
-            document.querySelector('.controls').style.display = 'block';
-            document.getElementById('builder').style.display = 'none';
-            document.getElementById('builderBtn').textContent = 'Back to Builder';
-        }
-        function switchToBuilder() {
-            document.getElementById('referenceContent').style.display = 'none';
-            document.querySelector('.controls').style.display = 'none';
-            document.getElementById('builder').style.display = 'block';
-            document.getElementById('builderBtn').textContent = 'Search Talents';
-        }
-        // Switch between reference and builder
-        document.getElementById('builderBtn').addEventListener('click', () => {
-            if (document.getElementById('builder').style.display === 'none') {
-                if (pendingSlot) {
-                    // If pending, switching back without selection
-                    pendingSlot = null;
-                }
-                switchToBuilder();
-            } else {
-                switchToReference();
+
+            function pushPyramidUpdateToAI() {
+                const updatedPyramid = getCurrentPyramidText();
+                const updateMsg = `PYRAMID UPDATE:\n${updatedPyramid}`;
+                
+                conversationHistory.push({ role: "user", parts: [{ text: updateMsg }] });
+                conversationHistory.push({ role: "model", parts: [{ text: "Pyramid updated." }] });
+                if (conversationHistory.length > 40) conversationHistory = conversationHistory.slice(-35);
             }
-        });
-        document.getElementById('searchInput').addEventListener('input', applyFilters);
-        document.getElementById('tierFilter').addEventListener('change', applyFilters);
-        document.getElementById('activationFilter').addEventListener('change', applyFilters);
-        document.getElementById('rankedFilter').addEventListener('change', applyFilters);
-        document.getElementById('resetBtn').addEventListener('click', () => {
-            document.getElementById('searchInput').value = '';
-            document.getElementById('tierFilter').value = 'all';
-            document.getElementById('activationFilter').value = 'all';
-            document.getElementById('rankedFilter').value = 'all';
-            activeTags.clear();
-            document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
-            applyFilters();
-        });
 
-        const GEMINI_API_KEY = "AIzaSyBDqTM2lMKdT6Khz6RdJmdLwYdDt898vj0"; // ←←← PUT YOUR GOOGLE AI STUDIO API KEY HERE
+            function initializeAIWithFullKnowledge() {
+                const allTalentsText = talents.map(t =>
+                    `"${t.name}" (Tier ${t.tier}) - ${t.activation}, Ranked: ${t.ranked.charAt(0).toUpperCase() + t.ranked.slice(1)}\n${t.description}\nSource: ${t.source || 'Unknown'}\n---`
+                ).join('\n');
 
-       // === CHATBOT SCRIPT — NOW 100% AWARE OF THE CURRENT TALENT TREE ===
-    const chatbotToggle = document.getElementById('chatbot-toggle');
-    const chatbotWindow = document.getElementById('chatbot-window');
-    const chatbotClose = document.getElementById('chatbot-close');
-    const chatbotMessages = document.getElementById('chatbot-messages');
-    const chatbotInput = document.getElementById('chatbot-input');
-    const chatbotSend = document.getElementById('chatbot-send');
+                const currentPyramid = getCurrentPyramidText();
 
-    let conversationHistory = [];
+                const systemPrompt = `You are the ultimate Genesys RPG talent & character builder assistant.
 
-    // Helper: get current pyramid state as clean text
-    function getCurrentPyramidText() {
-        const lines = [];
-        const rowNames = ["Tier 5", "Tier 4", "Tier 3", "Tier 2", "Tier 1"];
-
-        for (let r = 0; r < 5; r++) {
-            const tierName = rowNames[r];
-            const slots = [];
-            for (let s = 0; s < pyramidTalents[r].length; s++) {
-                const talent = pyramidTalents[r][s];
-                if (talent) {
-                    const active = document.querySelector(`.pyramid-slot[data-row="${r}"][data-slot="${s}"] .active-label input`)?.checked;
-                    slots.push(`${talent.name} (${active ? "Active" : "Passive"})`);
-                } else {
-                    slots.push("(empty)");
-                }
-            }
-            lines.push(`${tierName}: ${slots.join(" | ")}`);
-        }
-
-        const validity = validatePyramid() ? "VALID" : "INVALID (violates pyramid rules or duplicate non-ranked)";
-        lines.push(`\nPyramid status: ${validity}`);
-        return lines.join("\n");
-    }
-
-    function addMessage(content, isUser = false) {
-        const msgDiv = document.createElement('div');
-        msgDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
-        msgDiv.innerHTML = content.replace(/\n/g, '<br>');
-        chatbotMessages.appendChild(msgDiv);
-        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-    }
-
-    async function sendToGemini(userMessage = null) {
-        if (!GEMINI_API_KEY || GEMINI_API_KEY === "YOUR_API_KEY_HERE") {
-            addMessage("Error: Gemini API key missing!", false);
-            return;
-        }
-
-        const contents = [...conversationHistory];
-        if (userMessage) {
-            addMessage(userMessage, true);
-            contents.push({ role: "user", parts: [{ text: userMessage }] });
-        }
-
-        addMessage("Thinking...", false);
-        const typing = chatbotMessages.lastElementChild;
-
-        try {
-            const response = await fetch(
-                `https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`,
-                {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        contents,
-                        generationConfig: { temperature: 0.7, maxOutputTokens: 1500 }
-                    })
-                }
-            );
-
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-            const data = await response.json();
-            const reply = data.candidates[0].content.parts[0].text;
-
-            typing.remove();
-            addMessage(reply, false);
-
-            if (userMessage) conversationHistory.push({ role: "user", parts: [{ text: userMessage }] });
-            conversationHistory.push({ role: "model", parts: [{ text: reply }] });
-            if (conversationHistory.length > 40) conversationHistory = conversationHistory.slice(-35);
-        } catch (err) {
-            typing.remove();
-            addMessage(`Error: ${err.message}`, false);
-            console.error(err);
-        }
-    }
-
-    // Send handling
-    chatbotSend.addEventListener('click', () => {
-        const text = chatbotInput.value.trim();
-        if (text) { chatbotInput.value = ''; sendToGemini(text); }
-    });
-    chatbotInput.addEventListener('keypress', e => e.key === 'Enter' && chatbotSend.click());
-
-    // TOGGLE CHAT
-    chatbotToggle.onclick = () => chatbotWindow.style.display = chatbotWindow.style.display === 'flex' ? 'none' : 'flex';
-    chatbotClose.onclick = () => chatbotWindow.style.display = 'none';
-
-    // FULL INITIALIZATION — TALENT DB + CURRENT PYRAMID + LIVE UPDATES
-    document.addEventListener('DOMContentLoaded', async () => {
-        // Wait until talents + pyramid are ready
-        const wait = setInterval(() => {
-            if (talents?.length && pyramidTalents) {
-                clearInterval(wait);
-                initializeAIWithFullKnowledge();
-            }
-        }, 200);
-
-        function initializeAIWithFullKnowledge() {
-            const allTalentsText = talents.map(t =>
-                `"${t.name}" (Tier ${t.tier}) — ${t.activation}, Ranked: ${t.ranked}\n${t.description}\nSource: ${t.source || 'Unknown'}\n---`
-            ).join('\n');
-
-            const currentPyramid = getCurrentPyramidText();
-
-            const systemPrompt = `You are the ultimate Genesys RPG talent & character builder assistant.
-You have two sources of truth:
-
-1. COMPLETE TALENT DATABASE (never invent talents):
+COMPLETE TALENT DATABASE:
 ${allTalentsText}
 
-2. CURRENT TALENT PYRAMID (always up to date):
+CURRENT TALENT PYRAMID:
 ${currentPyramid}
 
 RULES:
-- Always reflect the exact current pyramid above when answering.
-- When the pyramid changes, you will receive an updated version automatically.
-- Validate pyramid: Tier 5 ≤ Tier 4 ≤ Tier 3 ≤ Tier 2 ≤ Tier 1 and no duplicate non-ranked talents.
-- Be extremely helpful with suggestions, comparisons, and build advice.
-- Answer concisely but completely. Use bullet points when helpful.
+- Pyramid must follow: T5 ≤ T4 ≤ T3 ≤ T2 ≤ T1
+- Non-ranked talents can only appear once
+- Provide helpful suggestions and build advice
 
-You are now fully synchronized with the page. Ready!`;
+Ready to help!`;
 
-            conversationHistory = [
-                { role: "user", parts: [{ text: systemPrompt }] },
-                { role: "model", parts: [{ text: "Perfect! I have the full talent list and I can see your current pyramid at all times. Ask me anything — build advice, validity checks, suggestions, etc.!" }] }
-            ];
+                conversationHistory = [
+                    { role: "user", parts: [{ text: systemPrompt }] },
+                    { role: "model", parts: [{ text: "I have full knowledge of all talents and your current pyramid. Ask me anything!" }] }
+                ];
 
-            addMessage(`Genesys Assistant online!<br>I know all ${talents.length} talents and I can <strong>see your current Talent Tree live</strong>.<br><br>Try asking:<br>• “Show my current pyramid”<br>• “Can I add Dedication?”<br>• “Best Tier 3 combat talent to add next?”`, false);
-        }
-
-        // LIVE UPDATE: Every time the pyramid changes, push the new state to the AI
-        const originalAssign = assignTalentToSlot;
-        assignTalentToSlot = function(talent) {
-            originalAssign(talent); // original behavior
-
-            // After any change → push updated pyramid to AI context
-            setTimeout(() => {
-                const updatedPyramid = getCurrentPyramidText();
-                const updateMsg = `PYRAMID UPDATE:\n${updatedPyramid}`;
-                conversationHistory.push({ role: "user", parts: [{ text: updateMsg }] });
-                conversationHistory.push({ role: "model", parts: [{ text: "Pyramid updated — I now see the new state." }] });
-            }, 300);
-        };
-
-        // Also watch the "Active/Passive" checkboxes
-        document.getElementById('pyramid')?.addEventListener('change', e => {
-            if (e.target.matches('.active-label input')) {
-                setTimeout(() => {
-                    const updatedPyramid = getCurrentPyramidText();
-                    conversationHistory.push({ role: "user", parts: [{ text: `PYRAMID UPDATE (active flag changed):\n${updatedPyramid}` }] });
-                    conversationHistory.push({ role: "model", parts: [{ text: "Active flags updated." }] });
-                }, 300);
+                addMessage(`Genesys Assistant online!<br>I know all <strong>${talents.length}</strong> talents and can see your pyramid live.<br><br>Try asking:<br>• "Show my current pyramid"<br>• "Can I add Dedication?"<br>• "Best Tier 3 combat talent?"`, false);
             }
-        });
-    });
 
-    // Original page load
-    loadTalents();
+            chatbotSend.addEventListener('click', () => {
+                const text = chatbotInput.value.trim();
+                if (text) { chatbotInput.value = ''; sendToGemini(text); }
+            });
+            chatbotInput.addEventListener('keypress', e => e.key === 'Enter' && chatbotSend.click());
+            chatbotToggle.onclick = () => chatbotWindow.style.display = chatbotWindow.style.display === 'flex' ? 'none' : 'flex';
+            chatbotClose.onclick = () => chatbotWindow.style.display = 'none';
+
+            document.addEventListener('DOMContentLoaded', () => {
+                setupEventListeners();
+                loadTalents();
+            });
+
+            return {
+                load: loadTalents,
+                applyFilters: applyFilters,
+                assignTalentToSlot: assignTalentToSlot,
+                validatePyramid: validatePyramid
+            };
+        })();
     </script>
 </body>
 </html>
