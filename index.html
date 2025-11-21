@@ -4,618 +4,254 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Genesys Talents Complete Reference</title>
-    <!-- Load Inter font for a modern feel -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Lucide icons for modern iconography -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Load Fuse.js for fuzzy searching -->
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
-    
     <style>
-        /* Custom styles to define the tier colors using CSS variables */
-        .tier-1 { --tier-color: #10b981; } /* Emerald Green */
-        .tier-2 { --tier-color: #3b82f6; } /* Blue */
-        .tier-3 { --tier-color: #8b5cf6; } /* Violet */
-        .tier-4 { --tier-color: #f59e0b; } /* Amber */
-        .tier-5 { --tier-color: #ef4444; } /* Red */
-        
-        /* Custom background gradient for the body */
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #1f2937 0%, #4b5563 100%); /* Darker, modern grey gradient */
-        }
-
-        /* Specific styles for the Talent Card / Pyramid Slot ::before decoration */
-        .talent-card::before, .pyramid-slot::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 8px; /* Slightly thicker */
-            height: 100%;
-            background: var(--tier-color);
-            border-radius: 0.75rem 0 0 0.75rem;
-        }
-
-        /* Custom Scrollbar for modern look */
-        .content::-webkit-scrollbar, #chatMessages::-webkit-scrollbar {
-            width: 8px;
-        }
-        .content::-webkit-scrollbar-thumb, #chatMessages::-webkit-scrollbar-thumb {
-            background-color: #93c5fd; /* Blue 300 */
-            border-radius: 4px;
-        }
-        .content::-webkit-scrollbar-track, #chatMessages::-webkit-scrollbar-track {
-            background-color: #e5e7eb; /* Gray 200 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 1400px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); overflow: hidden; }
+        header { background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%); color: white; padding: 30px; text-align: center; position: relative; }
+        header h1 { font-size: 2.5em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        header p { font-size: 1.1em; opacity: 0.9; }
+        #builderBtn { position: absolute; top: 20px; right: 20px; padding: 10px 20px; background: #4299e1; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+        #builderBtn:hover { background: #3182ce; }
+        .controls { background: #f7fafc; padding: 25px; border-bottom: 2px solid #e2e8f0; }
+        .search-bar { display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
+        .search-bar input { flex: 1; min-width: 250px; padding: 12px 20px; border: 2px solid #cbd5e0; border-radius: 8px; font-size: 16px; transition: all 0.3s; }
+        .search-bar input:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102,126,234,0.1); }
+        .filters { display: flex; gap: 15px; flex-wrap: wrap; align-items: end; margin-bottom: 15px; }
+        .filter-group { display: flex; flex-direction: column; gap: 5px; }
+        .filter-group label { font-size: 12px; font-weight: 600; color: #4a5568; text-transform: uppercase; letter-spacing: 0.5px; }
+        select, button { padding: 10px 16px; border: 2px solid #cbd5e0; border-radius: 8px; font-size: 14px; cursor: pointer; transition: all 0.3s; background: white; }
+        select:hover, button:hover { border-color: #667eea; }
+        button { background: #667eea; color: white; border: none; font-weight: 600; }
+        button:hover { background: #5568d3; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(102,126,234,0.4); }
+        .tag-filter-bar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+        .tag-btn { padding: 7px 16px; border-radius: 30px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.25s ease; border: 2px solid #cbd5e0; background: #e2e8f0; color: #4a5568; }
+        .tag-btn:hover { border-color: #a0aec0; background: #edf2f7; }
+        .tag-btn.active { color: white; border-color: transparent; transform: scale(1.08); box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
+        .tag-btn.active.tag-combat { background: #e53e3e; }
+        .tag-btn.active.tag-defense { background: #3182ce; }
+        .tag-btn.active.tag-healing { background: #38a169; }
+        .tag-btn.active.tag-social { background: #d69e2e; }
+        .tag-btn.active.tag-vehicle { background: #805ad5; }
+        .tag-btn.active.tag-magic { background: #d53f8c; }
+        .tag-btn.active.tag-fear { background: #4c51bf; }
+        .tag-btn.active.tag-knowledge { background: #319795; }
+        .tag-btn.active.tag-movement { background: #dd6b20; }
+        .tag-btn.active.tag-strain { background: #718096; }
+        .tag-btn.active.tag-critical { background: #9b2c2c; }
+        .tag-btn.active.tag-leadership { background: #2c7a7b; }
+        .talent-tag { font-size: 11px; padding: 3px 10px; border-radius: 12px; font-weight: 600; color: white; }
+        .talent-tag.tag-combat { background: #e53e3e; }
+        .talent-tag.tag-defense { background: #3182ce; }
+        .talent-tag.tag-healing { background: #38a169; }
+        .talent-tag.tag-social { background: #d69e2e; }
+        .talent-tag.tag-vehicle { background: #805ad5; }
+        .talent-tag.tag-magic { background: #d53f8c; }
+        .talent-tag.tag-fear { background: #4c51bf; }
+        .talent-tag.tag-knowledge { background: #319795; }
+        .talent-tag.tag-movement { background: #dd6b20; }
+        .talent-tag.tag-strain { background: #718096; }
+        .talent-tag.tag-critical { background: #9b2c2c; }
+        .talent-tag.tag-leadership { background: #2c7a7b; }
+        .stats { display: flex; gap: 15px; flex-wrap: wrap; }
+        .stat-card { background: white; padding: 15px 20px; border-radius: 8px; border-left: 4px solid #667eea; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .stat-card .number { font-size: 24px; font-weight: bold; color: #667eea; }
+        .stat-card .label { font-size: 12px; color: #718096; text-transform: uppercase; margin-top: 5px; }
+        .content { padding: 30px; max-height: 800px; overflow-y: auto; }
+        #builder { padding: 30px; display: none; }
+        .pyramid-row { display: flex; justify-content: center; margin-bottom: 20px; }
+        .pyramid-slot { width: 360px; margin: 0 15px; border: 2px solid #e2e8f0; border-radius: 12px; padding: 22px; transition: all 0.3s; position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); background: white; cursor: pointer; }
+        .pyramid-slot:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.2); border-color: #667eea; }
+        .pyramid-slot::before { content: ''; position: absolute; top: 0; left: 0; width: 6px; height: 100%; background: var(--tier-color); }
+        .pyramid-slot .talent-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px; gap: 10px; }
+        .pyramid-slot .talent-name { font-size: 1.4em; font-weight: bold; color: #2d3748; }
+        .pyramid-slot .talent-tier { background: var(--tier-color); color: white; padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+        .pyramid-slot .talent-description { color: #4a5568; line-height: 1.6; font-size: 14.5px; margin-top: 10px; display: none; }
+        .pyramid-slot .talent-meta { display: flex; gap: 15px; flex-wrap: wrap; margin: 10px 0; font-size: 13px; color: #718096; display: none; }
+        .pyramid-slot .meta-item span.meta-label { font-weight: 600; color: #4a5568; }
+        .pyramid-slot .talent-source { font-size: 11px; color: #a0aec0; font-style: italic; text-align: right; margin-top: 10px; display: none; }
+        .pyramid-slot .active-label { font-size: 13px; color: #718096; display: flex; align-items: center; gap: 5px; margin-top: 10px; display: none; }
+        .talent-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 22px; }
+        .talent-card { background: white; border: 2px solid #e2e8f0; border-radius: 12px; padding: 22px; transition: all 0.3s; position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); cursor: pointer; }
+        .talent-card:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.2); border-color: #667eea; }
+        .talent-card::before { content: ''; position: absolute; top: 0; left: 0; width: 6px; height: 100%; background: var(--tier-color); }
+        .tier-1 { --tier-color: #48bb78; }
+        .tier-2 { --tier-color: #4299e1; }
+        .tier-3 { --tier-color: #9f7aea; }
+        .tier-4 { --tier-color: #ed8936; }
+        .tier-5 { --tier-color: #f56565; }
+        .talent-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px; gap: 10px; }
+        .talent-name { font-size: 1.4em; font-weight: bold; color: #2d3748; }
+        .talent-tier { background: var(--tier-color); color: white; padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+        .talent-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+        .talent-meta { display: flex; gap: 15px; flex-wrap: wrap; margin: 10px 0; font-size: 13px; color: #718096; }
+        .meta-item span.meta-label { font-weight: 600; color: #4a5568; }
+        .talent-description { color: #4a5568; line-height: 1.6; font-size: 14.5px; }
+        .talent-source { font-size: 11px; color: #a0aec0; font-style: italic; text-align: right; margin-top: 10px; }
+        .no-results, .loading { text-align: center; padding: 60px 20px; color: #718096; font-size: 1.3em; }
+        @media (max-width: 768px) {
+            .talent-grid { grid-template-columns: 1fr; }
+            .filters { flex-direction: column; align-items: stretch; }
+            .filter-group { width: 100%; }
+            .pyramid-slot { width: 100%; margin: 10px 0; }
         }
     </style>
 </head>
-<body class="p-4 md:p-8">
-
-    <!-- Error Modal UI (Replaces alert()) -->
-    <div id="modalOverlay" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden z-[1001] flex items-center justify-center p-4">
-        <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-sm w-full transform transition-all duration-300 scale-100 border-t-4 border-red-500" id="modalBox">
-            <h3 class="text-2xl font-bold text-red-600 mb-3" id="modalTitle">Error</h3>
-            <p class="text-gray-700 mb-6" id="modalMessage">An error occurred.</p>
-            <button onclick="hideModal()" class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-4 rounded-xl transition duration-150 shadow-lg hover:shadow-xl">
-                Acknowledge
-            </button>
-        </div>
-    </div>
-
-    <div class="container mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden">
-        <header class="bg-gray-800 text-white p-6 md:p-8 text-center relative rounded-t-2xl bg-gradient-to-br from-gray-900 to-gray-700">
-            <h1 class="text-3xl md:text-5xl font-extrabold mb-1 tracking-tight">Genesys Talents Reference</h1>
-            <p class="text-sm md:text-lg opacity-80">Chwała Pierwszemu! A resource for character creation and reference.</p>
-            
-            <!-- Mobile-friendly button group -->
-            <div class="flex flex-wrap justify-center md:justify-end gap-3 mt-4 md:mt-0 md:absolute md:top-5 md:right-5">
-                <button id="builderBtn" class="flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl shadow-lg transition duration-200 text-sm md:text-base">
-                    <span data-lucide="pyramid" class="w-5 h-5 mr-2"></span>
-                    Talent Tree Builder
-                </button>
-                <button id="chatbotToggleBtn" class="flex items-center px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl shadow-lg transition duration-200 text-sm md:text-base">
-                    <span data-lucide="bot" class="w-5 h-5 mr-2"></span>
-                    AI Assistant
-                </button>
-            </div>
+<body>
+    <div class="container">
+        <header>
+            <h1>Genesys Talents Reference</h1>
+            <p>Chwała Pierwszemu!</p>
+            <button id="builderBtn">Build Talent Tree</button>
         </header>
-
-        <div class="controls bg-gray-50 p-4 md:p-6 border-b border-gray-200">
-            <!-- Search -->
-            <div class="flex flex-wrap gap-4 mb-5">
-                <div class="relative flex-1 min-w-[200px]">
-                    <span data-lucide="search" class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2"></span>
-                    <input type="text" id="searchInput" placeholder="Fuzzy search: parry strain, dodge, full throttle, heal crit..." autocomplete="off"
-                            class="w-full p-3 pl-10 border-2 border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-inner">
-                </div>
+        <div class="controls">
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Fuzzy search: pary strain, doge, full trottle, heal crit..." autocomplete="off">
             </div>
-
-            <!-- Filters -->
-            <div class="flex flex-wrap items-end gap-4 mb-4">
-                <div class="flex flex-col gap-1 w-full sm:w-auto">
-                    <label class="text-xs font-semibold uppercase text-gray-600">Tier</label>
-                    <select id="tierFilter" class="p-3 border-2 border-gray-300 rounded-xl cursor-pointer transition duration-150 hover:border-indigo-500 bg-white shadow-sm">
+            <div class="filters">
+                <div class="filter-group">
+                    <label>Tier</label>
+                    <select id="tierFilter">
                         <option value="all">All Tiers</option><option value="1">Tier 1</option><option value="2">Tier 2</option>
                         <option value="3">Tier 3</option><option value="4">Tier 4</option><option value="5">Tier 5</option>
                     </select>
                 </div>
-                <div class="flex flex-col gap-1 w-full sm:w-auto">
-                    <label class="text-xs font-semibold uppercase text-gray-600">Activation</label>
-                    <select id="activationFilter" class="p-3 border-2 border-gray-300 rounded-xl cursor-pointer transition duration-150 hover:border-indigo-500 bg-white shadow-sm">
+                <div class="filter-group">
+                    <label>Activation</label>
+                    <select id="activationFilter">
                         <option value="all">All</option><option value="passive">Passive</option><option value="active">Active</option>
                     </select>
                 </div>
-                <div class="flex flex-col gap-1 w-full sm:w-auto">
-                    <label class="text-xs font-semibold uppercase text-gray-600">Ranked</label>
-                    <select id="rankedFilter" class="p-3 border-2 border-gray-300 rounded-xl cursor-pointer transition duration-150 hover:border-indigo-500 bg-white shadow-sm">
+                <div class="filter-group">
+                    <label>Ranked</label>
+                    <select id="rankedFilter">
                         <option value="all">All</option><option value="yes">Yes</option><option value="no">No</option>
                     </select>
                 </div>
-                <button id="resetBtn" class="flex items-center justify-center w-full sm:w-auto px-4 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-xl transition duration-150 shadow-md">
-                    <span data-lucide="rotate-ccw" class="w-5 h-5 mr-2"></span>
-                    Reset All
-                </button>
+                <button id="resetBtn">Reset All</button>
             </div>
-            
-            <!-- Tag Filters -->
-            <div class="tag-filter-bar flex flex-wrap gap-2 mb-5 pt-3 border-t border-gray-100" id="tagBar"></div>
-            
-            <!-- Stats -->
-            <div class="grid grid-cols-3 gap-4 pt-3 border-t border-gray-100">
-                <div class="stat-card bg-white p-4 rounded-xl border-l-4 border-indigo-500 shadow-lg">
-                    <div class="text-2xl font-bold text-indigo-600" id="totalCount">0</div>
-                    <div class="text-xs text-gray-500 uppercase mt-1">Total Talents</div>
-                </div>
-                <div class="stat-card bg-white p-4 rounded-xl border-l-4 border-indigo-500 shadow-lg">
-                    <div class="text-2xl font-bold text-indigo-600" id="shownCount">0</div>
-                    <div class="text-xs text-gray-500 uppercase mt-1">Filtered</div>
-                </div>
-                <div class="stat-card bg-white p-4 rounded-xl border-l-4 border-indigo-500 shadow-lg">
-                    <div class="text-2xl font-bold text-indigo-600" id="tagCount">0</div>
-                    <div class="text-xs text-gray-500 uppercase mt-1">Active Tags</div>
-                </div>
+            <div class="tag-filter-bar" id="tagBar"></div>
+            <div class="stats">
+                <div class="stat-card"><div class="number" id="totalCount">0</div><div class="label">Total</div></div>
+                <div class="stat-card"><div class="number" id="shownCount">0</div><div class="label">Shown</div></div>
+                <div class="stat-card"><div class="number" id="tagCount">0</div><div class="label">Active Tags</div></div>
             </div>
         </div>
-
-        <!-- Reference View -->
-        <div class="content p-4 md:p-6 max-h-[80vh] overflow-y-auto transition-all duration-300" id="referenceContent">
-            <div id="talentGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="loading col-span-full text-center p-12 text-gray-500 text-xl">Initializing database and loading talents...</div>
+        <div class="content" id="referenceContent">
+            <div id="talentGrid" class="talent-grid">
+                <div class="loading">Loading talents from talents.csv...</div>
             </div>
         </div>
-        
-        <!-- Builder View -->
-        <div id="builder" class="p-4 md:p-6 max-h-[80vh] overflow-y-auto hidden transition-all duration-300">
-             <div class="text-center mb-6 bg-indigo-50 p-4 rounded-xl shadow-inner">
-                <h2 class="text-3xl font-bold text-gray-800 mb-2">Talent Tree Builder (Pyramid)</h2>
-                <p class="text-gray-600">Select talents for each tier. Structure rule: Tier N requires at least N-1 talents from the tier above it (N+1).</p>
-                <div id="pyramidValidation" class="text-red-600 font-semibold mt-2 text-sm hidden">Validation Message</div>
-                <div class="mt-4 flex justify-center space-x-4">
-                    <button id="savePyramidBtn" class="flex items-center px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl transition duration-150 shadow-lg">
-                        <span data-lucide="save" class="w-5 h-5 mr-2"></span>
-                        Save Tree
-                    </button>
-                    <button id="loadPyramidBtn" class="flex items-center px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-semibold rounded-xl transition duration-150 shadow-lg">
-                        <span data-lucide="download" class="w-5 h-5 mr-2"></span>
-                        Load Tree
-                    </button>
-                </div>
-            </div>
-            <!-- The pyramid structure is responsive: stacks on mobile, horizontal rows on desktop -->
-            <div id="pyramid" class="flex flex-col gap-4"></div>
+        <div id="builder" style="display: none;">
+            <div id="pyramid"></div>
         </div>
     </div>
-
-    <!-- Chatbot Container (Now with API logic integrated into the script below) -->
-    <div id="chatbotContainer" class="fixed bottom-4 right-4 w-full max-w-xs md:max-w-sm h-3/4 md:h-[450px] bg-white rounded-2xl shadow-2xl flex flex-col hidden z-[1000] overflow-hidden border border-gray-200 transform transition-all duration-300">
-        <div id="chatHeader" class="bg-indigo-600 text-white p-4 font-extrabold text-lg flex justify-between items-center rounded-t-2xl">
-            Genesys AI Assistant
-            <button onclick="document.getElementById('chatbotContainer').classList.add('hidden')" class="text-white opacity-70 hover:opacity-100">
-                <span data-lucide="x" class="w-6 h-6"></span>
-            </button>
-        </div>
-        <div id="chatMessages" class="flex-grow p-4 overflow-y-auto flex flex-col gap-3">
-            <!-- Messages will be injected here by JavaScript -->
-        </div>
-
-        <!-- NEW LOADING INDICATOR -->
-        <div id="chatLoading" class="hidden p-2 text-center text-emerald-600 font-medium border-t border-gray-200">
-            <svg class="animate-spin h-4 w-4 mr-2 inline-block" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-            AI is analyzing...
-        </div>
-        
-        <div id="chatInputContainer" class="border-t border-gray-200 p-3 flex gap-2 bg-gray-50">
-            <input type="text" id="chatInput" placeholder="Ask a Genesys question..." autofocus
-                    class="flex-grow p-3 border border-gray-300 rounded-xl focus:ring-emerald-500 focus:border-emerald-500 text-sm shadow-inner"
-                    onkeypress="if(event.key === 'Enter') sendMessage()">
-            <button id="chatSendBtn" onclick="sendMessage()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl transition duration-150 shadow-md">
-                <span data-lucide="send" class="w-5 h-5"></span>
-            </button>
-        </div>
-    </div>
-    
-    <!-- JavaScript Logic -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        
-        // --- GLOBALS AND UTILS ---
-        setLogLevel('debug');
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-genesys-app-id';
-        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-
-        let db, auth;
-        let userId = null;
-        let isAuthReady = false;
-
+    <script>
         let talents = [];
         let fuse;
-        const talentsByTier = Array(6).fill().map(() => []);
+        let talentsByTier = Array(6).fill().map(() => []);
         const activeTags = new Set();
         let pendingSlot = null;
-        // The pyramid is 5 rows (for tiers 5 to 1), with max slots [1, 2, 3, 4, 5]
-        const pyramidTalents = Array.from({length: 5}, () => Array(5).fill(null));
+        const pyramidTalents = Array.from({length: 5}, () => Array(10).fill(null));
         const rowTiers = [5, 4, 3, 2, 1];
-        const rowSlotCounts = [1, 2, 3, 4, 5];
-        
-        // Define common tag colors (using explicit Tailwind classes for simplicity in JS)
-        const tagColorMap = {
-            "Combat": "bg-red-500 text-white", "Defense": "bg-blue-500 text-white", 
-            "Healing": "bg-green-500 text-white", "Social": "bg-amber-500 text-white", 
-            "Vehicle": "bg-violet-500 text-white", "Magic": "bg-pink-500 text-white", 
-            "Knowledge": "bg-teal-500 text-white", "Movement": "bg-orange-500 text-white",
-            "Strain": "bg-slate-500 text-white", "Critical": "bg-rose-600 text-white",
-        };
-
-        // Talent definitions: Tier colors are handled by CSS variables
         const tagDefinitions = [
-            { name: "Combat", keywords: ["attack", "damage", "hit", "melee", "ranged", "brawl", "weapon", "combat check", "deadly", "lethal"] },
-            { name: "Defense", keywords: ["defense", "soak", "parry", "reflect", "dodge", "sidestep", "armor", "shield"] },
-            { name: "Healing", keywords: ["heal", "wound", "strain", "medicine", "physician", "recovery"] },
-            { name: "Social", keywords: ["charm", "coercion", "deception", "leadership", "negotiation", "scathing", "inspiring", "presence"] },
-            { name: "Vehicle", keywords: ["piloting", "driving", "vehicle", "speed", "handling", "full throttle"] },
-            { name: "Magic", keywords: ["magic", "spell", "arcana", "divine", "primal", "curse", "barrier", "augment"] },
-            { name: "Knowledge", keywords: ["knowledge", "education", "lore", "xenology"] },
-            { name: "Movement", keywords: ["move", "swift", "jump up", "disengage", "shortcut"] },
-            { name: "Strain", keywords: ["strain", "second wind", "grit", "resolve"] },
-            { name: "Critical", keywords: ["critical", "vicious", "deadly accuracy"] },
+            { name: "combat", color: "tag-combat", keywords: ["attack", "damage", "hit", "melee", "ranged", "brawl", "weapon", "combat check", "deadly", "lethal"] },
+            { name: "defense", color: "tag-defense", keywords: ["defense", "soak", "parr", "reflect", "dodge", "sidestep", "armor", "shield"] },
+            { name: "healing", color: "tag-healing", keywords: ["heal", "wound", "strain", "medicine", "physician", "surgeon", "apothecary", "recovery"] },
+            { name: "social", color: "tag-social", keywords: ["charm", "coercion", "deception", "leadership", "negotiation", "scathing", "inspiring", "presence"] },
+            { name: "vehicle", color: "tag-vehicle", keywords: ["piloting", "driving", "vehicle", "speed", "handling", "full throttle", "all-terrain"] },
+            { name: "magic", color: "tag-magic", keywords: ["magic", "spell", "arcana", "divine", "primal", "curse", "barrier", "augment"] },
+            { name: "fear", color: "tag-fear", keywords: ["fear", "terrifying", "scathing", "confidence", "nobody's fool"] },
+            { name: "knowledge", color: "tag-knowledge", keywords: ["knowledge", "education", "lore", "xenology", "astrogation"] },
+            { name: "movement", color: "tag-movement", keywords: ["move", "swift", "jump up", "disengage", "shortcut"] },
+            { name: "strain", color: "tag-strain", keywords: ["strain", "second wind", "grit", "resolve"] },
+            { name: "critical", color: "tag-critical", keywords: ["critical", "vicious", "deadly accuracy", "lethal blows"] },
+            { name: "leadership", color: "tag-leadership", keywords: ["leadership", "command", "field commander", "inspiring"] }
         ];
-
-        // --- MOCK TALENTS DATA (Replaces CSV load) ---
-        const MOCK_TALENTS = [
-            { id: 1, name: "Parry", tier: 1, activation: "Active (Maneuver)", ranked: "Yes", description: "Once per round, when an enemy performs a Melee combat check targeting you, you may use a maneuver to increase your Melee defense by +1.", source: "Core Rulebook" },
-            { id: 2, name: "Grit", tier: 1, activation: "Passive", ranked: "Yes", description: "The character increases their total Strain Threshold by 1.", source: "Core Rulebook" },
-            { id: 3, name: "Dodge", tier: 2, activation: "Active (Incidental, Out of Turn)", ranked: "No", description: "When targeted by a Ranged combat check, you may spend 1 Strain to increase your Ranged Defense by +1 against that check.", source: "Core Rulebook" },
-            { id: 4, name: "Full Throttle", tier: 3, activation: "Active (Maneuver)", ranked: "No", description: "When piloting a vehicle, you may perform this maneuver to increase the vehicle's speed by 1 and decrease its Handling by 1 until the end of the round.", source: "Realms of Terrinoth" },
-            { id: 5, name: "Inspiring Rhetoric", tier: 4, activation: "Active (Action)", ranked: "Yes", description: "Once per encounter, you may perform a Hard (3 Purple) Leadership check to inspire allies within Short range. If successful, allies recover 1 Strain, plus 1 additional Strain per rank of this talent.", source: "Core Rulebook" },
-            { id: 6, name: "Master Physician", tier: 5, activation: "Active (Action)", ranked: "No", description: "When performing a Medicine check to heal wounds or critical injuries, you may spend 1 Destiny Point to treat up to 2 additional characters within Engaged range on the same action.", source: "Core Rulebook" },
-            { id: 7, name: "Lethal Blows", tier: 3, activation: "Passive", ranked: "Yes", description: "Add +1 damage to all successful combat checks.", source: "Core Rulebook" },
-            { id: 8, name: "Knowledge is Power", tier: 2, activation: "Active (Incidental)", ranked: "No", description: "When making a skill check that relies on a Knowledge skill, you may spend 1 Strain to downgrade the difficulty once.", source: "Realms of Terrinoth" },
-            { id: 9, name: "Overcharge", tier: 3, activation: "Active (Incidental)", ranked: "No", description: "When performing a successful combat check with an Energy weapon, you may spend 2 Advantage to increase the weapon's damage by +1.", source: "Star Wars EotE" },
-            { id: 10, name: "Jump Up", tier: 1, activation: "Active (Incidental)", ranked: "No", description: "Once per round, when you suffer a critical injury, you may stand up as an incidental. If you suffer a critical injury that leaves you incapacitated, you cannot use this talent.", source: "Core Rulebook" },
-            { id: 11, name: "Dedication", tier: 4, activation: "Passive", ranked: "No", description: "You gain 1 rank in one of your characteristics of choice (cannot exceed 6).", source: "Core Rulebook" },
-            { id: 12, name: "Second Wind", tier: 1, activation: "Active (Incidental, Out of Turn)", ranked: "Yes", description: "The character recovers 3 Strain, plus 1 additional Strain per rank.", source: "Core Rulebook" },
-            { id: 13, name: "Reflect", tier: 3, activation: "Active (Incidental, Out of Turn)", ranked: "Yes", description: "When targeted by a Ranged combat check, you may spend 1 Destiny Point to reduce the damage taken by 1, plus 1 per rank.", source: "Force and Destiny" },
-        ];
-        
-        // --- CHATBOT API & STATE ---
-        const apiKey = "AIzaSyBDqTM2lMKdT6Khz6RdJmdLwYdDt898vj0"; // Canvas runtime provides this
-        const CHAT_MODEL_NAME = "gemini-2.5-flash-preview-09-2025";
-        const chatApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${CHAT_MODEL_NAME}:generateContent?key=${apiKey}`;
-
-        let chatHistory = [
-            {
-                role: "model",
-                parts: [{ text: "Hello! I can help you with Genesys rules, dice results, and talent suggestions. Ask me anything about the game!" }]
-            }
-        ];
-        let isChatFetching = false;
-
-        // --- MODAL UTILITIES (Replaces alert) ---
-        function showModal(title, message) {
-            document.getElementById('modalTitle').textContent = title;
-            document.getElementById('modalMessage').textContent = message;
-            document.getElementById('modalOverlay').classList.remove('hidden');
-        }
-
-        function hideModal() {
-            document.getElementById('modalOverlay').classList.add('hidden');
-        }
-        
-        // --- FIREBASE INITIALIZATION AND AUTH ---
-        if (Object.keys(firebaseConfig).length > 0) {
-            const app = initializeApp(firebaseConfig);
-            db = getFirestore(app);
-            auth = getAuth(app);
-
-            onAuthStateChanged(auth, async (user) => {
-                if (user) {
-                    userId = user.uid;
-                    console.log("Firebase Auth Ready. User ID:", userId);
-                    // Load the user's saved pyramid once authenticated
-                    isAuthReady = true;
-                    await loadPyramid();
-                } else {
-                    try {
-                        const token = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-                        if (token) {
-                            await signInWithCustomToken(auth, token);
-                        } else {
-                            await signInAnonymously(auth);
-                        }
-                    } catch (error) {
-                        console.error("Firebase Sign-In Error:", error);
-                        // Fallback user ID if sign-in fails
-                        userId = crypto.randomUUID();
-                    }
-                }
-                isAuthReady = true;
-            });
-        } else {
-            // Non-Firebase environment fallback
-            console.warn("Firebase config not found. Persistence is disabled.");
-            userId = crypto.randomUUID();
-            isAuthReady = true;
-        }
-
-        // --- FIRESTORE LOGIC ---
-        async function savePyramid() {
-            if (!db || !userId) {
-                showModal('Persistence Disabled', 'Cannot save the tree. Firebase is not initialized or authenticated.');
-                return;
-            }
-            try {
-                // Store in private user data: artifacts/{appId}/users/{userId}/talent_tree/current
-                const docRef = doc(db, `artifacts/${appId}/users/${userId}/talent_tree/current`);
-                
-                // Only store essential data (name, tier, source) to keep the document small
-                const serializableData = pyramidTalents.map(row => 
-                    row.map(talent => talent ? {
-                        name: talent.name,
-                        tier: talent.tier,
-                        activation: talent.activation,
-                        ranked: talent.ranked,
-                        source: talent.source,
-                        description: talent.description
-                    } : null)
-                );
-
-                await setDoc(docRef, { 
-                    pyramid: serializableData,
-                    updatedAt: new Date().toISOString()
-                });
-                showModal('Success!', 'Talent Tree saved successfully to your profile!');
-
-            } catch (error) {
-                console.error("Error saving pyramid:", error);
-                showModal('Save Error', 'Failed to save the talent tree to the database.');
-            }
-        }
-
-        async function loadPyramid() {
-            if (!db || !userId || !isAuthReady) return; 
-            try {
-                const docRef = doc(db, `artifacts/${appId}/users/${userId}/talent_tree/current`);
-                
-                // Exponential backoff retry logic for fetching data
-                let docSnap = null;
-                const maxRetries = 3;
-                let delay = 1000;
-
-                for (let i = 0; i < maxRetries; i++) {
-                    try {
-                        docSnap = await getDoc(docRef);
-                        break; // Success!
-                    } catch (e) {
-                        if (i < maxRetries - 1) {
-                            console.warn(`Firestore read failed, retrying in ${delay}ms...`);
-                            await new Promise(resolve => setTimeout(resolve, delay));
-                            delay *= 2;
-                        } else {
-                            throw e; // Re-throw error on final failure
-                        }
-                    }
-                }
-
-                if (docSnap && docSnap.exists()) {
-                    const data = docSnap.data();
-                    const loadedPyramid = data.pyramid.map(row => 
-                        row.map(serializedTalent => {
-                            if (!serializedTalent) return null;
-                            // Re-hydrate the talent object including generated tags
-                            const talent = {...serializedTalent};
-                            talent.tags = generateTagsForTalent(talent);
-                            return talent;
-                        })
-                    );
-                    
-                    // Merge loaded data back into the main state variable
-                    for (let r = 0; r < 5; r++) {
-                        for (let s = 0; s < rowSlotCounts[r]; s++) {
-                            // Ensure the array access is safe
-                            pyramidTalents[r][s] = loadedPyramid[r] && loadedPyramid[r][s] !== undefined ? loadedPyramid[r][s] : null;
-                        }
-                    }
-
-                    showModal('Loaded!', 'Talent Tree loaded successfully from your profile.');
-                    updatePyramidUI();
-                } else {
-                    console.log("No saved talent tree found for this user.");
-                }
-            } catch (error) {
-                console.error("Error loading pyramid:", error);
-                showModal('Load Error', 'Failed to load the talent tree from the database.');
-            }
-        }
-
-        // --- CHATBOT LOGIC (Gemini API Integration) ---
-        
-        // Utility to convert Markdown text to HTML (basic formatting)
-        function formatMarkdown(text) {
-            let html = text.replace(/\n/g, '<br>');
-            // Bold **text**
-            html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            // Italic *text*
-            html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
-            // Basic list conversion (- item)
-            html = html.replace(/^- (.*)$/gm, '<li>$1</li>');
-            if (html.includes('<li>')) {
-                // Wrap only if list items exist, and replace temporary wrappers
-                html = '<ul>' + html + '</ul>';
-                html = html.replace('</ul><li>', '<li>').replace('</ul><br><ul>', '</ul><ul>');
-            }
-            return html;
-        }
-
-        function appendMessage(role, text) {
-            const messagesDiv = document.getElementById('chatMessages');
-            
-            const isUser = role === 'user';
-            const bgColor = isUser ? 'bg-indigo-600' : 'bg-indigo-100';
-            const textColor = isUser ? 'text-white' : 'text-gray-800';
-            const alignment = isUser ? 'self-end' : 'self-start';
-            const borderRadius = isUser ? 'rounded-br-none' : 'rounded-tl-none';
-            const shadowClass = isUser ? 'shadow-md' : 'shadow-sm';
-
-            const messageElement = document.createElement('div');
-            messageElement.className = `chat-message ${isUser ? 'user-message' : 'ai-message'} ${alignment} ${bgColor} ${textColor} p-3 rounded-xl ${borderRadius} max-w-[85%] ${shadowClass}`;
-            messageElement.innerHTML = formatMarkdown(text);
-            
-            messagesDiv.appendChild(messageElement);
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
-        }
-
-        function toggleLoading(show) {
-            isChatFetching = show;
-            document.getElementById('chatLoading').classList.toggle('hidden', !show);
-            document.getElementById('chatSendBtn').disabled = show;
-            document.getElementById('chatInput').disabled = show;
-        }
-
-        async function sendMessage() {
-            if (isChatFetching) return;
-
-            const inputElement = document.getElementById('chatInput');
-            const userText = inputElement.value.trim();
-
-            if (!userText) return;
-
-            // 1. Add user message to UI and history
-            appendMessage('user', userText);
-            chatHistory.push({ role: "user", parts: [{ text: userText }] });
-            
-            // Clear input and show loading
-            inputElement.value = '';
-            toggleLoading(true);
-
-            // 2. Prepare API payload
-            const payload = {
-                contents: chatHistory,
-                // Using Google Search grounding for up-to-date and factual responses
-                tools: [{ "google_search": {} }], 
-                systemInstruction: {
-                    parts: [{ text: "You are a friendly, helpful, and concise AI assistant named Gemini, specifically for the Genesys RPG system. Use your knowledge to provide accurate rules explanations, dice results analysis, or talent suggestions based on keywords. Respond in Markdown." }]
-                },
-            };
-
-            const maxRetries = 3;
-            let currentRetry = 0;
-
-            while (currentRetry < maxRetries) {
-                try {
-                    const response = await fetch(chatApiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-
-                    const result = await response.json();
-                    
-                    const modelText = result.candidates?.[0]?.content?.parts?.[0]?.text;
-
-                    if (modelText) {
-                        // 3. Add model response to UI and history
-                        appendMessage('model', modelText);
-                        chatHistory.push({ role: "model", parts: [{ text: modelText }] });
-                        break; // Exit the loop on success
-                    } else {
-                        throw new Error("Received an invalid response format from the API.");
-                    }
-
-                } catch (error) {
-                    currentRetry++;
-                    console.error(`Chatbot API Attempt ${currentRetry} failed:`, error);
-                    if (currentRetry < maxRetries) {
-                        // Exponential backoff
-                        const delay = Math.pow(2, currentRetry) * 1000;
-                        await new Promise(resolve => setTimeout(resolve, delay));
-                    } else {
-                        appendMessage('model', "I apologize, but I am currently unable to connect to the Genesys AI service. Please try again later.");
-                        break; // Exit the loop after max retries
-                    }
-                }
-            }
-
-            // 4. Hide loading indicator
-            toggleLoading(false);
-        }
-        // Expose sendMessage globally for the button/keypress events in HTML
-        window.sendMessage = sendMessage;
-
-
-        // --- DATA PROCESSING AND RENDERING ---
         function generateTagsForTalent(talent) {
             const text = (talent.name + " " + talent.description).toLowerCase();
             const tags = [];
             for (const def of tagDefinitions) {
                 if (def.keywords.some(kw => text.includes(kw))) {
-                    const exists = tags.some(t => t.name === def.name);
-                    if (!exists) tags.push({ name: def.name, colorClass: tagColorMap[def.name] });
+                    tags.push({ name: def.name, color: def.color });
                 }
             }
-            // Add specific tags not easily captured by keywords
-            if (talent.name.toLowerCase().includes("parry") || talent.name.toLowerCase().includes("reflect") || talent.name.toLowerCase().includes("dodge")) {
-                 const exists = tags.some(t => t.name === "Defense");
-                 if (!exists) tags.push({name: "Defense", colorClass: tagColorMap["Defense"]});
-            }
-            if (talent.name.toLowerCase().includes("grit") || talent.name.toLowerCase().includes("second wind")) {
-                 const exists = tags.some(t => t.name === "Strain");
-                 if (!exists) tags.push({name: "Strain", colorClass: tagColorMap["Strain"]});
-            }
+            if (talent.name.toLowerCase().includes("parry")) tags.push({name: "defense", color: "tag-defense"});
+            if (talent.name.toLowerCase().includes("reflect")) tags.push({name: "defense", color: "tag-defense"});
+            if (talent.name.toLowerCase().includes("dodge")) tags.push({name: "defense", color: "tag-defense"});
             return tags;
         }
-
-        function loadTalents() {
-            // Use MOCK_TALENTS instead of fetching CSV
-            talents = MOCK_TALENTS.map(t => {
-                t.tags = generateTagsForTalent(t);
-                return t;
-            });
-
-            fuse = new Fuse(talents, { keys: ['name', 'description'], threshold: 0.3, includeScore: true, shouldSort: true });
-            talents.forEach(t => talentsByTier[t.tier].push(t));
-            document.getElementById('totalCount').textContent = talents.length;
-            buildTagBar();
-            applyFilters();
-            if (isAuthReady) {
-                // Initialize pyramid UI once, load data separately
-                buildPyramid(); 
+        function parseCSVLine(line) {
+            const values = [];
+            let current = '';
+            let inQuote = false;
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                if (char === '"' && !inQuote) inQuote = true;
+                else if (char === '"' && inQuote) {
+                    if (i + 1 < line.length && line[i+1] === '"') { current += '"'; i++; }
+                    else inQuote = false;
+                }
+                else if (char === ',' && !inQuote) { values.push(current.trim()); current = ''; }
+                else current += char;
+            }
+            values.push(current.trim());
+            return values;
+        }
+        async function loadTalents() {
+            try {
+                const response = await fetch('talents.csv');
+                if (!response.ok) throw new Error('talents.csv not found');
+                const csvText = await response.text();
+                const lines = csvText.trim().split('\n');
+                talents = lines.slice(1).map(line => {
+                    const [name, tierStr, activation, ranked, description, source] = parseCSVLine(line);
+                    const tier = parseInt(tierStr) || 1;
+                    const talent = { name: name || '', tier, activation: activation || '', ranked: ranked || '', description: description || '', source: source || '', tags: [] };
+                    talent.tags = generateTagsForTalent(talent);
+                    return talent;
+                }).filter(t => t.name);
+                fuse = new Fuse(talents, { keys: ['name', 'description'], threshold: 0.35, includeScore: true, shouldSort: true });
+                talents.forEach(t => talentsByTier[t.tier].push(t));
+                document.getElementById('totalCount').textContent = talents.length;
+                buildTagBar();
+                applyFilters();
+                buildPyramid();
+            } catch (err) {
+                document.getElementById('talentGrid').innerHTML = `<div class="no-results"><h2>Error</h2><p>${err.message}</p></div>`;
             }
         }
-
         function buildTagBar() {
             const bar = document.getElementById('tagBar');
             bar.innerHTML = '';
             tagDefinitions.forEach(def => {
                 const btn = document.createElement('button');
-                const isActive = activeTags.has(def.name);
-                
-                // Use a neutral background for inactive, and apply the tag's color on hover/active
-                let baseClass = `tag-btn px-3 py-1 rounded-full text-xs font-semibold transition duration-200 border border-gray-300 bg-white text-gray-700 hover:shadow-md`;
-                let activeClass = isActive ? tagColorMap[def.name] : 'hover:bg-indigo-100 hover:border-indigo-400';
-                
-                btn.className = `${baseClass} ${activeClass} ${isActive ? 'active' : ''}`;
-                btn.textContent = def.name;
+                btn.className = `tag-btn ${def.color}`;
+                btn.textContent = def.name.charAt(0).toUpperCase() + def.name.slice(1);
                 btn.dataset.tag = def.name;
                 btn.onclick = () => toggleTag(def.name);
                 bar.appendChild(btn);
             });
         }
-
         function toggleTag(tagName) {
             const btn = document.querySelector(`.tag-btn[data-tag="${tagName}"]`);
             if (activeTags.has(tagName)) {
                 activeTags.delete(tagName);
-                // Remove active classes and restore hover styles
-                btn.className = btn.className.split(' ').filter(cls => !tagColorMap[tagName].includes(cls) && cls !== 'active').join(' ') + ' hover:bg-indigo-100 hover:border-indigo-400';
+                btn.classList.remove('active');
             } else {
                 activeTags.add(tagName);
-                // Add active classes
-                btn.className = btn.className.split(' ').filter(cls => !cls.startsWith('hover')).join(' ') + ' ' + tagColorMap[tagName] + ' active';
+                btn.classList.add('active');
             }
             applyFilters();
         }
-
         function applyFilters() {
             let results = talents;
             const query = document.getElementById('searchInput').value.trim();
             if (query) results = fuse.search(query).map(r => r.item);
-
             const tier = document.getElementById('tierFilter').value;
             const act = document.getElementById('activationFilter').value.toLowerCase();
             const ranked = document.getElementById('rankedFilter').value.toLowerCase();
-
             results = results.filter(t => {
                 const matchTier = tier === 'all' || t.tier.toString() === tier;
                 const matchAct = act === 'all' || t.activation.toLowerCase().includes(act);
@@ -626,226 +262,164 @@
             renderTalents(results);
             document.getElementById('tagCount').textContent = activeTags.size;
         }
-
         function renderTalents(list) {
             const grid = document.getElementById('talentGrid');
             grid.innerHTML = '';
             if (list.length === 0) {
-                grid.innerHTML = `<div class="no-results col-span-full text-center p-12 text-gray-500 text-xl">
-                    <h2 class="font-bold mb-2">No talents found</h2>
-                    <p>Try different filters or search terms</p>
-                </div>`;
+                grid.innerHTML = `<div class="no-results"><h2>No talents found</h2><p>Try different filters or search terms</p></div>`;
                 document.getElementById('shownCount').textContent = 0;
                 return;
             }
-
             list.forEach(t => {
                 const card = document.createElement('div');
-                card.className = `talent-card tier-${t.tier} bg-white border-2 border-gray-100 rounded-2xl p-6 transition duration-300 hover:shadow-xl hover:border-indigo-500 relative overflow-hidden shadow-md cursor-pointer`;
+                card.className = `talent-card tier-${t.tier}`;
                 card.innerHTML = `
-                    <div class="flex justify-between items-start mb-3 gap-2">
-                        <div class="text-xl font-bold text-gray-900">${t.name} ${t.ranked === 'Yes' ? '(Ranked)' : ''}</div>
-                        <div class="talent-tier text-white text-xs font-bold px-3 py-1 rounded-full shadow-md" style="background: var(--tier-color);">Tier ${t.tier}</div>
+                    <div class="talent-header">
+                        <div class="talent-name">${t.name}</div>
+                        <div class="talent-tier">Tier ${t.tier}</div>
                     </div>
-                    <div class="flex flex-wrap gap-1.5 my-2">
-                        ${t.tags.map(tag => `<span class="talent-tag text-xs font-semibold px-2 py-0.5 rounded-full shadow-sm ${tag.colorClass}">${tag.name}</span>`).join('')}
+                    <div class="talent-tags">
+                        ${t.tags.map(tag => `<span class="talent-tag ${tag.color}">${tag.name}</span>`).join('')}
                     </div>
-                    <div class="flex gap-4 flex-wrap my-2 text-sm text-gray-600">
-                        <div class="meta-item"><span class="font-semibold text-gray-800">Activation:</span> ${t.activation}</div>
+                    <div class="talent-meta">
+                        <div class="meta-item"><span class="meta-label">Activation:</span> ${t.activation}</div>
+                        <div class="meta-item"><span class="meta-label">Ranked:</span> ${t.ranked}</div>
                     </div>
-                    <div class="text-gray-700 text-sm leading-relaxed mt-3">${t.description}</div>
-                    <div class="text-xs text-gray-400 italic text-right mt-3">Source: ${t.source}</div>
-                    <button class="select-btn absolute top-2 right-2 p-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-full transition duration-150 shadow-lg hidden" 
-                            data-talent-tier="${t.tier}"
-                            data-talent-name="${t.name}"
-                            onclick="event.stopPropagation(); assignTalentToSlot(${t.tier}, '${t.name.replace(/'/g, "\\'")}')">
-                        <span data-lucide="plus" class="w-5 h-5"></span>
-                    </button>
+                    <div class="talent-description">${t.description}</div>
+                    <div class="talent-source">Source: ${t.source}</div>
                 `;
+                card.addEventListener('click', () => assignTalentToSlot(t));
                 grid.appendChild(card);
             });
-            lucide.createIcons();
             document.getElementById('shownCount').textContent = list.length;
-            
-            // Show select buttons if a slot is pending
-            document.querySelectorAll('.select-btn').forEach(btn => {
-                if (pendingSlot && parseInt(btn.dataset.talentTier) === rowTiers[pendingSlot.r]) {
-                    btn.classList.remove('hidden');
-                } else {
-                    btn.classList.add('hidden');
-                }
-            });
         }
-
-        // --- TALENT TREE BUILDER LOGIC ---
+        // Talent Tree Builder
         function buildPyramid() {
             const pyramid = document.getElementById('pyramid');
             pyramid.innerHTML = '';
-            
+            const rowSlots = [1, 2, 3, 4, 5];
             for (let r = 0; r < 5; r++) {
-                const tier = rowTiers[r];
                 const row = document.createElement('div');
-                
-                // Responsive row: stack on mobile, center horizontal on desktop
-                row.className = 'pyramid-row flex flex-col md:flex-row justify-center mb-5 gap-4 w-full';
-                row.innerHTML = `<h3 class="text-lg font-bold text-gray-700 w-full text-left md:text-center p-2 rounded-lg bg-gray-100 shadow-inner">Tier ${tier} (${pyramidTalents[r].filter(t => t).length}/${rowSlotCounts[r]} Slots Used)</h3>`;
-
-                for (let s = 0; s < rowSlotCounts[r]; s++) {
+                row.className = 'pyramid-row';
+                const tier = rowTiers[r];
+                for (let s = 0; s < rowSlots[r]; s++) {
                     const slot = document.createElement('div');
-                    // Responsive slot size: full width on mobile, fixed-ish width on desktop
-                    slot.className = `pyramid-slot tier-${tier} bg-white border-2 border-gray-200 rounded-xl p-5 transition duration-300 hover:shadow-lg relative overflow-hidden shadow-md cursor-pointer w-full md:w-64 max-w-full md:max-w-md`;
+                    slot.className = `pyramid-slot tier-${tier}`;
                     slot.dataset.row = r;
                     slot.dataset.slot = s;
-                    slot.onclick = () => selectSlot(r, s, tier);
-
+                    slot.innerHTML = `
+                        <div class="talent-header">
+                            <div class="talent-name">-- Select Talent --</div>
+                            <div class="talent-tier">Tier ${tier}</div>
+                        </div>
+                        <div class="talent-tags" style="display: none;"></div>
+                        <div class="talent-meta" style="display: none;">
+                            <div class="meta-item"><span class="meta-label">Activation:</span> --</div>
+                            <div class="meta-item"><span class="meta-label">Ranked:</span> --</div>
+                        </div>
+                        <div class="talent-description" style="display: none;"></div>
+                        <div class="talent-source" style="display: none;"></div>
+                        <label class="active-label" style="display: none;"><input type="checkbox"> Active?</label>
+                    `;
+                    slot.addEventListener('click', () => openSearchForSlot(slot));
                     row.appendChild(slot);
                 }
                 pyramid.appendChild(row);
             }
-            updatePyramidUI();
         }
-
-        function updatePyramidUI() {
-            const validationEl = document.getElementById('pyramidValidation');
-            const totalSlotsFilled = pyramidTalents.flat().filter(t => t).length;
-            let validationMessage = '';
-            let isValid = true;
-
-            // Loop through tiers 5 down to 2 (row r=0 to r=3)
-            for (let r = 0; r < 4; r++) {
-                const currentTier = rowTiers[r]; // Tier N
-                const nextTier = rowTiers[r + 1]; // Tier N-1 (the one below it)
-                
-                // Count filled slots in the current tier (N)
-                const filledCurrentTier = pyramidTalents[r].filter(t => t).length; 
-                
-                // Count filled slots in the tier below (N-1)
-                const filledNextTier = pyramidTalents[r + 1].filter(t => t).length;
-                
-                const requiredFromAbove = nextTier - 1; // e.g. Tier 4 (r=1) requires 3 (4-1) from Tier 5 (r=0)
-
-                if (filledNextTier > 0 && filledCurrentTier < requiredFromAbove) {
-                    validationMessage = `Tier ${nextTier} requires ${requiredFromAbove} talents from Tier ${currentTier} or higher. You only have ${filledCurrentTier}.`;
-                    isValid = false;
-                    break;
-                }
-            }
-            
-            if (isValid) {
-                validationEl.classList.add('hidden');
-            } else {
-                validationEl.textContent = validationMessage;
-                validationEl.classList.remove('hidden');
-            }
-
-            // Update the UI slots
-            for (let r = 0; r < 5; r++) {
-                for (let s = 0; s < rowSlotCounts[r]; s++) {
-                    const slot = document.querySelector(`.pyramid-slot[data-row="${r}"][data-slot="${s}"]`);
-                    const talent = pyramidTalents[r][s];
-                    
-                    if (slot) {
-                        const tier = rowTiers[r];
-                        
-                        if (talent) {
-                            slot.innerHTML = `
-                                <div class="flex justify-between items-start mb-3 gap-2">
-                                    <div class="talent-name text-lg font-bold text-gray-900">${talent.name}</div>
-                                    <div class="talent-tier text-white text-xs font-bold px-3 py-1 rounded-full shadow-md" style="background: var(--tier-color);">Tier ${tier}</div>
-                                </div>
-                                <div class="talent-tags flex flex-wrap gap-1.5 my-2">
-                                    ${talent.tags.map(tag => `<span class="talent-tag text-xs font-semibold px-2 py-0.5 rounded-full shadow-sm ${tag.colorClass}">${tag.name}</span>`).join('')}
-                                </div>
-                                <div class="talent-description text-gray-700 text-sm leading-relaxed mt-3">${talent.description.substring(0, 100)}...</div>
-                                <button class="remove-btn absolute top-2 right-2 p-1 bg-red-500 hover:bg-red-600 text-white rounded-full transition duration-150 shadow-lg" 
-                                        onclick="event.stopPropagation(); removeTalentFromSlot(${r}, ${s})">
-                                    <span data-lucide="x" class="w-4 h-4"></span>
-                                </button>
-                            `;
-                            slot.classList.remove('hover:border-indigo-400');
-                            slot.classList.add('hover:ring-2', 'hover:ring-red-500'); // Highlight on removal hover
-                        } else {
-                            // Empty slot
-                            slot.innerHTML = `
-                                <div class="flex justify-between items-start mb-3 gap-2">
-                                    <div class="talent-name text-lg font-semibold text-gray-500">-- Select Talent --</div>
-                                    <div class="talent-tier text-white text-xs font-bold px-3 py-1 rounded-full shadow-md" style="background: var(--tier-color);">Tier ${tier}</div>
-                                </div>
-                                <div class="text-sm text-gray-400 italic">Click to search and assign a talent to this slot.</div>
-                            `;
-                            slot.classList.add('hover:border-indigo-400', 'hover:shadow-xl');
-                            slot.classList.remove('hover:ring-2', 'hover:ring-red-500');
-                        }
-                    }
-                }
-            }
-            lucide.createIcons();
+        function openSearchForSlot(slot) {
+            pendingSlot = slot;
+            const tier = rowTiers[slot.dataset.row];
+            // Switch to reference view first
+            switchToReference();
+            // Then set filter and apply
+            document.getElementById('tierFilter').value = tier.toString();
+            applyFilters();
         }
-
-        function selectSlot(r, s, tier) {
-            // If the slot is already filled, click should do nothing or remove (we handle removal with the X button)
-            if (pyramidTalents[r][s]) {
+        function assignTalentToSlot(talent) {
+            if (!pendingSlot) return;
+            const row = parseInt(pendingSlot.dataset.row);
+            const slotIndex = parseInt(pendingSlot.dataset.slot);
+            const temp = pyramidTalents[row][slotIndex];
+            pyramidTalents[row][slotIndex] = talent;
+            if (!validatePyramid()) {
+                alert('Invalid selection! Violates talent pyramid rules or non-ranked duplicate.');
+                pyramidTalents[row][slotIndex] = temp;
+                pendingSlot = null;
                 return;
             }
-
-            // Set the pending slot
-            pendingSlot = { r, s, tier };
-
-            // Switch to reference view
-            document.getElementById('referenceContent').classList.remove('hidden');
-            document.getElementById('builder').classList.add('hidden');
-            document.getElementById('builderBtn').innerHTML = '<span data-lucide="book-open" class="w-5 h-5 mr-2"></span>Return to Builder';
-            document.getElementById('builderBtn').classList.replace('bg-indigo-600', 'bg-gray-600');
-            
-            // Highlight the appropriate talents in the reference view
-            document.querySelectorAll('.select-btn').forEach(btn => {
-                if (parseInt(btn.closest('.talent-card').className.match(/tier-(\d)/)[1]) === tier) {
-                    btn.classList.remove('hidden');
-                } else {
-                    btn.classList.add('hidden');
-                }
-            });
-
-            showModal('Slot Selected', `Please select a Tier ${tier} talent from the list below to fill the slot.`);
-        }
-        
-        // This function is called from the 'renderTalents' select button
-        window.assignTalentToSlot = function(tier, talentName) {
-            if (!pendingSlot || rowTiers[pendingSlot.r] !== tier) {
-                showModal('Error', 'Please select a slot in the Talent Builder first.');
-                return;
-            }
-            
-            const selectedTalent = talents.find(t => t.name === talentName);
-            if (!selectedTalent) {
-                showModal('Error', 'Talent not found in database.');
-                return;
-            }
-
-            // Assign the talent to the pending slot
-            pyramidTalents[pendingSlot.r][pendingSlot.s] = selectedTalent;
-
-            // Clear pending slot and return to builder view
+            pendingSlot.querySelector('.talent-name').textContent = talent.name;
+            pendingSlot.querySelector('.talent-tags').innerHTML = talent.tags.map(tag => `<span class="talent-tag ${tag.color}">${tag.name}</span>`).join('');
+            pendingSlot.querySelector('.talent-tags').style.display = talent.tags.length > 0 ? 'flex' : 'none';
+            pendingSlot.querySelectorAll('.meta-item')[0].innerHTML = `<span class="meta-label">Activation:</span> ${talent.activation}`;
+            pendingSlot.querySelectorAll('.meta-item')[1].innerHTML = `<span class="meta-label">Ranked:</span> ${talent.ranked}`;
+            pendingSlot.querySelector('.talent-meta').style.display = 'flex';
+            pendingSlot.querySelector('.talent-description').textContent = talent.description;
+            pendingSlot.querySelector('.talent-description').style.display = 'block';
+            pendingSlot.querySelector('.talent-source').textContent = `Source: ${talent.source}`;
+            pendingSlot.querySelector('.talent-source').style.display = 'block';
+            pendingSlot.querySelector('.active-label').style.display = 'flex';
             pendingSlot = null;
-            document.getElementById('referenceContent').classList.add('hidden');
-            document.getElementById('builder').classList.remove('hidden');
-            document.getElementById('builderBtn').innerHTML = '<span data-lucide="pyramid" class="w-5 h-5 mr-2"></span>Talent Tree Builder';
-            document.getElementById('builderBtn').classList.replace('bg-gray-600', 'bg-indigo-600');
-
-            // Hide all select buttons
-            document.querySelectorAll('.select-btn').forEach(btn => btn.classList.add('hidden'));
-
-            updatePyramidUI();
-            hideModal(); // Hide the slot selected modal
+            switchToBuilder();
         }
-        
-        // This function is called from the 'X' button in the pyramid slot
-        window.removeTalentFromSlot = function(r, s) {
-            pyramidTalents[r][s] = null;
-            updatePyramidUI();
+        function validatePyramid() {
+            const counts = [0, 0, 0, 0, 0, 0];
+            const talentOccurrences = {};
+            
+            pyramidTalents.forEach((row, r) => {
+                row.forEach(t => {
+                    if (t) {
+                        const tier = rowTiers[r];
+                        counts[tier]++;
+                        
+                        // Track occurrences of each talent
+                        if (!talentOccurrences[t.name]) {
+                            talentOccurrences[t.name] = { count: 0, talent: t };
+                        }
+                        talentOccurrences[t.name].count++;
+                    }
+                });
+            });
+            
+            // Check pyramid rule: tier5 <= tier4 <= tier3 <= tier2 <= tier1
+            for (let k = 1; k <= 4; k++) {
+                if (counts[k+1] > counts[k]) return false;
+            }
+            
+            // Check for invalid duplicates (non-ranked talents appearing more than once)
+            for (const name in talentOccurrences) {
+                const {count, talent} = talentOccurrences[name];
+                if (count > 1 && talent.ranked.toLowerCase() === 'no') {
+                    return false;
+                }
+            }
+            
+            return true;
         }
-        
-        // --- EVENT LISTENERS ---
+        function switchToReference() {
+            document.getElementById('referenceContent').style.display = 'block';
+            document.querySelector('.controls').style.display = 'block';
+            document.getElementById('builder').style.display = 'none';
+            document.getElementById('builderBtn').textContent = 'Back to Builder';
+        }
+        function switchToBuilder() {
+            document.getElementById('referenceContent').style.display = 'none';
+            document.querySelector('.controls').style.display = 'none';
+            document.getElementById('builder').style.display = 'block';
+            document.getElementById('builderBtn').textContent = 'Search Talents';
+        }
+        // Switch between reference and builder
+        document.getElementById('builderBtn').addEventListener('click', () => {
+            if (document.getElementById('builder').style.display === 'none') {
+                if (pendingSlot) {
+                    // If pending, switching back without selection
+                    pendingSlot = null;
+                }
+                switchToBuilder();
+            } else {
+                switchToReference();
+            }
+        });
         document.getElementById('searchInput').addEventListener('input', applyFilters);
         document.getElementById('tierFilter').addEventListener('change', applyFilters);
         document.getElementById('activationFilter').addEventListener('change', applyFilters);
@@ -856,50 +430,10 @@
             document.getElementById('activationFilter').value = 'all';
             document.getElementById('rankedFilter').value = 'all';
             activeTags.clear();
-            buildTagBar();
+            document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
             applyFilters();
         });
-
-        document.getElementById('builderBtn').addEventListener('click', () => {
-            const builderDiv = document.getElementById('builder');
-            const referenceDiv = document.getElementById('referenceContent');
-            const button = document.getElementById('builderBtn');
-
-            if (builderDiv.classList.contains('hidden')) {
-                // Switch to builder
-                referenceDiv.classList.add('hidden');
-                builderDiv.classList.remove('hidden');
-                button.innerHTML = '<span data-lucide="book-open" class="w-5 h-5 mr-2"></span>Return to Reference';
-                button.classList.replace('bg-indigo-600', 'bg-gray-600');
-                // Ensure select buttons are hidden when returning
-                document.querySelectorAll('.select-btn').forEach(btn => btn.classList.add('hidden'));
-                pendingSlot = null;
-            } else {
-                // Switch to reference
-                builderDiv.classList.add('hidden');
-                referenceDiv.classList.remove('hidden');
-                button.innerHTML = '<span data-lucide="pyramid" class="w-5 h-5 mr-2"></span>Talent Tree Builder';
-                button.classList.replace('bg-gray-600', 'bg-indigo-600');
-            }
-            lucide.createIcons();
-        });
-        
-        document.getElementById('savePyramidBtn').addEventListener('click', savePyramid);
-        document.getElementById('loadPyramidBtn').addEventListener('click', loadPyramid);
-        
-        document.getElementById('chatbotToggleBtn').addEventListener('click', () => {
-            document.getElementById('chatbotContainer').classList.toggle('hidden');
-        });
-        
-        // --- INITIALIZATION ---
-        function initializeAppLogic() {
-            loadTalents();
-            lucide.createIcons();
-            // Render initial chat messages (from chatHistory) after the rest of the page loads
-            chatHistory.forEach(msg => appendMessage(msg.role, msg.parts[0].text));
-        }
-
-        window.onload = initializeAppLogic;
+        loadTalents();
     </script>
 </body>
 </html>
